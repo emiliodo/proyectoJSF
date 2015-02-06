@@ -3,3 +3,6 @@
 /BlogRocksteady2-ejb/dist/
 /build/
 /BlogRocksteady2-war/dist/
+/nbproject/private/
+/BlogRocksteady2-war/nbproject/private/
+/BlogRocksteady2-ejb/nbproject/private/
