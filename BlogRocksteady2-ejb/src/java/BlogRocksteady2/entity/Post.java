@@ -52,7 +52,7 @@ public class Post implements Serializable {
     private BigDecimal postId;
     @Lob
     @Column(name = "HEADER_IMAGE")
-    private Serializable headerImage;
+    private Byte[] headerImage;
     @Column(name = "MVPOST")
     private Character mvpost;
     @Size(max = 255)
@@ -88,11 +88,11 @@ public class Post implements Serializable {
         this.postId = postId;
     }
 
-    public Serializable getHeaderImage() {
+    public Byte[] getHeaderImage() {
         return headerImage;
     }
 
-    public void setHeaderImage(Serializable headerImage) {
+    public void setHeaderImage(Byte[] headerImage) {
         this.headerImage = headerImage;
     }
 
