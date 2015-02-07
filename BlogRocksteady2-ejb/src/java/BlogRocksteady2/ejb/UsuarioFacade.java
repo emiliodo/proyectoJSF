@@ -6,6 +6,7 @@
 package BlogRocksteady2.ejb;
 
 import BlogRocksteady2.entity.Usuario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,5 +28,29 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     public UsuarioFacade() {
         super(Usuario.class);
     }
+    public Usuario getUserByNickname(String nick, String password) {
+
+        List<Usuario> usersList = em.createQuery("SELECT u FROM Usuario u WHERE u.username = :nick and u.password = :password")
+                .setParameter("nick", nick)
+                .setParameter("password", password)
+                .getResultList();
+
+        if (usersList != null && usersList.size() > 0) {
+            return usersList.get(0);
+        } else {
+            return null;
+        }
+    }
     
+    public Usuario findById(Integer id){
+        
+         List<Usuario> usersList = em.createQuery("SELECT u FROM Usuario u WHERE u.userId = :id")
+                .setParameter("id", id)
+                .getResultList();
+    if (usersList != null && usersList.size() > 0) {
+            return usersList.get(0);
+        } else {
+            return null;
+        }
+    }
 }

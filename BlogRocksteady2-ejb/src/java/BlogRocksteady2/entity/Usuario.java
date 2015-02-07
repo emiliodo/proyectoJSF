@@ -52,7 +52,7 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "USER_ID")
-    private BigDecimal userId;
+    private Integer userId;
     @Size(max = 255)
     @Column(name = "DESCRIPTION")
     private String description;
@@ -100,15 +100,15 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(BigDecimal userId) {
+    public Usuario(Integer userId) {
         this.userId = userId;
     }
 
-    public BigDecimal getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(BigDecimal userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
