@@ -7,6 +7,7 @@ package BlogRocksteady2.bean;
 
 import BlogRocksteady2.ejb.UsuarioFacade;
 import BlogRocksteady2.entity.Usuario;
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -21,7 +22,7 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @SessionScoped
-public class LoginBean {
+public class LoginBean implements Serializable{
     @EJB
     private UsuarioFacade usuarioFacade;
 
@@ -64,18 +65,18 @@ public class LoginBean {
     
     
     public String comprobar(){
-     usuario = usuarioFacade.getUserByNickname(nick, password);
-     if(usuario!=null){
-          FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", usuario.getUserId());
-     //    String user = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
-         
-        return "pruebajsf.xhtml?faces-redirect=true";
-        }else{
-           FacesMessage message = new FacesMessage("usuario o contraseña invalido");
+        usuario = usuarioFacade.getUserByNickname(nick, password);
+        if(usuario!=null){
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", usuario.getUserId());
+            //    String user = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+
+            return "pruebajsf.xhtml?faces-redirect=true";
+        } else {
+            FacesMessage message = new FacesMessage("usuario o contraseña invalido");
             FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(validar.getClientId(context), message);
-     return null;
-    }
+            context.addMessage(context.getViewRoot().getClientId(), message);
+            return "";
+       }
     }
     
     public String logout(){
