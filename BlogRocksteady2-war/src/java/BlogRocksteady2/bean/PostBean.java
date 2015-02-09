@@ -4,6 +4,7 @@ import BlogRocksteady2.ejb.ComentarioFacade;
 import BlogRocksteady2.ejb.PostFacade;
 import BlogRocksteady2.entity.Comentario;
 import BlogRocksteady2.entity.Post;
+import java.io.ByteArrayInputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -13,6 +14,9 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 @ManagedBean
 @RequestScoped
@@ -76,19 +80,23 @@ public class PostBean {
 
     }
 
-    public Byte[] cargarFotos(BigDecimal postId) {
+    public StreamedContent cargarFoto(BigDecimal postId) {
         
-//        BigDecimal postId = new BigDecimal(Integer.parseInt(request.getParameter("postId")));
-//        Post post = postFacade.find(postId);
-//        byte[] file = post.getHeaderImage();
-//        response.setContentType("image/jpg");
-//        try (OutputStream out = response.getOutputStream()) {
-//            out.write(file);
-//            out.flush();
-//        }
-        
-        return null;
+
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        if (context.getRenderResponse()) {
+            // So, we're rendering the view. Return a stub StreamedContent so that it will generate right URL.
+            return new DefaultStreamedContent();
+        }
+        else {
+            // So, browser is requesting the image. Get ID value from actual request param.
+//            String id = context.getExternalContext().getRequestParameterMap().get("id");
+            byte [] image = this.postFacade.find(postId).getHeaderImage();
+            return new DefaultStreamedContent(new ByteArrayInputStream(image));
+        }
     }
+    
 
     public PostBean() {
 

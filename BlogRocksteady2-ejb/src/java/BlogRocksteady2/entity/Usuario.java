@@ -63,9 +63,9 @@ public class Usuario implements Serializable {
     @Size(max = 255)
     @Column(name = "FACEBOOK")
     private String facebook;
-//    @Lob
-//    @Column(name = "IMG")
-//    private Serializable img;
+    @Lob
+    @Column(name = "IMG")
+    private byte [] img;
     @Size(max = 255)
     @Column(name = "INSTAGRAM")
     private String instagram;
@@ -136,13 +136,13 @@ public class Usuario implements Serializable {
         this.facebook = facebook;
     }
 
-//    public Serializable getImg() {
-//        return img;
-//    }
-//
-//    public void setImg(Serializable img) {
-//        this.img = img;
-//    }
+    public byte [] getImg() {
+        return img;
+    }
+
+    public void setImg(byte [] img) {
+        this.img = img;
+    }
 
     public String getInstagram() {
         return instagram;
