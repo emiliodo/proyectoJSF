@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>New Post</title>
+    </h:head>
+    <h:body>
+        <f:view>
+            <h:form>
+                <h1><h:outputText value="Create/Edit"/></h1>
+<!--                    <h:outputLabel value="HeaderImage:" for="headerImage" />
+                    <h:inputTextarea rows="4" cols="30" id="headerImage" value="#{newPostBean.post.headerImage}" title="HeaderImage" />-->
+                    <h:outputLabel value="Title:" for="title" /><br/>
+                    <p:inputText id="title" value="#{newPostBean.post.title}" title="Title" /><br/>
+                    <h:outputLabel value="PostContent:" for="postContent" /><br/>
+                    <p:inputTextarea id="postContent" value="#{newPostBean.post.postContent}" title="PostContent" /><br/>
+                    <h:outputLabel value="PostGps:" for="postGps" /><br/>
+                    <p:inputText id="postGps" value="#{newPostBean.post.postGps}" title="PostGps" /><br/>
+                    
+                    <p:commandButton value="Post" id="createPost" actionListener="#{newPostBean.createPost()}" ajax="false" />
+            </h:form>
+        </f:view>
+
+    </h:body>
+</html>
+

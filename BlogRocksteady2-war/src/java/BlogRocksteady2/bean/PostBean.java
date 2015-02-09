@@ -5,11 +5,8 @@ import BlogRocksteady2.ejb.PostFacade;
 import BlogRocksteady2.entity.Comentario;
 import BlogRocksteady2.entity.Post;
 import java.io.ByteArrayInputStream;
-import java.io.OutputStream;
-import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -22,8 +19,6 @@ import org.primefaces.model.StreamedContent;
 @RequestScoped
 public class PostBean {
 
-    private static final Logger LOG = Logger.getLogger(PostBean.class.getName());
-
     @EJB
     private PostFacade postFacade;
     @EJB
@@ -33,6 +28,7 @@ public class PostBean {
     private List<Post> postlist;
     private Comentario comentario;
     private Collection<Comentario> comentariolist;
+    private StreamedContent image;
 
     public Post getPost() {
         return post;
@@ -69,20 +65,11 @@ public class PostBean {
     @PostConstruct
     public void init() {
         this.postlist = this.postFacade.findAll();
-//        if ( this.postlist != null)
-//            LOG.info("Postlist = " + this.postlist.get(0).getPostedBy().getUsername() + " - " +
-//                     this.postlist.get(0).getPostedBy().toString());
 
     }
 
-    public Collection<Comentario> cargarComentarios(BigDecimal postId) {
-        return this.postFacade.find(postId).getComentarioCollection();
-
-    }
-
-    public StreamedContent cargarFoto(BigDecimal postId) {
+    public StreamedContent getImage() {
         
-
         FacesContext context = FacesContext.getCurrentInstance();
 
         if (context.getRenderResponse()) {
@@ -91,9 +78,9 @@ public class PostBean {
         }
         else {
             // So, browser is requesting the image. Get ID value from actual request param.
-//            String id = context.getExternalContext().getRequestParameterMap().get("id");
-            byte [] image = this.postFacade.find(postId).getHeaderImage();
-            return new DefaultStreamedContent(new ByteArrayInputStream(image));
+            String idpost = context.getExternalContext().getRequestParameterMap().get("paramImage");
+            byte [] img = this.postFacade.find(idpost).getHeaderImage();
+            return new DefaultStreamedContent(new ByteArrayInputStream(img),"image/jpeg");
         }
     }
     
