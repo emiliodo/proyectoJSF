@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head></h:head>
+    <h:body onload="#{editPerfilBean.cargarPerfil()}">
+        <div>TODO write content</div>
+        <h:form>
+            <h:panelGrid columns="2" columnClasses="column" cellpadding="5">
+
+                <h:outputLabel for="email" value="Email:" />
+                <p:inplace id="email" editor="true" emptyLabel="Introduzca email">
+                    <p:inputText value="#{editPerfilBean.email}" required="true" label="text" />
+                </p:inplace>
+
+                <h:outputLabel for="webSite" value="WebSite:" />
+                <p:inplace id="webSite" editor="true" emptyLabel="Introduzca website">
+                    <p:inputText value="#{editPerfilBean.website}" required="true" label="text" />
+                </p:inplace>
+
+                <h:outputLabel for="description" value="Description:" />
+                <p:inplace id="description" editor="true" emptyLabel="Introduzca description">
+                    <p:inputText value="#{editPerfilBean.description}" required="true" label="text" />
+                </p:inplace>
+
+                <h:outputLabel for="facebook" value="facebook:" />
+                <p:inplace id="facebook" editor="true" emptyLabel="Introdusca facbook">
+                    <p:inputText value="#{editPerfilBean.facebook}"  label="text" />
+                </p:inplace>
+
+
+                <h:outputLabel for="twitter" value="twitter:" />
+                <p:inplace id="twitter" editor="true"   emptyLabel="Introdusca twitter">
+                    <p:inputText value="#{editPerfilBean.twitter}"  label="text" />
+                </p:inplace>
+
+                <h:outputLabel for="linkedin" value="Linkedin" />
+                <p:inplace id="linkedin" editor="true" emptyLabel="Introdusca likendin">
+                    <p:inputText value="#{editPerfilBean.linkedin}"   label="text" />
+                </p:inplace>
+
+                <h:outputLabel for="instagram" value="Instagram" />
+                <p:inplace id="instagram" editor="true" emptyLabel="Introdusca instagram">
+                    <p:inputText value="#{editPerfilBean.instagram}"  label="text" />
+                </p:inplace>
+                <h:commandButton action="#{editPerfilBean.editarPerfil()}" value="Update profile"  />
+            </h:panelGrid>
+
+        </h:form>
+
+
+    </h:body>
+</html>

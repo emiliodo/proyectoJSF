@@ -11,12 +11,16 @@
     <h:body>
         <h:form>
         <h:outputLabel value="username"/>
-        <h:inputText  value="#{loginBean.nick}"/>
+        <h:inputText id="nick" required="true" requiredMessage="Nick obligatorio" 
+                     value="#{loginBean.nick}"/>
+        <h:message for="nick"/>
         <h:outputLabel value="password"/>
-        <h:inputText  value="#{loginBean.password}" />
+        <h:inputText id="password" required="true" requiredMessage="Nick obligatorio" 
+                     value="#{loginBean.password}" />
+        <h:message for="password"/>
         <br></br>
         <h:commandButton id="validar" action="#{loginBean.comprobar()}"/>
-         <h:message for="validar" />
+         
         </h:form>
     </h:body>
 </html>
