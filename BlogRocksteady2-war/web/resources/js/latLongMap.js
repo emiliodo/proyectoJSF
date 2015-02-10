@@ -5,7 +5,7 @@ function initialize() {
     var editLat = $('#inLat').val();
     var editLong = $('#inLat').val();
     var posicion;
-    if (editLat!="" && editLong!= ""){
+    if (editLat!=="" && editLong!== ""){
         posicion = new google.maps.LatLng(editLat,editLong);
     }
     else{

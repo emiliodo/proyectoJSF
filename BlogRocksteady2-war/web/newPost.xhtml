@@ -6,24 +6,30 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>New Post</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <h:outputScript library="js" name="latLongMap.js" />
     </h:head>
     <h:body>
         <f:view>
             <h:form>
-                <h1><h:outputText value="Create/Edit"/></h1>
-<!--                    <h:outputLabel value="HeaderImage:" for="headerImage" />
-                    <h:inputTextarea rows="4" cols="30" id="headerImage" value="#{newPostBean.post.headerImage}" title="HeaderImage" />-->
-                    <h:outputLabel value="Title:" for="title" /><br/>
-                    <p:inputText id="title" value="#{newPostBean.post.title}" title="Title" /><br/>
-                    <h:outputLabel value="PostContent:" for="postContent" /><br/>
-                    <p:inputTextarea id="postContent" value="#{newPostBean.post.postContent}" title="PostContent" /><br/>
-                    <h:outputLabel value="PostGps:" for="postGps" /><br/>
-                    <p:inputText id="postGps" value="#{newPostBean.post.postGps}" title="PostGps" /><br/>
-                    
-                    <p:commandButton value="Post" id="createPost" actionListener="#{newPostBean.createPost()}" ajax="false" />
+                <h1><h:outputText value="Create/Edit"/></h1><br/><br/>
+                Header Image:
+                <h:inputFile id="headerImage" value="#{newPostBean.post.headerImage}" title="HeaderImage" /><br/><br/>
+                Title:
+                <p:inputText id="title" value="#{newPostBean.post.title}" title="Title" /><br/><br/>
+                Content:
+                <p:inputTextarea id="postContent" value="#{newPostBean.post.postContent}" title="PostContent" /><br/><br/>
+<!--                <h:outputLabel value="PostGps:" for="postGps" /><br/><br/>
+                <p:inputText id="postGps" value="#{newPostBean.post.postGps}" title="PostGps" /><br/><br/>-->
+                Latitude:
+                <p:inputText id="inLat" value="postLat"/><br/><br/>
+                Longitude:
+                <p:inputText id="inLong" value="postLong"/><br/><br/>
+           
+                <div id="latLongMap" style="width:600px; height: 300px;"></div><br/>     
+                <p:commandButton value="Post" id="createPost" actionListener="#{newPostBean.createPost()}" ajax="false" />
             </h:form>
         </f:view>
 
     </h:body>
 </html>
-

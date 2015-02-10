@@ -5,6 +5,7 @@ import BlogRocksteady2.ejb.PostFacade;
 import BlogRocksteady2.entity.Comentario;
 import BlogRocksteady2.entity.Post;
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -13,11 +14,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.annotation.MultipartConfig;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 @ManagedBean
 @SessionScoped
+@MultipartConfig
 public class PostBean {
 
     @EJB
@@ -66,7 +69,6 @@ public class PostBean {
     @PostConstruct
     public void init() {
         this.postlist = this.postFacade.findAll();
-
     }
 
     public StreamedContent getImage() {
@@ -84,8 +86,19 @@ public class PostBean {
             return new DefaultStreamedContent(new ByteArrayInputStream(img),"image/jpeg");
         }
     }
-    
-    
+    public void setImage(StreamedContent img) {
+        this.image = img;
+    }
+
+//    public StreamedContent getImage() {
+//        return image;
+//    }
+
+    public String doImage() {
+        InputStream input = new ByteArrayInputStream(this.postFacade.find(3).getHeaderImage());
+        this.setImage(new DefaultStreamedContent(input));
+        return "blog.hxtml";
+    }
 
     public PostBean() {
 
