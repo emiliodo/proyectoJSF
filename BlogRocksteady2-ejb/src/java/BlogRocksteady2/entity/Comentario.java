@@ -11,11 +11,14 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Emilio
+ * @author Blackproxy
  */
 @Entity
 @Table(name = "COMENTARIO")
@@ -40,24 +43,26 @@ public class Comentario implements Serializable {
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
+    @SequenceGenerator(name = "generadorSeqComentario", sequenceName = "COMENTARIO_ID_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generadorSeqComentario")
     @Basic(optional = false)
     @NotNull
     @Column(name = "COMMENT_ID")
     private BigDecimal commentId;
-    @Size(max = 255)
+    @Size(max = 4000)
     @Column(name = "COMMENT_CONTENT")
     private String commentContent;
     @Column(name = "COMMENT_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date commentDate;
-    @Size(max = 255)
+    @Size(max = 100)
     @Column(name = "COMMENT_GPS")
     private String commentGps;
     @JoinColumn(name = "POST_COMMENTED", referencedColumnName = "POST_ID")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Post postCommented;
     @JoinColumn(name = "COMMENT_BY", referencedColumnName = "USER_ID")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Usuario commentBy;
 
     public Comentario() {
@@ -137,7 +142,7 @@ public class Comentario implements Serializable {
 
     @Override
     public String toString() {
-        return "BlogRocksteady2.entity.Comentario[ commentId=" + commentId + " ]";
+        return "Entities.Comentario[ commentId=" + commentId + " ]";
     }
     
 }

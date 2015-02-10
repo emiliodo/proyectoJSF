@@ -10,8 +10,11 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -19,6 +22,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,7 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Emilio
+ * @author Blackproxy
  */
 @Entity
 @Table(name = "POST")
@@ -38,39 +42,42 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Post.findAll", query = "SELECT p FROM Post p"),
     @NamedQuery(name = "Post.findByPostId", query = "SELECT p FROM Post p WHERE p.postId = :postId"),
     @NamedQuery(name = "Post.findByMvpost", query = "SELECT p FROM Post p WHERE p.mvpost = :mvpost"),
+    @NamedQuery(name = "Post.findByTitle", query = "SELECT p FROM Post p WHERE p.title = :title"),
     @NamedQuery(name = "Post.findByPostContent", query = "SELECT p FROM Post p WHERE p.postContent = :postContent"),
     @NamedQuery(name = "Post.findByPostDate", query = "SELECT p FROM Post p WHERE p.postDate = :postDate"),
-    @NamedQuery(name = "Post.findByPostGps", query = "SELECT p FROM Post p WHERE p.postGps = :postGps"),
-    @NamedQuery(name = "Post.findByTitle", query = "SELECT p FROM Post p WHERE p.title = :title")})
+    @NamedQuery(name = "Post.findByPostGps", query = "SELECT p FROM Post p WHERE p.postGps = :postGps")})
 public class Post implements Serializable {
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    
     @Id
-    @Basic(optional = false)
+    @SequenceGenerator(name = "generadorSeqPost", sequenceName = "POST_ID_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generadorSeqPost")
+    @Basic(optional = false)    
     @NotNull
-    @Column(name = "POST_ID")
+    @Column(name="POST_ID")
     private BigDecimal postId;
+    @Column(name = "MVPOST")
+    private Character mvpost;
     @Lob
     @Column(name = "HEADER_IMAGE")
     private byte[] headerImage;
-    @Column(name = "MVPOST")
-    private Character mvpost;
-    @Size(max = 255)
+    @Size(max = 25)
+    @Column(name = "TITLE")
+    private String title;
+    @Size(max = 4000)
     @Column(name = "POST_CONTENT")
     private String postContent;
     @Column(name = "POST_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date postDate;
-    @Size(max = 255)
+    @Size(max = 100)
     @Column(name = "POST_GPS")
     private String postGps;
-    @Size(max = 255)
-    @Column(name = "TITLE")
-    private String title;
     @JoinColumn(name = "POSTED_BY", referencedColumnName = "USER_ID")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Usuario postedBy;
-    @OneToMany(mappedBy = "postCommented")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "postCommented")
     private Collection<Comentario> comentarioCollection;
 
     public Post() {
@@ -88,6 +95,14 @@ public class Post implements Serializable {
         this.postId = postId;
     }
 
+    public Character getMvpost() {
+        return mvpost;
+    }
+
+    public void setMvpost(Character mvpost) {
+        this.mvpost = mvpost;
+    }
+
     public byte[] getHeaderImage() {
         return headerImage;
     }
@@ -96,12 +111,12 @@ public class Post implements Serializable {
         this.headerImage = headerImage;
     }
 
-    public Character getMvpost() {
-        return mvpost;
+    public String getTitle() {
+        return title;
     }
 
-    public void setMvpost(Character mvpost) {
-        this.mvpost = mvpost;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getPostContent() {
@@ -126,14 +141,6 @@ public class Post implements Serializable {
 
     public void setPostGps(String postGps) {
         this.postGps = postGps;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public Usuario getPostedBy() {
@@ -175,7 +182,7 @@ public class Post implements Serializable {
 
     @Override
     public String toString() {
-        return "BlogRocksteady2.entity.Post[ postId=" + postId + " ]";
+        return "Entities.Post[ postId=" + postId + " ]";
     }
     
 }

@@ -6,6 +6,8 @@
 package BlogRocksteady2.ejb;
 
 import BlogRocksteady2.entity.Comentario;
+import BlogRocksteady2.entity.Usuario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,5 +29,11 @@ public class ComentarioFacade extends AbstractFacade<Comentario> {
     public ComentarioFacade() {
         super(Comentario.class);
     }
+    public List<Comentario> getCommentsByUser(Usuario u) {
+        return em.createQuery("SELECT c FROM Comentario c WHERE c.commentBy = :commentedBy")
+                .setParameter("commentedBy", u)
+                .getResultList();
+    }
+    
     
 }

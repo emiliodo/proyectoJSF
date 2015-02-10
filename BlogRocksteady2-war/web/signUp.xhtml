@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    
+    
+    
+    <h:head>
+        <title> Sign Up </title>
+    </h:head>
+    <h:body>
+       
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="User Name" />
+                <h:inputText  id="userName" value="#{signUpBean.userName}" required="true"/>
+                
+                <h:outputLabel value="First name"/>  
+                <h:inputText id="name" value="#{signUpBean.name}"/>
+                
+                <h:outputLabel value="Last name" />
+                <h:inputText id="lastName" value="#{signUpBean.lastName}"/>
+                
+                <h:outputLabel value="Email"/>
+                <h:inputText id="email" required="true" requiredMessage=" email obligatorio"
+                             value="#{signUpBean.email}"/>
+                
+                <h:outputLabel value="Password" />
+                <h:inputSecret id="password" required="true"
+                               value="#{signUpBean.password}"/>
+                
+                <h:outputLabel value="Confirm Password" />
+                <h:inputSecret id ="confirmPassword" required="true"
+                               value="#{signUpBean.confirmPassword}" />
+                
+                <h:outputLabel value="WebSite"/>
+                <h:inputText id="website" value="#{signUpBean.website}" />
+                
+                <h:outputLabel value="Description"/>
+                <h:inputText id="description" value="#{signUpBean.description}" />
+                
+                <h:outputLabel value="Twitter" />
+                <h:inputText id="twitter" value="#{signUpBean.twitter}" />
+                
+                <h:outputLabel value="Facebook" />
+                <h:inputText id="facebook" value="#{signUpBean.facebook}" />
+                
+                <h:outputLabel value="Instagram" /> 
+                <h:inputText id="instragrama" value="#{signUpBean.instagram}" />
+                
+                <h:outputLabel value="Linkedin"/>
+                <h:inputText id="linkedin" value="#{signUpBean.linkedin}" />
+                    
+                <h:commandButton value="Sign Up" action="#{signUpBean.doRegister}"/>
+            
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+

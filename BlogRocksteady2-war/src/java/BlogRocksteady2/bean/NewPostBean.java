@@ -20,6 +20,8 @@ import javax.faces.bean.RequestScoped;
 public class NewPostBean {
     @EJB
     private PostFacade postFacade;
+    
+    private Post post;
 
     public Post getPost() {
         return post;
@@ -34,7 +36,7 @@ public class NewPostBean {
 
     
     
-    private Post post;
+
     
     public NewPostBean() {
     }
