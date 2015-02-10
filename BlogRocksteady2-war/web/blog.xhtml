@@ -30,6 +30,7 @@
                             #{item.postContent}<br/><br/>
                             
                             <p:graphicImage cache="false" value="#{postBean.image}" width="600" height="150">
+                                <f:param name="paramImage" value="#{item.headerImage}" />
                             </p:graphicImage> <br/><br/>
                             
                             <div id="mostrarMapa#{item.postId}">
