@@ -14,6 +14,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
 import javax.servlet.annotation.MultipartConfig;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -74,7 +75,7 @@ public class PostBean {
     public StreamedContent getImage() {
         
         FacesContext context = FacesContext.getCurrentInstance();
-
+        //context.getCurrentPhaseId()== PhaseId.RENDER_RESPONSE
         if (context.getRenderResponse()) {
             // So, we're rendering the view. Return a stub StreamedContent so that it will generate right URL.
             return new DefaultStreamedContent();
