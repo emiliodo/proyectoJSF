@@ -112,7 +112,7 @@ public class NewPostBean {
         newPost.setPostDate(Calendar.getInstance().getTime());
         postFacade.create(newPost);
 
-        return ("blog.xhtml");
+        return title;
     }
 
 }
