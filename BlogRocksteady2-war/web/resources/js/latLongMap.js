@@ -5,10 +5,10 @@ function initialize() {
     var editLat = $('#inLat').val();
     var editLong = $('#inLat').val();
     var posicion;
-    if (editLat!=="" && editLong!== ""){
-        posicion = new google.maps.LatLng(editLat,editLong);
+    if (editLat != "" && editLong != "") {
+        posicion = new google.maps.LatLng(editLat, editLong);
     }
-    else{
+    else {
         posicion = new google.maps.LatLng(36.72, -4.42);
     }
     var mapOptions = {
@@ -26,33 +26,33 @@ function initialize() {
 }
 
 function addMarker(location) {
-  var marker = new google.maps.Marker({
-    position: location,
-    map: map
-  });
-  markers.push(marker);
+    var marker = new google.maps.Marker({
+        position: location,
+        map: map
+    });
+    markers.push(marker);
 }
 // Sets the map on all markers in the array.
 function setAllMap(map) {
-  for (var i = 0; i < markers.length; i++) {
-    markers[i].setMap(map);
-  }
+    for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+    }
 }
 
 // Removes the markers from the map, but keeps them in the array.
 function clearMarkers() {
-  setAllMap(null);
+    setAllMap(null);
 }
 
 // Shows any markers currently in the array.
 function showMarkers() {
-  setAllMap(map);
+    setAllMap(map);
 }
 
 // Deletes all markers in the array by removing references to them.
 function deleteMarkers() {
-  clearMarkers();
-  markers = [];
+    clearMarkers();
+    markers = [];
 }
 
 function loadScript() {
@@ -63,5 +63,4 @@ function loadScript() {
 }
 
 window.onload = loadScript;
-
 google.maps.event.addDomListener(window, 'load', initialize());
