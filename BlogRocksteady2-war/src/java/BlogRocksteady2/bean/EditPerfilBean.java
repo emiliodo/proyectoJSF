@@ -7,18 +7,29 @@ package BlogRocksteady2.bean;
 
 import BlogRocksteady2.ejb.UsuarioFacade;
 import BlogRocksteady2.entity.Usuario;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.Part;
+import org.apache.commons.io.IOUtils;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
  * @author YSF
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class EditPerfilBean implements Serializable{
     @EJB
     private UsuarioFacade usuarioFacade;
@@ -31,9 +42,45 @@ public class EditPerfilBean implements Serializable{
     private String linkedin;  
     private String description;
     private String instagram;
+    private Part foto;
+    private StreamedContent image;
+
+//    public UploadedFile getFile() {
+//        return file;
+//    }
+//
+//    public void setFile(UploadedFile file) {
+//        this.file = file;
+//    }
+//     public void upload() {
+//        if(file != null) {
+//            FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
+//            FacesContext.getCurrentInstance().addMessage(null, message);
+//        }
+//    }
 
     public String getLinkedin() {
         return linkedin;
+    }
+
+    public Part getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Part foto) {
+        this.foto = foto;
+    }
+
+    public StreamedContent getImage() {
+        InputStream inputStream = new ByteArrayInputStream((byte[]) this.usuario.getImg());
+        this.setImage(new DefaultStreamedContent(inputStream, "image/jpg"));
+       
+
+        return image;
+    }
+
+    public void setImage(StreamedContent image) {
+        this.image = image;
     }
 
     public void setLinkedin(String linkedin) {
@@ -98,9 +145,9 @@ public class EditPerfilBean implements Serializable{
     }
     
     public  String cargarPerfil(){
-        Integer user = (Integer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
-
-        if (user>0){
+        BigDecimal user = (BigDecimal) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+        
+        if (user.compareTo(BigDecimal.ZERO)>=1){
             usuario = usuarioFacade.findById(user);
 
             setEmail(usuario.getEmail());
@@ -110,15 +157,16 @@ public class EditPerfilBean implements Serializable{
             setDescription(usuario.getDescription());
             setLinkedin(usuario.getLinkedin());
             setInstagram(usuario.getInstagram());
+            //setFile((UploadedFile) usuario.getImg());
             return null;
         }else{
             return "index.xhtml";
         }
     }
     
-     public  String editarPerfil(){
-        Integer user = (Integer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
-        if (user>0){
+     public  String editarPerfil() throws IOException{
+        BigDecimal user = (BigDecimal) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+        if (user.compareTo(BigDecimal.ZERO)>=1){
             usuario = usuarioFacade.findById(user);
             usuario.setEmail(email);
             usuario.setDescription(description);
@@ -127,7 +175,16 @@ public class EditPerfilBean implements Serializable{
             usuario.setTwitter(twitter);
             usuario.setLinkedin(linkedin);
             usuario.setInstagram(instagram);
+             InputStream inputStream = foto.getInputStream();
+             byte[] imagen = IOUtils.toByteArray(inputStream);
+            usuario.setImg(imagen);
+            
+          //  usuario.setImg((Serializable) file);
             usuarioFacade.edit(usuario);
+            
+        
+
+            
       
         }
         return "/pruebajsf.xhtml?faces-redirect=true";

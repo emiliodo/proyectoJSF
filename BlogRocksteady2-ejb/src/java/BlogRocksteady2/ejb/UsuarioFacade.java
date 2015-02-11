@@ -96,7 +96,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         em.getTransaction().commit();
     }
     
-    public Usuario findById(Integer id){
+    public Usuario findById(BigDecimal id){
         
          List<Usuario> usersList = em.createQuery("SELECT u FROM Usuario u WHERE u.userId = :id")
                 .setParameter("id", id)
