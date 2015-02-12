@@ -46,9 +46,10 @@
                                     #{comentario.commentContent}
                                 </h:column>
                             </h:dataTable>
-                            
+
                             <p:inputText id="commentContent" value="#{newComBean.contenidoComentario}" title="commentContent" />
-                            <h:commandButton value="comentar" id="createComment" action="#{newComBean.createCommnt()}"/>
+                            <h:commandButton value="comentar" id="createComment" action="#{newComBean.createCommnt(item)}"/>
+
                             <hr/>
 
                         </h:column>
