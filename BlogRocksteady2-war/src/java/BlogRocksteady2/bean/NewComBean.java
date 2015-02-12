@@ -62,6 +62,7 @@ public class NewComBean {
         newComentario.setCommentDate(Calendar.getInstance().getTime());
         comentarioFacade.create(newComentario);
         
+//        return ("blog.xhtml");
     }
 
     public NewComBean() {
