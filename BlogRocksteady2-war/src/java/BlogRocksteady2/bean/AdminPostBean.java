@@ -15,6 +15,7 @@ import java.util.List;
 import static java.util.Objects.isNull;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 
@@ -30,6 +31,8 @@ public class AdminPostBean implements Serializable{
     @EJB
     private PostFacade postFacade;
     
+//    @ManagedProperty(value="#{loginBean}")
+//    private LoginBean loginBean;
     
     private List<Post> postList;
     private String userFilter;
@@ -102,7 +105,7 @@ public class AdminPostBean implements Serializable{
         Post p = postFacade.find(postID);
         postFacade.remove(p);
         this.searchPerformed = false;
-        return "index";
+        return null;
     }
     
     public String doMakeMVP(BigDecimal postID){

@@ -1,77 +1,13 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"      
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/plantilla/plantilla.xhtml">
 
-        <title>Blog - Rocksteady Blog</title>
-        <h:outputStylesheet library="css" name="style.css"  />
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <meta name="description" content="" />
-        <meta name="keywords" content="" />
-        <script src="http://fonts.googleapis.com/css?family=Oxygen:400,300,700"/>
-        <h:outputStylesheet library="css" name="skel-noscript.css"  />
-        <!--[if lte IE 8]><h:outputScript library="js" name="js/html5shiv.js"/><![endif]-->
-        <h:outputScript library="js" name="skel.min.js"/>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"/>
-        <h:outputScript library="js" name="skel-panels.min.js"/>
-        <h:outputScript library="js" name="init.js"/>
-
-
-        <!--[if lte IE 8]><h:outputStylesheet library="css" name="css/ie/v8.css"/><![endif]-->
-        <!--[if lte IE 9]><h:outputStylesheet library="css" name="css/ie/v9.css"/><![endif]-->
-    </h:head>
-    <h:body>
-        <!-- Header -->
-        <div id="header">
-            <div class="container">
-
-                <!-- Logo -->
-                <div id="logo">
-                    <h1><a>Rocksteady</a></h1>
-                    <span>BLOG</span>
-                </div>
-
-                <!-- Nav -->
-                <!-- Mezclamos tags jsf con c:if  para no crear muchos h:panelGroup -->
-                <nav id="nav">
-                    <ul>
-                        <li>
-                            <h:link value="Home" outcome="index" />
-                        </li>
-
-                        <li>
-                            <h:link value="Blog" outcome="blog" />
-                        </li>
-                        <c:if test="#{not empty sessionBean.user}">
-                            <li>
-                                <h:link value="Sign Up" outcome="signUp"/>
-                            </li>
-                        </c:if>
-
-                        <c:if test="#{not empty sessionBean.user}">
-                            <!-- uso el c:if u no el rendered como condición para mostrar el enlace ya que al estar siempre 
-                            el <li> aparecería un elemento vacío en caso de no cumplirse la condición -->
-                            <c:if test="#{sessionBean.user.userType == BigInteger.valueOf(1)}">
-                                <li>
-                                    <h:link value="Admin" outcome="admin" rendered="#{sessionBean.user.userType == BigInteger.valueOf(1)}"/>
-                                </li>
-                            </c:if>
-                            <li>
-                                <h:link value="Edit Profile" outcome="editProfile" />
-                            </li>
-                            <li>
-                                <h:link value="Log Out" outcome="logout" />
-                            </li>
-                        </c:if>
-                    </ul>
-                </nav>
-
-            </div>
-        </div>
-        <!-- Header -->
+    <ui:define name="contenido">
 
         <!-- Main -->
         <div id="main">
@@ -144,12 +80,12 @@
 
                 <!-- SEARCH RESULTS: -->
 
-                <h:panelGroup rendered="#{ empty adminUserBean.userList and 
+                <h:panelGroup rendered="#{ empty adminUserBean.userList and  
                                            empty adminPostBean.postList and 
                                            empty adminCommentBean.commentList and
-                                           (adminUserBean.searchPerformed or
-                                           adminCommentBean.searchPerformed or
-                                           adminPostBean.searchPerformed)}">
+                                           loginBean.busquedaRealizada eq 'post' or
+                                           loginBean.busquedaRealizada eq 'comment'or
+                                           loginBean.busquedaRealizada eq 'users' }">
                     <br/><br/>
                     <header>
                         <center>
@@ -190,6 +126,7 @@
                                         <f:selectItem id="item2" itemLabel="#{msg['setAdmin']}" itemValue="Admin#{usersFound.userId}" />
                                         <f:selectItem id="item3" itemLabel="#{msg['setWriter']}" itemValue="Writer#{usersFound.userId}" />
                                         <f:selectItem id="item4" itemLabel="#{msg['setRegistered']}" itemValue="Registered#{usersFound.userId}" />
+                                        <f:selectItem id="item5" itemLabel="#{msg['deleteUser']}" itemValue="Delete#{usersFound.userId}" />
 
                                     </h:selectOneMenu>
                                 </h:form>
@@ -272,10 +209,7 @@
         <!-- Main -->
 
 
-        <!-- Copyright -->
-        <div id="copyright">
-            Trabajo Java EE - Máster INFTEL
-        </div>
-    </h:body>
-</html>
+        
+    </ui:define>
+</ui:composition>
 
