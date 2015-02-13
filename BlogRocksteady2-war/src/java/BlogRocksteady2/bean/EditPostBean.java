@@ -10,8 +10,6 @@ import BlogRocksteady2.ejb.UsuarioFacade;
 import BlogRocksteady2.entity.Post;
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,14 +21,15 @@ import org.apache.commons.io.IOUtils;
 
 /**
  *
- * @author Blackproxy
+ * @author Emilio
  */
 @ManagedBean
 @RequestScoped
-public class NewPostBean {
+public class EditPostBean {
 
     @EJB
     private UsuarioFacade usuarioFacade;
+
     @EJB
     private PostFacade postFacade;
 
@@ -71,57 +70,34 @@ public class NewPostBean {
         this.content = content;
     }
 
-    public String getLatitude() {
-        return latitude;
-    }
+    public String editPost() {
 
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
-    private String latitude;
-    private String longitude;
-
-    /**
-     * Creates a new instance of NewPostBean
-     */
-    public NewPostBean() {
-    }
-
-    public String createPost() {
-
-        //Controlar que el usuario logueado tiene permisos para crear Post
-        Post newPost = new Post();
-        newPost.setMvpost(Character.MIN_VALUE);
-        newPost.setPostContent(content);
+        Post editPost = new Post();
 
         if (headerImage != null) {
             InputStream is;
             try {
                 is = headerImage.getInputStream();
                 byte[] img = IOUtils.toByteArray(is);
-                newPost.setHeaderImage(img);
+                editPost.setHeaderImage(img);
             } catch (IOException ex) {
                 Logger.getLogger(NewPostBean.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
-        newPost.setTitle(title);
-        newPost.setPostGps(latitude + "," + longitude);
-
-        //El usuario que tiene la sesion abierta.
-        newPost.setPostedBy(usuarioFacade.find(new BigDecimal(BigInteger.ONE)));
-        newPost.setPostDate(Calendar.getInstance().getTime());
-        postFacade.create(newPost);
-
+        editPost.setTitle(title);
+        editPost.setPostContent(content);
+        editPost.setPostDate(Calendar.getInstance().getTime());
+        postFacade.edit(editPost);
         return "blog.xhtml?faces-redirect=true";
     }
-   
+
+    public String cargarEditar(Post p) {
+        this.postE = p;
+        return "editPost.xhtml?faces-redirect=true";
+    }
+
+    public EditPostBean() {
+    }
+
 }
