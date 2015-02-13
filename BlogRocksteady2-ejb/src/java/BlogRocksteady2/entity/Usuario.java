@@ -274,4 +274,15 @@ public class Usuario implements Serializable {
         return "Entities.Usuario[ userId=" + userId + " ]";
     }
     
+    public String userTypeToText(){
+        System.out.print("usertype= " + this.userType + " username= "+ this.username);
+        if(this.userType == (BigInteger.valueOf(1))){
+            return "Admin";
+        }else if(this.userType == (BigInteger.valueOf(2))){
+            return "Writer";
+        }else{
+            return "Registered";
+        }
+    }
+    
 }

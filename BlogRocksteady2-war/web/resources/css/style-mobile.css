@@ -128,7 +128,7 @@
 				position: absolute;
 				left: 25px;
 				top: 20px;
-				background: url('images/mobileUI-site-nav-opener-bg.svg') 0px 0px no-repeat;
+				background: url('../resources/images/mobileUI-site-nav-opener-bg.svg') 0px 0px no-repeat;
 				opacity: 0.50;
 			}
 
@@ -139,7 +139,7 @@
 
 	#navPanel
 	{
-		background: #181818 url(images/overlay.png) repeat;
+		background: #181818 url(../resources/images/overlay.png) repeat;
 	}
 
 		#navPanel .link
