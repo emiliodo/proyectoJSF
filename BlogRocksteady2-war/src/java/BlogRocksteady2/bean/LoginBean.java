@@ -25,8 +25,8 @@ public class LoginBean implements Serializable{
     @EJB
     private UsuarioFacade usuarioFacade;
 
-    private String nick ;
-    private String password;
+    private String nick ; // es igual a usuario.username
+    private String password; // es usuario.password
     private Usuario usuario;
     private UIComponent validar;
     private String busquedaRealizada;
