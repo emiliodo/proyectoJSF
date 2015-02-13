@@ -1,18 +1,14 @@
+/*
+	Monochromed by TEMPLATED
+    templated.co @templatedco
+    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+*/
+
 /*********************************************************************************/
 /* Basic                                                                         */
 /*********************************************************************************/
 
-	.button
+	body,input,textarea,select
 	{
-		/*
-		
-		For elements that use border-radius, add the following:
-		
-			-ms-behavior: url('css/ie/PIE.htc');
-
-		Note that PIE.htc requires its elements to be relative or absolute:
-
-			position: relative;
-
-		*/
+		font-size: 10pt;
 	}

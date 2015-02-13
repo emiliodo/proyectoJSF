@@ -2,8 +2,9 @@ var map;
 var markers = [];
 
 function initialize() {
-    var editLat = $('#inLat').val();
-    var editLong = $('#inLong').val();
+    
+    var editLat = $('#j_idt6\\:inLat').val();
+    var editLong = $('#j_idt6\\:inLong').val();
     var posicion;
     if (editLat != "" && editLong != "") {
         posicion = new google.maps.LatLng(editLat, editLong);
@@ -19,8 +20,8 @@ function initialize() {
     google.maps.event.addListener(map, 'click', function (event) {
         deleteMarkers();
         addMarker(event.latLng);
-        $('#inLat').val(event.latLng.lat());
-        $('#inLong').val(event.latLng.lng());
+        $('#j_idt6\\:inLat').val(event.latLng.lat());
+        $('#j_idt6\\:inLong').val(event.latLng.lng());
     });
     addMarker(posicion);
 }
@@ -58,7 +59,7 @@ function deleteMarkers() {
 function loadScript() {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src = "http://maps.googleapis.com/maps/api/js?v3&key=AIzaSyAgG5LgI0PmcY0nFxyecNOJEWhVIrQjdWs&sensor=false&callback=initialize";
+    script.src = "http://maps.googleapis.com/maps/api/js?v3&key=AIzaSyAgG5LgI0PmcY0nFxyecNOJEWhVIrQjdWs&amp;sensor=false&callback=initialize";
     document.body.appendChild(script);
 }
 

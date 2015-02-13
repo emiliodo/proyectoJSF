@@ -8,6 +8,7 @@ package BlogRocksteady2.bean;
 import BlogRocksteady2.ejb.UsuarioFacade;
 import BlogRocksteady2.entity.Usuario;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.logging.Level;
@@ -28,6 +29,9 @@ public class AdminUserBean implements Serializable {
 
     private static final Logger LOG = Logger.getLogger(AdminUserBean.class.getName());
 
+//    @ManagedProperty(value="#{loginBean}")
+//    private LoginBean loginBean;
+    
     @EJB
     private UsuarioFacade usuarioFacade;
 
@@ -76,6 +80,7 @@ public class AdminUserBean implements Serializable {
             this.userList = usuarioFacade.findByNameContaining(this.userFilter);
         }
         this.searchPerformed = true;
+//        loginBean.setBusquedaRealizada("users");
         return null;
     }
 
@@ -88,24 +93,35 @@ public class AdminUserBean implements Serializable {
             i--;
         }
         userID = new BigInteger(comando.substring(i));
-
+        
         comando = comando.replaceAll("\\d*$", "");
-
+        Usuario u = usuarioFacade.find(new BigDecimal(userID));
+        
         switch (comando) {
             case "Admin":
                 LOG.log(Level.INFO, "Setting user as admin. User ID = {0}", userID);
+                u.setUserType(BigInteger.valueOf(1));
+                usuarioFacade.edit(u);
                 break;
             case "Writer":
                 LOG.log(Level.INFO, "Setting user as writer {0}", userID);
+                u.setUserType(BigInteger.valueOf(2));
+                usuarioFacade.edit(u);
                 break;
             case "Registered":
                 LOG.log(Level.INFO, "Setting user as registered {0}", userID);
+                u.setUserType(BigInteger.valueOf(3));
+                usuarioFacade.edit(u);
                 break;
+            case "Delete":
+                LOG.log(Level.INFO, "Deleting user {0}", userID);
+                usuarioFacade.remove(usuarioFacade.find(new BigDecimal(userID)));
             default:
                 LOG.log(Level.INFO, "Not changing anything for user {0}", userID);
                 break;
         }
         this.searchPerformed = false;
+        //loginBean.setBusquedaRealizada(null);
         return null;
     }
 

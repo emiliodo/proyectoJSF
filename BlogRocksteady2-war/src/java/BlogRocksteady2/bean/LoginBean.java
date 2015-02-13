@@ -11,7 +11,6 @@ import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -28,8 +27,9 @@ public class LoginBean implements Serializable{
 
     private String nick ;
     private String password;
-    private Usuario usuario ;
+    private Usuario usuario;
     private UIComponent validar;
+    private String busquedaRealizada;
     
     /**
      * Creates a new instance of LoginBean
@@ -53,7 +53,13 @@ public class LoginBean implements Serializable{
         this.usuario = usuario;
     }
 
+    public String getBusquedaRealizada() {
+        return busquedaRealizada;
+    }
 
+    public void setBusquedaRealizada(String busquedaRealizada) {
+        this.busquedaRealizada = busquedaRealizada;
+    }
 
     public String getPassword() {
         return password;

@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 
@@ -28,6 +29,9 @@ public class AdminCommentBean implements Serializable{
     private ComentarioFacade comentarioFacade;
     @EJB
     private UsuarioFacade usuarioFacade;
+    
+//    @ManagedProperty(value="#{loginBean}")
+//    private LoginBean loginBean;
     
     
     private boolean searchPerformed;

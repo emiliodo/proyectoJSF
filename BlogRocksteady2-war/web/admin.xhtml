@@ -1,84 +1,20 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"      
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/plantilla/plantilla.xhtml">
 
-        <title>Blog - Rocksteady Blog</title>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <meta name="description" content="" />
-        <meta name="keywords" content="" />
-        <script src="http://fonts.googleapis.com/css?family=Oxygen:400,300,700"/>
-        <h:outputStylesheet library="css" name="skel-noscript.css"  />
-        <h:outputStylesheet library="css" name="style.css"  />
-        <!--[if lte IE 8]><h:outputScript library="js" name="js/html5shiv.js"/><![endif]-->
-        <h:outputScript library="js" name="skel.min.js"/>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"/>
-        <h:outputScript library="js" name="skel-panels.min.js"/>
-        <h:outputScript library="js" name="init.js"/>
-
-
-        <!--[if lte IE 8]><h:outputStylesheet library="css" name="css/ie/v8.css"/><![endif]-->
-        <!--[if lte IE 9]><h:outputStylesheet library="css" name="css/ie/v9.css"/><![endif]-->
-    </h:head>
-    <h:body>
-        <!-- Header -->
-        <div id="header">
-            <div class="container">
-
-                <!-- Logo -->
-                <div id="logo">
-                    <h1><a>Rocksteady</a></h1>
-                    <span>BLOG</span>
-                </div>
-
-                <!-- Nav -->
-                <!-- Mezclamos tags jsf con c:if  para no crear muchos h:panelGroup -->
-                <nav id="nav">
-                    <ul>
-                        <li>
-                            <h:link value="Home" outcome="index" />
-                        </li>
-
-                        <li>
-                            <h:link value="Blog" outcome="blog" />
-                        </li>
-                        <c:if test="#{not empty sessionBean.user}">
-                            <li>
-                                <h:link value="Sign Up" outcome="signUp"/>
-                            </li>
-                        </c:if>
-
-                        <c:if test="#{not empty sessionBean.user}">
-                            <!-- uso el c:if u no el rendered como condición para mostrar el enlace ya que al estar siempre 
-                            el <li> aparecería un elemento vacío en caso de no cumplirse la condición -->
-                            <c:if test="#{sessionBean.user.userType == BigInteger.valueOf(1)}">
-                                <li>
-                                    <h:link value="Admin" outcome="admin" rendered="#{sessionBean.user.userType == BigInteger.valueOf(1)}"/>
-                                </li>
-                            </c:if>
-                            <li>
-                                <h:link value="Edit Profile" outcome="editProfile" />
-                            </li>
-                            <li>
-                                <h:link value="Log Out" outcome="logout" />
-                            </li>
-                        </c:if>
-                    </ul>
-                </nav>
-
-            </div>
-        </div>
-        <!-- Header -->
+    <ui:define name="contenido">
 
         <!-- Main -->
         <div id="main">
             <div class="container">
                 <header>
                     <center>
-                        <h2>Hello 
+                        <h2>#{msg['Hello']}
                             <font color="orange">
                                 #{sessionBean.user.username}
                                 <br/><br/>
@@ -91,11 +27,13 @@
                     <div class="3u">
                         <section>
                             <h:form>
-                                <legend><b>Edit Users</b></legend>
-                                Filter by:<br/>
+                                <legend>
+                                    <b>#{msg['EditUsers']}</b>
+                                </legend>
+                                #{msg['FilterBy']}:<br/>
                                 <h:inputText value="#{adminUserBean.userFilter}"/>
                                 <br/>
-                                <h:commandButton value="Find users" action="#{adminUserBean.doSearchUsersByNameContaining()}"/>
+                                <h:commandButton value="#{msg['findUsers']}" action="#{adminUserBean.doSearchUsersByNameContaining()}"/>
                             </h:form>
 
 
@@ -105,11 +43,11 @@
                         <section>
                             <h:form>
 
-                                <legend><b>Delete Post</b></legend>
-                                From User:<br/>
+                                <legend><b>#{msg['DeletePost']}</b></legend>
+                                #{msg['FromUser']}:<br/>
                                 <h:inputText value="#{adminPostBean.userFilter}"/>
                                 <br/>
-                                <h:commandButton value="Find posts by user" action="#{adminPostBean.doSearchPostsByUser()}"/>
+                                <h:commandButton value="#{msg['FindPostByUser']}" action="#{adminPostBean.doSearchPostsByUser()}"/>
                             </h:form>
                         </section>
                     </div>
@@ -117,11 +55,11 @@
                         <section>
                             <h:form>
 
-                                <legend><b>Delete Comment</b></legend>
-                                From User:<br/>
+                                <legend><b>#{msg['DeleteComment']}</b></legend>
+                                #{msg['FromUser']}:<br/>
                                 <h:inputText value="#{adminCommentBean.userFilter}"/>
                                 <br/>
-                                <h:commandButton value="Find comments by user" action="#{adminCommentBean.doSearchCommentsByUser()}"/>
+                                <h:commandButton value="#{msg['findComment']}" action="#{adminCommentBean.doSearchCommentsByUser()}"/>
 
                             </h:form>
                         </section>
@@ -130,9 +68,9 @@
                         <section>
                             <h:form>
 
-                                <legend><b>Select MVPost</b></legend>
-                                Remember, cookies!...<br/><br/>
-                                <h:commandButton value="Get Posts" action="#{adminPostBean.doListPostsForMVP()}"/>
+                                <legend><b>#{msg['selectMVPost']}</b></legend>
+                                <br/><br/>
+                                <h:commandButton value="#{msg['getPosts']}" action="#{adminPostBean.doListPostsForMVP()}"/>
                             </h:form>
                         </section>
                     </div>
@@ -142,16 +80,16 @@
 
                 <!-- SEARCH RESULTS: -->
 
-                <h:panelGroup rendered="#{ empty adminUserBean.userList and 
+                <h:panelGroup rendered="#{ empty adminUserBean.userList and  
                                            empty adminPostBean.postList and 
                                            empty adminCommentBean.commentList and
-                                           (adminUserBean.searchPerformed or
-                                           adminCommentBean.searchPerformed or
-                                           adminPostBean.searchPerformed)}">
+                                           loginBean.busquedaRealizada eq 'post' or
+                                           loginBean.busquedaRealizada eq 'comment'or
+                                           loginBean.busquedaRealizada eq 'users' }">
                     <br/><br/>
                     <header>
                         <center>
-                            <h2><font color="red">No results found.</font></h2></center>
+                            <h2><font color="red">#{msg['noResultsFound']}</font></h2></center>
                     </header>
                 </h:panelGroup>
 
@@ -159,42 +97,43 @@
                     <br/><br/>
                     <header>
                         <center>
-                            <h2><font color="green">Users found:</font></h2>
+                            <h2><font color="green">#{msg['usersFound']}:</font></h2>
                         </center>
                     </header>
                     <h:dataTable style="width:100%" value="#{adminUserBean.userList}"
                                  var="usersFound">
                         <h:column>
                             <!-- column header -->
-                            <f:facet name="header"><b>Username</b></f:facet>
+                            <f:facet name="header"><b>#{msg['Username']}</b></f:facet>
                             <!-- row record -->
                             #{usersFound.username}
                         </h:column>
                         <h:column>
                             <!-- column header -->
-                            <f:facet name="header"><b>User type</b></f:facet>
+                            <f:facet name="header"><b>#{msg['UserType']}</b></f:facet>
                             <!-- row record -->
                             #{usersFound.userTypeToText()}
                         </h:column>
                         <h:column>
                             <!-- column header -->
-                            <f:facet name="header"><b>Perform Action</b></f:facet>
+                            <f:facet name="header"><b>#{msg['performAction']}</b></f:facet>
                             <!-- row record -->
                             <h:panelGroup rendered="#{sessionBean.user.userId ne usersFound.userId}">
                                 <h:form>
                                     <h:selectOneMenu value="Select action..." onchange="submit()" 
                                                      valueChangeListener="#{adminUserBean.actionUserEditActionPerformed}">
-                                        <f:selectItem id="item1" itemLabel="Select option..." itemValue="" />
-                                        <f:selectItem id="item2" itemLabel="Make Admin" itemValue="Admin#{usersFound.userId}" />
-                                        <f:selectItem id="item3" itemLabel="Make Writer" itemValue="Writer#{usersFound.userId}" />
-                                        <f:selectItem id="item4" itemLabel="Make Registered" itemValue="Registered#{usersFound.userId}" />
+                                        <f:selectItem id="item1" itemLabel="#{msg['selectOption']}" itemValue="" />
+                                        <f:selectItem id="item2" itemLabel="#{msg['setAdmin']}" itemValue="Admin#{usersFound.userId}" />
+                                        <f:selectItem id="item3" itemLabel="#{msg['setWriter']}" itemValue="Writer#{usersFound.userId}" />
+                                        <f:selectItem id="item4" itemLabel="#{msg['setRegistered']}" itemValue="Registered#{usersFound.userId}" />
+                                        <f:selectItem id="item5" itemLabel="#{msg['deleteUser']}" itemValue="Delete#{usersFound.userId}" />
 
                                     </h:selectOneMenu>
                                 </h:form>
                             </h:panelGroup>
                             <h:panelGroup rendered="#{sessionBean.user.userId eq usersFound.userId}">
                                 <font color="red">
-                                    This is me.
+                                    #{msg['itsme']}.
                                 </font>
                             </h:panelGroup>
                         </h:column>
@@ -205,9 +144,12 @@
                     <br/><br/>
                     <header>
                         <center>
-                            <h2><font color="green">Post list:</font></h2>
+                            <h2>
+                                <font color="green">#{msg['PostList']}:</font>
+                            </h2>
                         </center>
                     </header>
+                    
                     <h:dataTable value="#{adminPostBean.postList}"
                                  var="postsFound">
                         <h:column>
@@ -216,7 +158,7 @@
                                 #{postsFound.postDate}
                             </li>
                             <h:form>
-                                <h:commandButton value="delete post titled" action="#{adminPostBean.doDeletePostWithID(postsFound.postId)}"/>
+                                <h:commandButton value="#{msg['DeletePost']}" action="#{adminPostBean.doDeletePostWithID(postsFound.postId)}"/>
                             </h:form>
 
                         </h:column>
@@ -226,7 +168,7 @@
                 <h:panelGroup rendered="#{not empty adminPostBean.postList and adminPostBean.setMVP}">
                     <br/><br/>
                     <header>
-                        <center><h2><font color="green">Select post to make MVP:</font></h2></center>
+                        <center><h2><font color="green">#{msg['selectPostToMakeMVP']}:</font></h2></center>
                     </header>
                     <h:dataTable value="#{adminPostBean.postList}"
                                  var="postsFoundMVP">
@@ -236,7 +178,7 @@
                                 #{postsFoundMVP.postDate}
                             </li>
                             <h:form>
-                                <h:commandButton value="Make MVP" action="#{adminPostBean.doMakeMVP(postsFoundMVP.postId)}"/>
+                                <h:commandButton value="#{msg['MakeMVP']}" action="#{adminPostBean.doMakeMVP(postsFoundMVP.postId)}"/>
                             </h:form>
                             <br/>
                         </h:column>
@@ -246,14 +188,14 @@
                 <h:panelGroup rendered="#{not empty adminCommentBean.commentList and adminCommentBean.searchPerformed}">
                     <br/><br/>
                     <header>
-                        <center><h2><font color="green">Comments found:</font></h2></center>
+                        <center><h2><font color="green">#{msg['CommentsFound']}:</font></h2></center>
                     </header>
                     <h:dataTable value="#{adminCommentBean.commentList}"
                                  var="commentsFound">
                         <h:column>
                             <li>#{commentsFound.commentContent}
                                 <h:form>
-                                    <h:commandButton value="delete comment" action="#{adminCommentBean.doDeleteCommentPostWithID(commentsFound.commentId)}"/>
+                                    <h:commandButton value="#{msg['DeleteComment']}" action="#{adminCommentBean.doDeleteCommentPostWithID(commentsFound.commentId)}"/>
                                 </h:form> 
                             </li>
                         </h:column>
@@ -267,10 +209,7 @@
         <!-- Main -->
 
 
-        <!-- Copyright -->
-        <div id="copyright">
-            Trabajo Java EE - Máster INFTEL
-        </div>
-    </h:body>
-</html>
+        
+    </ui:define>
+</ui:composition>
 

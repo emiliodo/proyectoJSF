@@ -10,26 +10,25 @@
         <h:outputScript library="js" name="latLongMap.js" />
     </h:head>
     <h:body>
-        <f:view>
+        <f:view> 
             <h:form enctype="multipart/form-data">
-                <h1><h:outputText value="Create/Edit"/></h1><br/><br/>
+                <h1><h:outputText value="Create"/></h1>
                 Header Image:<br/>
                 <h:inputFile id="headerImage" value="#{newPostBean.headerImage}" title="HeaderImage" /><br/><br/>
                 Title:<br/>
-                <p:inputText id="title" value="#{newPostBean.title}" title="Title" /><br/><br/>
+                <h:inputText id="title" value="#{newPostBean.title}" title="Title" /><br/><br/>
                 Content:<br/>
-                <p:inputTextarea id="postContent" value="#{newPostBean.content}" title="PostContent" /><br/><br/>
+                <h:inputTextarea rows="5" cols="50" id="postContent" value="#{newPostBean.content}" title="PostContent" /><br/><br/>
                 Latitude:<br/>
-                <p:inputText id="inLat" value="#{newPostBean.latitude}"/><br/><br/>
+                <h:inputText id="inLat" value="#{newPostBean.latitude}"/><br/><br/>
                 Longitude:<br/>
-                <p:inputText id="inLong" value="#{newPostBean.longitude}"/><br/><br/>
-           
-                <div id="latLongMap" style="width:800px; height: 300px;"></div><br/>     
-                <h:commandButton value="Post" id="createPost" action="#{newPostBean.createPost()}">
-                </h:commandButton>
-                <h1><h:link value="Volver" outcome="blog.xhtml" /></h1><br/> <br/> 
+                <h:inputText id="inLong" value="#{newPostBean.longitude}"/><br/><br/>
+                Festival position (click the map for set a position):<br/>
+                <div id="latLongMap" style="width:600px; height: 300px;"></div><br/> 
+
+                <h:commandButton value="Post" id="createPost" action="#{newPostBean.createPost()}"/><br/><br/> 
+                <h:link value="Volver" outcome="blog.xhtml" />
             </h:form>
         </f:view>
-
     </h:body>
 </html>
