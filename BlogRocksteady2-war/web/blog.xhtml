@@ -54,16 +54,15 @@
                                     #{comentario.commentContent}
                                 </h:column>
                             </h:dataTable>
-                            <h:form enctype="multipart/form-data">
-                                <p:inputText id="commentContent" value="#{newComBean.contenidoComentario}" title="commentContent" />
-                                <h:commandButton value="Comentar" action="#{newComBean.createCommnt()}" >
+
+
+                            <h:form>
+                                <h:inputText value="#{newComBean.contenidoComentario}" title="CommentContent" />
+                                <h:commandButton value="Comentar" action="#{newComBean.createCommnt()}">
                                     <f:setPropertyActionListener target="#{newComBean.postComentado}" value="#{item}" />
                                 </h:commandButton>
                             </h:form>
-
-
                             <hr/>
-
                         </h:column>
 
                     </h:dataTable>
