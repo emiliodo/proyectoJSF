@@ -26,12 +26,14 @@
                             <h:outputText value="#{item.postedBy.username}"/> |  
                             <h:outputText value="#{item.postDate}">
                                 <f:convertDateTime pattern="MM/dd/yyyy HH:mm"/>
-                            </h:outputText> <br/><br/>
-                            #{item.postContent}<br/><br/>
+                            </h:outputText> | 
+                            <h:commandButton value="editar" action="#{newPostBean.cargarEditar(item)}"/><br/><br/>
 
-                            <p:graphicImage   cache="false" value="#{postBean.image}" width="600" height="150">
+                            <p:graphicImage cache="false" value="#{postBean.image}" width="600" height="150">
                                 <f:param name="idpost" value="#{item.postId}" />
                             </p:graphicImage> <br/><br/>
+
+                            #{item.postContent}<br/><br/>
 
                             <div id="mostrarMapa#{item.postId}">
                                 <center><a onclick="cargarMapa(#{item.postId}, '#{item.postGps}')">MAPA</a></center>
@@ -50,7 +52,7 @@
                                 <p:inputText id="commentContent" value="#{newComBean.contenidoComentario}" title="commentContent" />
                                 <h:commandButton value="comentar" id="createComment" action="#{newComBean.createCommnt(item)}"/>
                             </h:form>
-                            
+
 
                             <hr/>
 
