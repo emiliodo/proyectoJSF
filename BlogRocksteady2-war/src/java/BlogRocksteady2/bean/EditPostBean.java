@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.servlet.http.Part;
 import org.apache.commons.io.IOUtils;
 
@@ -24,7 +25,7 @@ import org.apache.commons.io.IOUtils;
  * @author Emilio
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class EditPostBean {
 
     @EJB
@@ -72,28 +73,17 @@ public class EditPostBean {
 
     public String editPost() {
 
-        Post editPost = new Post();
-
-        if (headerImage != null) {
-            InputStream is;
-            try {
-                is = headerImage.getInputStream();
-                byte[] img = IOUtils.toByteArray(is);
-                editPost.setHeaderImage(img);
-            } catch (IOException ex) {
-                Logger.getLogger(NewPostBean.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        editPost.setTitle(title);
-        editPost.setPostContent(content);
-        editPost.setPostDate(Calendar.getInstance().getTime());
-        postFacade.edit(editPost);
+        postE.setTitle(title);
+        postE.setPostContent(content);
+        postE.setPostDate(Calendar.getInstance().getTime());
+        postFacade.edit(postE);
         return "blog.xhtml?faces-redirect=true";
     }
 
     public String cargarEditar(Post p) {
         this.postE = p;
+        this.title = postE.getTitle();
+        this.content = postE.getPostContent();
         return "editPost.xhtml?faces-redirect=true";
     }
 

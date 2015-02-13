@@ -27,7 +27,9 @@
                             <h:outputText value="#{item.postDate}">
                                 <f:convertDateTime pattern="MM/dd/yyyy HH:mm"/>
                             </h:outputText> | 
-                            <h:commandButton value="editar" action="#{newPostBean.cargarEditar(item)}"/><br/><br/>
+                            <h:commandButton value="editar" action="#{editPostBean.cargarEditar(item)}"/>
+                            <h:commandButton value="borrar" action="#{adminPostBean.doDeletePostWithID(item.postId)}"/>
+                            <br/><br/>
 
                             <p:graphicImage cache="false" value="#{postBean.image}" width="600" height="150">
                                 <f:param name="idpost" value="#{item.postId}" />

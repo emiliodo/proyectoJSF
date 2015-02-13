@@ -15,14 +15,12 @@
                 
                     <h1><h:outputText value="Edit"/></h1>
                     
-                    Header Image:<br/>
-                    <h:inputFile id="headerImage" value="#{editPostBean.headerImage}" title="HeaderImage" /><br/><br/>
                     Title:<br/>
-                    <p:inputText id="title" value="#{newPostBean.title}" title="Title" /><br/><br/>
+                    <h:inputText id="title" value="#{editPostBean.title}" title="Title" /><br/><br/>
                     Content:<br/>
-                    <p:inputTextarea rows="5" cols="50" id="postContent" value="#{newPostBean.content}" title="PostContent" /><br/><br/>
+                    <h:inputTextarea rows="5" cols="50" id="postContent" value="#{editPostBean.content}" title="PostContent" /><br/><br/>
 
-                    <h:commandButton value="Edit" id="createPost" action="#{newPostBean.editPost()}"/><br/><br/> 
+                    <h:commandButton value="Edit" id="createPost" action="#{editPostBean.editPost()}"/><br/><br/> 
                     <h:link value="Volver" outcome="blog.xhtml" /><br/>
             </h:form>
         </f:view>
