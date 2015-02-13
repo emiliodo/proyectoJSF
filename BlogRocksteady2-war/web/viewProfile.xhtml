@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/plantilla/plantilla.xhtml">
+
+    <ui:define name="contenido">
+        <h:panelGroup rendered="#{not empty loginBean.usuario}">
+        <div id="main">
+                <div class="container">
+
+                    <header>
+                        <center>
+                            <h2>Profile of <font color="orange">#{loginBean.usuario.username}</font>
+                            </h2>
+                        </center>
+                    </header>
+                    <div class="patata" align="center">
+                        <div class="2u" align="center">
+                            <br/>
+                            <center>
+                                <img height = "100px" width = "100px" src="ShowUserImage?userId=#{loginBean.usuario.userId}"/>
+                            </center>
+                            <br/>
+                            <b>First name:</b> 
+                            #{loginBean.usuario.name}
+                            <br/>
+                            <b>Last name:</b>
+                            #{loginBean.usuario.lastName}
+                            <br/>
+                            <b>Website:</b>
+                            #{loginBean.usuario.email}
+                            <br/>
+                            <b>Description:</b>
+                            #{loginBean.usuario.description}
+                            <br/>
+                            <b>Twitter:</b>
+                            #{loginBean.usuario.twitter}
+                            <br/>
+                            <b>Facebook:</b> 
+                            #{loginBean.usuario.facebook}
+                            <br/>
+                            <b>Instagram:</b> 
+                            #{loginBean.usuario.instagram}
+                            <br/>
+                            <b>Linkedin:</b> 
+                            #{loginBean.usuario.linkedin}
+                            <br/>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+      
+
+        </h:panelGroup> 
+         <h:panelGroup rendered="#{empty loginBean.usuario}">
+        <div id="main">
+                <div class="container">
+
+                    <header>
+                        <center>
+                            <h2><font color="Red">Inicie sesión!!!</font>
+                            </h2>
+                        </center>
+                    </header>
+                    <div class="patata" align="center">
+                        <div class="2u" align="center">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+      
+
+        </h:panelGroup> 
+    </ui:define>
+</ui:composition>
