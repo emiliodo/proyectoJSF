@@ -69,7 +69,7 @@ public class PostBean {
 
     @PostConstruct
     public void init() {
-        this.postlist = this.postFacade.findAll();
+        this.postlist = this.postFacade.getRecentPost();
     }
 
     public StreamedContent getImage() {

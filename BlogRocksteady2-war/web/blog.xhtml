@@ -1,70 +1,72 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:p="http://primefaces.org/ui">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/plantilla/plantilla.xhtml">
 
-    <h:head>
-        <title>Blog</title>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <h:outputScript library="js" name="initMap.js" />
-
-    </h:head>
-    <h:body>
-
+    <ui:define name="contenido">
+        
+        <!-- Main -->
         <div id="main">
-            <h1><h:link value="New Post" outcome="newPost.xhtml" /></h1>
-            <f:view>
-                <h:form enctype="multipart/form-data">
-                    <h1><h:outputText value="Post List"/></h1>
-                    <h:dataTable value="#{postBean.postlist}" var="item">
-
-                        <h:column>
-                            <b> <h:outputText value="#{item.title}"/></b><br/>
-                            <h:outputText value="#{item.postedBy.username}"/> |  
-                            <h:outputText value="#{item.postDate}">
-                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm"/>
-                            </h:outputText> | 
-                            <h:commandButton value="editar" action="#{editPostBean.cargarEditar(item)}"/>
-                            <h:commandButton value="borrar" action="#{adminPostBean.doDeletePostWithID(item.postId)}"/>
-                            <br/><br/>
-
-                            <p:graphicImage cache="false" value="#{postBean.image}" width="600" height="150">
-                                <f:param name="idpost" value="#{item.postId}" />
-                            </p:graphicImage> <br/><br/>
-
-                            #{item.postContent}<br/><br/>
-
-                            <div id="mostrarMapa#{item.postId}">
-                                <center><a onclick="cargarMapa(#{item.postId}, '#{item.postGps}')">MAPA</a></center>
-                            </div><br/>
-
-                            <h:dataTable value="#{item.comentarioCollection}" var="comentario">
-                                <h:column>
-                                    #{comentario.commentBy.username}" |
-                                    <h:outputText value="#{comentario.commentDate}">
-                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm"/>
-                                    </h:outputText> <br/>
-                                    #{comentario.commentContent}
-                                </h:column>
-                            </h:dataTable>
+            <div class="row">
+                <div id="content" class="12u skel-cell-important">
+                    <div class="container">
+                        <h1><h:link value="New Post" outcome="newPost.xhtml" /></h1>
+                        <f:view>
                             <h:form enctype="multipart/form-data">
-                                <p:inputText id="commentContent" value="#{newComBean.contenidoComentario}" title="commentContent" />
-                                <h:commandButton value="comentar" id="createComment" action="#{newComBean.createCommnt(item)}"/>
+                                <h1><h:outputText value="Post List"/></h1>
+                                <h:dataTable value="#{postBean.postlist}" var="item">
+
+                                    <h:column>
+                                        <b> <h:outputText value="#{item.title}"/></b><br/>
+                                        <h:outputText value="#{item.postedBy.username}"/> |  
+                                        <h:outputText value="#{item.postDate}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm"/>
+                                        </h:outputText> 
+                                        <h:commandButton value="editar" action="#{editPostBean.cargarEditar(item)}"/>
+                                        <h:commandButton value="borrar" action="#{adminPostBean.doDeletePostWithID(item.postId)}"/>
+                                        <br/><br/>
+                                        #{item.postContent}<br/><br/>
+                                        <ui:fragment rendered="#{not empty item.headerImage}">
+                                            <p:graphicImage   cache="false" value="#{postBean.image}" width="600" height="150">
+                                                <f:param name="idpost" value="#{item.postId}" />
+                                            </p:graphicImage> <br/><br/>
+                                        </ui:fragment>
+                                        <ui:fragment rendered="#{empty item.headerImage}">
+                                            <p:graphicImage   cache="false" value="resources/images/RockSteadyPost.jpg" width="600" height="150">
+                                            </p:graphicImage> <br/><br/>
+                                        </ui:fragment>
+
+                                        <div id="mostrarMapa#{item.postId}">
+                                            <center><a onclick="cargarMapa(#{item.postId}, '#{item.postGps}')">MAPA</a></center>
+                                        </div><br/>
+
+                                        <h:dataTable value="#{item.comentarioCollection}" var="comentario">
+                                            <h:column>
+                                                #{comentario.commentBy.username}" |
+                                                <h:outputText value="#{comentario.commentDate}">
+                                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm"/>
+                                                </h:outputText> <br/>
+                                                #{comentario.commentContent}
+                                            </h:column>
+                                        </h:dataTable>
+                                        <h:form enctype="multipart/form-data">
+                                            <p:inputText id="commentContent" value="#{newComBean.contenidoComentario}" title="commentContent" />
+                                            <h:commandButton value="Comentar" action="#{newComBean.createCommnt()}" >
+                                                <f:setPropertyActionListener target="#{newComBean.postComentado}" value="#{item}" />
+                                            </h:commandButton>
+                                        </h:form>
+                                        <hr/>
+                                    </h:column>
+                                </h:dataTable>
                             </h:form>
-
-
-                            <hr/>
-
-                        </h:column>
-
-                    </h:dataTable>
-                </h:form>
-            </f:view>
-
+                        </f:view>
+                    </div>
+                </div>
+            </div>      
         </div>
-    </h:body>
-</html>
-
+    </ui:define>
+</ui:composition>
