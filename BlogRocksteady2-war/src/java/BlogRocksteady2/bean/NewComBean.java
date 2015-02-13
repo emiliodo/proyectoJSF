@@ -53,11 +53,11 @@ public class NewComBean {
         this.contenidoComentario = contenidoComentario;
     }
 
-    public String createCommnt(Post commented) {
+    public String createCommnt() {
 
         Comentario newComentario = new Comentario();
         newComentario.setCommentContent(contenidoComentario);
-        newComentario.setPostCommented(commented);
+        newComentario.setPostCommented(postComentado);
         newComentario.setCommentBy(usuarioFacade.find(new BigDecimal(BigInteger.ONE)));
         newComentario.setCommentDate(Calendar.getInstance().getTime());
         comentarioFacade.create(newComentario);

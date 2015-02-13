@@ -3,7 +3,7 @@ var markers = [];
 
 function initialize() {
     var editLat = $('#inLat').val();
-    var editLong = $('#inLat').val();
+    var editLong = $('#inLong').val();
     var posicion;
     if (editLat != "" && editLong != "") {
         posicion = new google.maps.LatLng(editLat, editLong);

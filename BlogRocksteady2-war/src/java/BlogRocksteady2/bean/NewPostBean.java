@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.event.ActionEvent;
 import javax.servlet.http.Part;
 import org.apache.commons.io.IOUtils;
 
@@ -84,6 +85,10 @@ public class NewPostBean {
      * Creates a new instance of NewPostBean
      */
     public NewPostBean() {
+    }
+    
+    public void buttonPostAction(ActionEvent actionEvent) {
+        createPost();
     }
 
     public String createPost() {
