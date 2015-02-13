@@ -43,7 +43,7 @@ and open the template in the editor.
                                 <a href="IndexServlet">HOME</a>
                             </li>
                             <li>
-                                <a href="PostServlet">Blog</a>
+                                <a href="faces/blog.xhtml">Blog</a>
                             </li>
                             <c:if test="true"> <!-- NO exite usuario -->
                                 <li>
@@ -53,7 +53,7 @@ and open the template in the editor.
                             <c:if test="false"> <!-- exite usuario -->
                                 <c:if test="false"> <!-- usuario.userType == 1 -->
                                     <li>
-                                        <a href="admin.jsp">ADMIN AREA</a>
+                                        <a href="faces/admin.xhtml">ADMIN AREA</a>
                                     </li>
                                 </c:if>
                                 <li>

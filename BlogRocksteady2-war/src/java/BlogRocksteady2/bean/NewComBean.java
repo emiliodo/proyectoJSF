@@ -53,7 +53,7 @@ public class NewComBean {
         this.contenidoComentario = contenidoComentario;
     }
 
-    public void createCommnt(Post commented) {
+    public String createCommnt(Post commented) {
 
         Comentario newComentario = new Comentario();
         newComentario.setCommentContent(contenidoComentario);
@@ -61,7 +61,9 @@ public class NewComBean {
         newComentario.setCommentBy(usuarioFacade.find(new BigDecimal(BigInteger.ONE)));
         newComentario.setCommentDate(Calendar.getInstance().getTime());
         comentarioFacade.create(newComentario);
-        
+
+        return "blog.xhtml?faces-redirect=true";
+
     }
 
     public NewComBean() {
