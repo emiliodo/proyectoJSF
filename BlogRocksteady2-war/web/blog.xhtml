@@ -16,7 +16,7 @@
                     <center><h2>#{msg['PostList']}</h2></center>
                 </header>
 
-                <ui:fragment rendered="#{loginBean.usuario.userType lt 2}">
+                <ui:fragment rendered="#{loginBean.usuario.userType lt 3}">
                     <center>
                         <div id="nav">
                             <ul> 
@@ -97,7 +97,18 @@
                                         </section>
                                         <ui:repeat value="#{item.comentarioCollection}" var="comentario">
                                             <hr/>
-                                            #{comentario.commentBy.username}|
+                                            <ui:fragment rendered="#{empty comentario.commentBy.img}">
+                                                <p:graphicImage   cache="false" value="resources/images/default-user.png" alt="UserImage" width="30px" height="30px">
+                                                </p:graphicImage>
+                                            </ui:fragment>
+                                            <ui:fragment rendered="#{not empty comentario.commentBy.img}">
+                                                <p:graphicImage cache="false" value="#{imagenBean.userImage}" width="20px" height="20px">
+                                                    <f:param name="iduser" value="#{comentario.commentBy.userId}" />
+                                                </p:graphicImage>
+                                            </ui:fragment>
+                                            <h:commandLink action="#{postBean.goProfileView()}" ><h:outputText value="#{comentario.commentBy.username}"/>
+                                                <f:param name="iduser" value="#{comentario.commentBy.userId}" />
+                                            </h:commandLink> | 
                                             <h:outputText value="#{comentario.commentDate}">
                                                 <f:convertDateTime pattern="MM/dd/yyyy HH:mm"/>
                                             </h:outputText> <br/>

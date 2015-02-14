@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.Part;
@@ -35,6 +36,17 @@ public class NewPostBean {
     @EJB
     private PostFacade postFacade;
 
+    public LoginBean getLoginBean() {
+        return loginBean;
+    }
+
+    public void setLoginBean(LoginBean loginBean) {
+        this.loginBean = loginBean;
+    }
+
+    @ManagedProperty(value="#{loginBean}")
+    private LoginBean loginBean;
+    
     private String title;
     private Part headerImage;
     private String content;
@@ -122,7 +134,7 @@ public class NewPostBean {
         newPost.setPostGps(latitude + "," + longitude);
 
         //El usuario que tiene la sesion abierta.
-        newPost.setPostedBy(usuarioFacade.find(new BigDecimal(BigInteger.ONE)));
+        newPost.setPostedBy(loginBean.getUsuario());
         newPost.setPostDate(Calendar.getInstance().getTime());
         postFacade.create(newPost);
 

@@ -15,6 +15,7 @@ import java.math.BigInteger;
 import java.util.Calendar;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 /**
@@ -24,6 +25,17 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class NewComBean {
+    
+    @ManagedProperty(value="#{loginBean}")
+    private LoginBean loginBean;
+
+    public LoginBean getLoginBean() {
+        return loginBean;
+    }
+
+    public void setLoginBean(LoginBean loginBean) {
+        this.loginBean = loginBean;
+    }
 
     @EJB
     private UsuarioFacade usuarioFacade;
@@ -58,7 +70,7 @@ public class NewComBean {
         Comentario newComentario = new Comentario();
         newComentario.setCommentContent(contenidoComentario);
         newComentario.setPostCommented(postComentado);
-        newComentario.setCommentBy(usuarioFacade.find(new BigDecimal(BigInteger.ONE)));
+        newComentario.setCommentBy(loginBean.getUsuario());
         newComentario.setCommentDate(Calendar.getInstance().getTime());
         comentarioFacade.create(newComentario);
 

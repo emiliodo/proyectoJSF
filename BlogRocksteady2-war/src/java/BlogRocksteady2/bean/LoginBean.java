@@ -76,7 +76,7 @@ public class LoginBean implements Serializable{
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", usuario.getUserId());
             //    String user = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
 
-            return "pruebajsf.xhtml?faces-redirect=true";
+            return "login.xhtml?faces-redirect=true";
         } else {
             FacesMessage message = new FacesMessage("usuario o contraseña invalido");
             FacesContext context = FacesContext.getCurrentInstance();
