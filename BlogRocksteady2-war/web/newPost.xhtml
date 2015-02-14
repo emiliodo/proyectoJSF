@@ -32,7 +32,7 @@
                                     #{msg['mapDescription']}<br/>
                                     <div id="latLongMap" style="width:800px; height: 300px;"></div><br/><br/>
 
-                                    <p:commandButton value="Post" id="createPost" action="#{newPostBean.createPost()}"/>
+                                    <p:commandButton ajax="false" value="Post" id="createPost" action="#{newPostBean.createPost()}"/>
                                     <p:commandButton ajax="false" value="#{msg['Back']}" action="blog.xhtml"/><br/><br/>
                                 </h:form>
                             </f:view>
