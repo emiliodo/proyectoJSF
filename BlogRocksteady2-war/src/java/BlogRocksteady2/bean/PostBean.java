@@ -21,7 +21,6 @@ import org.primefaces.model.StreamedContent;
 
 @ManagedBean
 @RequestScoped
-@MultipartConfig
 public class PostBean {
 
     @EJB
@@ -75,7 +74,6 @@ public class PostBean {
     public StreamedContent getImage() {
         
         FacesContext context = FacesContext.getCurrentInstance();
-//        context.getCurrentPhaseId()== PhaseId.RENDER_RESPONSE;
         if (context.getCurrentPhaseId()== PhaseId.RENDER_RESPONSE) {
             // So, we're rendering the view. Return a stub StreamedContent so that it will generate right URL.
             return new DefaultStreamedContent();
