@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import javax.faces.event.ValueChangeEvent;
@@ -29,8 +30,8 @@ public class AdminUserBean implements Serializable {
 
     private static final Logger LOG = Logger.getLogger(AdminUserBean.class.getName());
 
-//    @ManagedProperty(value="#{loginBean}")
-//    private LoginBean loginBean;
+    @ManagedProperty(value="#{loginBean}")
+    private LoginBean loginBean;
     
     @EJB
     private UsuarioFacade usuarioFacade;
@@ -46,6 +47,10 @@ public class AdminUserBean implements Serializable {
 
     public void setSearchPerformed(boolean searchPerformed) {
         this.searchPerformed = searchPerformed;
+    }
+    
+    public void setLoginBean(LoginBean loginBean) {
+        this.loginBean = loginBean;
     }
 
     public List<Usuario> getUserList() {
@@ -80,7 +85,7 @@ public class AdminUserBean implements Serializable {
             this.userList = usuarioFacade.findByNameContaining(this.userFilter);
         }
         this.searchPerformed = true;
-//        loginBean.setBusquedaRealizada("users");
+        loginBean.setBusquedaRealizada("users");
         return null;
     }
 
@@ -121,7 +126,7 @@ public class AdminUserBean implements Serializable {
                 break;
         }
         this.searchPerformed = false;
-        //loginBean.setBusquedaRealizada(null);
+        loginBean.setBusquedaRealizada(null);
         return null;
     }
 
