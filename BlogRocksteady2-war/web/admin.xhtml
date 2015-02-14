@@ -101,21 +101,21 @@
                                 <h2><font color="green">#{msg['usersFound']}:</font></h2>
                             </center>
                         </header>
-                        <h:dataTable style="width:100%" value="#{adminUserBean.userList}"
+                        <p:dataTable style="width:100%" value="#{adminUserBean.userList}"
                                      var="usersFound">
-                            <h:column>
+                            <p:column>
                                 <!-- column header -->
                                 <f:facet name="header"><b>#{msg['Username']}</b></f:facet>
                                 <!-- row record -->
                                 #{usersFound.username}
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column>
                                 <!-- column header -->
                                 <f:facet name="header"><b>#{msg['UserType']}</b></f:facet>
                                 <!-- row record -->
                                 #{msg[usersFound.userTypeToText()]}
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column>
                                 <!-- column header -->
                                 <f:facet name="header"><b>#{msg['performAction']}</b></f:facet>
                                 <!-- row record -->
@@ -137,35 +137,28 @@
                                         #{msg['itsme']}.
                                     </font>
                                 </h:panelGroup>
-                            </h:column>
-                        </h:dataTable>
+                            </p:column>
+                        </p:dataTable>
                     </h:panelGroup>
 
                     <h:panelGroup rendered="#{not empty adminPostBean.postList and !adminPostBean.setMVP and loginBean.busquedaRealizada eq 'posts'}">
                         <br/><br/>
                         <header>
-                            <center>
-                                <h2>
-                                    <font color="green">#{msg['PostList']}:</font>
-                                </h2>
-                            </center>
+                            <center><h2><font color="green">#{msg['PostList']}:</font></h2></center>
                         </header>
-                        <h:form>
-                            <p:dataTable id="ajaxPostsTable"
-                                         value="#{adminPostBean.postList}"
-                                         var="postsFound">
-                                <p:column> 
-                                    <li><b>#{postsFound.title}</b>
-                                        <br/>
-                                        #{postsFound.postDate}
-                                    </li>
-                                    <p:commandButton value="#{msg['DeletePost']}" 
-                                                     actionListener="#{adminPostBean.doDeletePostWithID(postsFound.postId)}"
-                                                     update="ajaxPostsTable">
-                                    </p:commandButton>
-                                </p:column>
-                            </p:dataTable>
-                        </h:form>
+                        <p:dataTable value="#{adminPostBean.postList}"
+                                     var="postList">
+                            <p:column>
+                                <li><b> #{postList.title}</b>
+                                    <br/>
+                                    #{postList.postDate}
+                                </li>
+                                <h:form>
+                                    <h:commandButton value="#{msg['DeletePost']}" action="#{adminPostBean.doDeletePostWithID(postList.postId)}"/>                         
+                                </h:form>
+                                <br/>
+                            </p:column>
+                        </p:dataTable>
                     </h:panelGroup>
 
                     <h:panelGroup rendered="#{not empty adminPostBean.postList and adminPostBean.setMVP and loginBean.busquedaRealizada eq 'posts'}">
@@ -173,9 +166,9 @@
                         <header>
                             <center><h2><font color="green">#{msg['selectPostToMakeMVP']}:</font></h2></center>
                         </header>
-                        <h:dataTable value="#{adminPostBean.postList}"
+                        <p:dataTable value="#{adminPostBean.postList}"
                                      var="postsFoundMVP">
-                            <h:column>
+                            <p:column>
                                 <li><b> #{postsFoundMVP.title}</b>
                                     <br/>
                                     #{postsFoundMVP.postDate}
@@ -184,25 +177,25 @@
                                     <h:commandButton value="#{msg['MakeMVP']}" action="#{adminPostBean.doMakeMVP(postsFoundMVP.postId)}"/>                         
                                 </h:form>
                                 <br/>
-                            </h:column>
-                        </h:dataTable>
+                            </p:column>
+                        </p:dataTable>
                     </h:panelGroup>
-                    
+
                     <h:panelGroup rendered="#{not empty adminCommentBean.commentList and adminCommentBean.searchPerformed and loginBean.busquedaRealizada eq 'comments'}">
                         <br/><br/>
                         <header>
                             <center><h2><font color="green">#{msg['CommentsFound']}:</font></h2></center>
                         </header>
-                        <h:dataTable value="#{adminCommentBean.commentList}"
+                        <p:dataTable value="#{adminCommentBean.commentList}"
                                      var="commentsFound">
-                            <h:column>
+                            <p:column>
                                 <li>#{commentsFound.commentContent}
                                     <h:form>
                                         <h:commandButton value="#{msg['DeleteComment']}" action="#{adminCommentBean.doDeleteCommentPostWithID(commentsFound.commentId)}"/>
                                     </h:form> 
                                 </li>
-                            </h:column>
-                        </h:dataTable>
+                            </p:column>
+                        </p:dataTable>
                     </h:panelGroup>
                     <!-- SEARCH RESULTS -->
                 </div>
