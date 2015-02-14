@@ -17,17 +17,23 @@
 
                         <f:view>
                             <h:form enctype="multipart/form-data">
-                                <h1><h:outputText value="Edit"/></h1>
+                                <header>
+                                    <h2>EDIT POST</h2>
+                                </header>
                                 Title:<br/>
-                                <h:inputText id="title" value="#{editPostBean.title}" title="Title" /><br/><br/>
+                                <h:inputText id="title" value="#{editPostBean.title}" title="Title" /><br/>
                                 Content:<br/>
-                                <h:inputTextarea rows="5" cols="50" id="postContent" value="#{editPostBean.content}" title="PostContent" /><br/><br/>
-                                <h:commandButton value="Edit" id="createPost" action="#{editPostBean.editPost()}"/><br/><br/> 
-                                <h:link value="Volver" outcome="blog.xhtml" /><br/>
+                                <h:inputTextarea rows="5" cols="50" id="postContent" value="#{editPostBean.content}" title="PostContent" /><br/>
+                                Latitude:<br/>
+                                <h:inputText id="inLat" value="#{newPostBean.latitude}"/><br/>
+                                Longitude:<br/>
+                                <h:inputText id="inLong" value="#{newPostBean.longitude}"/><br/>
+                                Festival position (click the map for set a position):
+                                <div id="latLongMap" style="width:800px; height: 300px;"></div><br/>
+                                    <h:commandButton value="Edit" id="createPost" action="#{editPostBean.editPost()}"/><br/>
+                                    <h:link value="Volver" outcome="blog.xhtml" /><br/>
                             </h:form>
                         </f:view>
-                        
-                        
                     </div>
                 </div>
             </div>      

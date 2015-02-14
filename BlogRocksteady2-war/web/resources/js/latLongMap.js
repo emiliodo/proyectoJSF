@@ -3,8 +3,8 @@ var markers = [];
 
 function initialize() {
     
-    var editLat = $('#j_idt36\\:inLat').val();
-    var editLong = $('#j_idt36\\:inLong').val();
+    var editLat = $('#j_idt/^([0-9])*$/\\:inLat').val();
+    var editLong = $('#j_idt/^([0-9])*$/\\:inLong').val();
     var posicion;
     if (editLat != "" && editLong != "") {
         posicion = new google.maps.LatLng(editLat, editLong);
@@ -20,8 +20,8 @@ function initialize() {
     google.maps.event.addListener(map, 'click', function (event) {
         deleteMarkers();
         addMarker(event.latLng);
-        $('#j_idt36\\:inLat').val(event.latLng.lat());
-        $('#j_idt36\\:inLong').val(event.latLng.lng());
+        $('#j_idt/^([0-9])*$/\\:inLat').val(event.latLng.lat());
+        $('#j_idt/^([0-9])*$/\\:inLong').val(event.latLng.lng());
     });
     addMarker(posicion);
 }

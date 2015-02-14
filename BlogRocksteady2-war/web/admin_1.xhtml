@@ -14,26 +14,26 @@
             <div class="row">
                 <div id="content" class="12u skel-cell-important">
                     <div class="container">
-                        <f:view> 
-                            <h:form enctype="multipart/form-data">
-                                <h1><h:outputText value="Create"/></h1>
-                                Header Image:<br/>
-                                <h:inputFile id="headerImage" value="#{newPostBean.headerImage}" title="HeaderImage" /><br/><br/>
-                                Title:<br/>
-                                <h:inputText id="title" value="#{newPostBean.title}" title="Title" /><br/><br/>
-                                Content:<br/>
-                                <h:inputTextarea rows="5" cols="50" id="postContent" value="#{newPostBean.content}" title="PostContent" /><br/><br/>
-                                Latitude:<br/>
-                                <h:inputText id="inLat" value="#{newPostBean.latitude}"/><br/><br/>
-                                Longitude:<br/>
-                                <h:inputText id="inLong" value="#{newPostBean.longitude}"/><br/><br/>
-                                Festival position (click the map for set a position):<br/>
-                                <div id="latLongMap" style="width:600px; height: 300px;"></div><br/> 
-
-                                <h:commandButton value="Post" id="createPost" action="#{newPostBean.createPost()}"/><br/><br/> 
-                                <h:link value="Volver" outcome="blog.xhtml" />
-                            </h:form>
-                        </f:view>
+                        <h:form>
+                            <h:panelGrid columns="3" style="height: 400px; width: 50%;">
+                                <h:panelGrid >
+                                    <h:outputLabel value="username"/>
+                                    <h:inputText id="nick" required="true" requiredMessage="Nick obligatorio" 
+                                                 value="#{loginBean.nick}"/>
+                                    <h:message for="nick"/>
+                                </h:panelGrid><br></br>
+                                <h:panelGrid>
+                                    <h:outputLabel value="password"/>
+                                    <h:inputText id="password" required="true" requiredMessage="Password obligatorio" 
+                                                 value="#{loginBean.password}" />
+                                    <h:message for="password"/>
+                                </h:panelGrid><br></br>
+                                <h:panelGrid>
+                                    <h:commandButton id="validar" action="#{loginBean.comprobar()}" value="Enter"/>
+                                    <h:message for="validar"/>
+                                </h:panelGrid>
+                            </h:panelGrid>
+                        </h:form>
                     </div>
                 </div>
             </div>      
