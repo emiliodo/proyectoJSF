@@ -14,7 +14,7 @@
 
                     <header>
                         <center>
-                            <h2>Profile of <font color="orange">#{loginBean.usuario.username}</font>
+                            <h2>Profile of <font color="orange">#{viewProfileBean.usuario.username}</font>
                             </h2>
                         </center>
                     </header>
@@ -22,32 +22,34 @@
                         <div class="2u" align="center">
                             <br/>
                             <center>
-                                <img height = "100px" width = "100px" src="ShowUserImage?userId=#{loginBean.usuario.userId}"/>
+                                <p:graphicImage cache="false" value="#{imagenBean.userImage}" width="100px" height="100px">
+                                    <f:param name="iduser" value="#{viewProfileBean.usuario.userId}" />
+                                </p:graphicImage>
                             </center>
                             <br/>
                             <b>First name:</b> 
-                            #{loginBean.usuario.name}
+                            #{viewProfileBean.usuario.name}
                             <br/>
                             <b>Last name:</b>
-                            #{loginBean.usuario.lastName}
+                            #{viewProfileBean.usuario.lastName}
                             <br/>
                             <b>Website:</b>
-                            #{loginBean.usuario.email}
+                            #{viewProfileBean.usuario.email}
                             <br/>
                             <b>Description:</b>
-                            #{loginBean.usuario.description}
+                            #{viewProfileBean.usuario.description}
                             <br/>
                             <b>Twitter:</b>
-                            #{loginBean.usuario.twitter}
+                            #{viewProfileBean.usuario.twitter}
                             <br/>
                             <b>Facebook:</b> 
-                            #{loginBean.usuario.facebook}
+                            #{viewProfileBean.usuario.facebook}
                             <br/>
                             <b>Instagram:</b> 
-                            #{loginBean.usuario.instagram}
+                            #{viewProfileBean.usuario.instagram}
                             <br/>
                             <b>Linkedin:</b> 
-                            #{loginBean.usuario.linkedin}
+                            #{viewProfileBean.usuario.linkedin}
                             <br/>
 
                         </div>

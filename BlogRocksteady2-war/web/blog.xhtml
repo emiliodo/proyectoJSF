@@ -56,26 +56,34 @@
                                                             <f:param name="iduser" value="#{item.postedBy.userId}" />
                                                         </p:graphicImage>
                                                     </ui:fragment>
-                                                    <b><h:link outcome=""><h:outputText value="#{item.postedBy.username}"/> </h:link></b> |  
+                                                    <b>
+                                                        <h:commandLink action="#{postBean.goProfileView()}" ><h:outputText value="#{item.postedBy.username}"/>
+                                                            <f:param name="iduser" value="#{item.postedBy.userId}" />
+                                                        </h:commandLink>
+                                                    </b> |  
                                                     <h:outputText value="#{item.postDate}">
                                                         <f:convertDateTime pattern="MM/dd/yyyy HH:mm"/>
-                                                    </h:outputText> 
+                                                    </h:outputText>
                                                     <ui:fragment rendered="#{item.postedBy.userId eq loginBean.usuario.userId}">
-                                                        <h:commandButton value="editar" action="#{editPostBean.cargarEditar(item)}"/>
-                                                        <h:commandButton value="borrar" action="#{adminPostBean.doDeletePostWithID(item.postId)}"/>
+                                                        <h:commandLink action="#{editPostBean.cargarEditar(item)}"> 
+                                                            <h:graphicImage value="resources/images/edit_icon.png" alt="#{msg['editPost']}" />
+                                                        </h:commandLink>
+                                                        <h:commandLink action="#{adminPostBean.doDeletePostWithID(item.postId)}"> 
+                                                            <h:graphicImage value="resources/images/delete_icon.png" alt="#{msg['deletePost']}" />
+                                                        </h:commandLink>
                                                     </ui:fragment>
                                                 </span>
                                             </header>
                                             <ui:fragment rendered="#{not empty item.headerImage}">
                                                 <a class="image full">
-                                                    <p:graphicImage cache="false" value="#{imagenBean.postImage}" width="600" height="150">
+                                                    <p:graphicImage cache="false" value="#{imagenBean.postImage}" height = "300px" width = "1200px">
                                                         <f:param name="idpost" value="#{item.postId}" />
                                                     </p:graphicImage> 
                                                 </a>
                                             </ui:fragment>
                                             <ui:fragment rendered="#{empty item.headerImage}">
                                                 <a class="image full">
-                                                    <p:graphicImage   cache="false" value="resources/images/RockSteadyPost.jpg" width="600" height="150">
+                                                    <p:graphicImage   cache="false" value="resources/images/RockSteadyPost.jpg" height = "300px" width = "1200px">
                                                     </p:graphicImage>
                                                 </a>
                                             </ui:fragment>
@@ -89,20 +97,21 @@
                                         </section>
                                         <ui:repeat value="#{item.comentarioCollection}" var="comentario">
                                             <hr/>
-                                                #{comentario.commentBy.username}|
-                                                <h:outputText value="#{comentario.commentDate}">
-                                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm"/>
-                                                </h:outputText> <br/>
-                                                #{comentario.commentContent}<br/>                                        
+                                            #{comentario.commentBy.username}|
+                                            <h:outputText value="#{comentario.commentDate}">
+                                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm"/>
+                                            </h:outputText> <br/>
+                                            #{comentario.commentContent}<br/>                                        
                                         </ui:repeat>
 
-                                        
+
                                         <h:form enctype="multipart/form-data">
-                                            <p:inputText id="commentContent" value="#{newComBean.contenidoComentario}" title="commentContent" />
+                                            <p:inputTextarea rows="3" cols="60" id="commentContent" value="#{newComBean.contenidoComentario}" title="commentContent" /><br/>
                                             <h:commandButton value="Comentar" action="#{newComBean.createCommnt()}" >
                                                 <f:setPropertyActionListener target="#{newComBean.postComentado}" value="#{item}" />
                                             </h:commandButton>
                                         </h:form>
+                                        <br/>
                                         <hr/>
                                     </h:column>
                                 </h:dataTable>

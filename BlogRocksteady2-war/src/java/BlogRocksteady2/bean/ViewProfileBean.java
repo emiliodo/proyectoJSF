@@ -5,10 +5,14 @@
  */
 package BlogRocksteady2.bean;
 
+import BlogRocksteady2.ejb.UsuarioFacade;
 import BlogRocksteady2.entity.Usuario;
+import java.math.BigDecimal;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -17,6 +21,8 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class ViewProfileBean {
+    @EJB
+    private UsuarioFacade usuarioFacade;
 
     private Usuario usuario;
 
@@ -37,6 +43,9 @@ public class ViewProfileBean {
     @PostConstruct
     public void init(){
         //recoger id usuario
+        FacesContext context = FacesContext.getCurrentInstance();
+        String iduser = context.getExternalContext().getRequestParameterMap().get("iduser");
+        this.usuario = usuarioFacade.find(new BigDecimal(iduser));
     }
     
 }
