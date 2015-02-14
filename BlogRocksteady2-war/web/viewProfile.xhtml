@@ -9,7 +9,7 @@
 
     <ui:define name="contenido">
         <h:panelGroup rendered="#{not empty loginBean.usuario}">
-        <div id="main">
+            <div id="main">
                 <div class="container">
 
                     <header>
@@ -22,9 +22,15 @@
                         <div class="2u" align="center">
                             <br/>
                             <center>
-                                <p:graphicImage cache="false" value="#{imagenBean.userImage}" width="100px" height="100px">
-                                    <f:param name="iduser" value="#{viewProfileBean.usuario.userId}" />
-                                </p:graphicImage>
+                                <ui:fragment rendered="#{not empty viewProfileBean.usuario.img}">
+                                    <p:graphicImage cache="false" value="#{imagenBean.userImage}" width="100px" height="100px">
+                                        <f:param name="iduser" value="#{viewProfileBean.usuario.userId}" />
+                                    </p:graphicImage>
+                                </ui:fragment>
+                                <ui:fragment rendered="#{empty viewProfileBean.usuario.img}">
+                                    <p:graphicImage cache="false" value="resources/images/default-user.png" width="100px" height="100px">
+                                    </p:graphicImage>
+                                </ui:fragment>
                             </center>
                             <br/>
                             <b>First name:</b> 
@@ -56,11 +62,11 @@
                     </div>
                 </div>
             </div>
-      
+
 
         </h:panelGroup> 
-         <h:panelGroup rendered="#{empty loginBean.usuario}">
-        <div id="main">
+        <h:panelGroup rendered="#{empty loginBean.usuario}">
+            <div id="main">
                 <div class="container">
 
                     <header>
@@ -76,7 +82,7 @@
                     </div>
                 </div>
             </div>
-      
+
 
         </h:panelGroup> 
     </ui:define>

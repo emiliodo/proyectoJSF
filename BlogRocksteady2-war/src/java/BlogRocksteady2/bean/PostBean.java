@@ -8,6 +8,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -15,7 +16,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
-import javax.servlet.annotation.MultipartConfig;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
@@ -28,6 +28,24 @@ public class PostBean {
     @EJB
     private ComentarioFacade comentarioFacade;
 
+    private Date dateFrom;
+
+    public Date getDateFrom() {
+        return dateFrom;
+    }
+
+    public void setDateFrom(Date dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+
+    public Date getDateTo() {
+        return dateTo;
+    }
+
+    public void setDateTo(Date dateTo) {
+        this.dateTo = dateTo;
+    }
+    private Date dateTo;
     private Post post;
     private List<Post> postlist;
     private Comentario comentario;
@@ -96,6 +114,10 @@ public class PostBean {
 
     public PostBean() {
 
+    }
+    
+    public String filterPost(){
+        return null;
     }
 
 }

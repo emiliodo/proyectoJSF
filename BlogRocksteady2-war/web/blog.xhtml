@@ -29,22 +29,24 @@
                     </center>
                     <br/><br/>
                 </ui:fragment>
-                <!--            <div>
-                                    <center><h2><fmt:message key="filterPost"/></h2></center>
-                                    <center><form action="/RocksteadyRep/PostServlet" method="post">
-                                             <fmt:message key="between"/><input type="date" name="dateFrom"/> and <input type="date" name="dateTo"/><br>
-                                            <input type="submit" value="<fmt:message key="filter"/>" name="btnFilter" />
-                                        </form></center>
-                                </div>-->
-                <div class="row">
-                    <div id="content" class="12u skel-cell-important">
-                        <ui:repeat value="#{postBean.postlist}" var="item">
+                <div>
+                    <center><h2>#{msg['filterPost']}</h2></center>
+                    <center><h:form>
+                            From date:<p:calendar id="popup" value="#{postBean.dateFrom}" mode="inline" /></br>
+                            to date:<p:calendar id="popup" value="#{postBean.dateTo}" mode="inline" />
+                            <p:commandButton value="#{msg['filter']}" action="#{postBean.filterPost()}"></p:commandButton>
+                    </h:form>
+                </center>
+            </div>
+            <div class="row">
+                <div id="content" class="12u skel-cell-important">
+                    <ui:repeat value="#{postBean.postlist}" var="item">
 
-                            <section>
-                                <header>
-                                    <h2> <h:outputText value="#{item.title}"/></h2><br/>
-                                    <span class="byline">
-                                        <h:form> 
+                        <section>
+                            <header>
+                                <h2> <h:outputText value="#{item.title}"/></h2><br/>
+                                <span class="byline">
+                                    <h:form> 
                                         <ui:fragment rendered="#{empty item.postedBy.img}">
                                             <p:graphicImage   cache="false" value="resources/images/default-user.png" alt="UserImage" width="30px" height="30px">
                                             </p:graphicImage>
@@ -55,9 +57,9 @@
                                             </p:graphicImage>
                                         </ui:fragment>
                                         <b>
-                                                <h:commandLink action="#{postBean.goProfileView()}" ><h:outputText value="#{item.postedBy.username}"/>
-                                                    <f:param name="iduser" value="#{item.postedBy.userId}" />
-                                                </h:commandLink>
+                                            <h:commandLink action="#{postBean.goProfileView()}" ><h:outputText value="#{item.postedBy.username}"/>
+                                                <f:param name="iduser" value="#{item.postedBy.userId}" />
+                                            </h:commandLink>
                                         </b> |  
                                         <h:outputText value="#{item.postDate}">
                                             <f:convertDateTime pattern="MM/dd/yyyy HH:mm"/>
@@ -70,33 +72,33 @@
                                                 <h:graphicImage value="resources/images/delete_icon.png" alt="#{msg['deletePost']}" />
                                             </h:commandLink>
                                         </ui:fragment>
-                                        </h:form>
-                                    </span>
-                                </header>
-                                <ui:fragment rendered="#{not empty item.headerImage}">
-                                    <a class="image full">
-                                        <p:graphicImage cache="false" value="#{imagenBean.postImage}" height = "300px" width = "1200px">
-                                            <f:param name="idpost" value="#{item.postId}" />
-                                        </p:graphicImage> 
-                                    </a>
-                                </ui:fragment>
-                                <ui:fragment rendered="#{empty item.headerImage}">
-                                    <a class="image full">
-                                        <p:graphicImage   cache="false" value="resources/images/RockSteadyPost.jpg" height = "300px" width = "1200px">
-                                        </p:graphicImage>
-                                    </a>
-                                </ui:fragment>
-                                <br/><br/>
-                                #{item.postContent}<br/><br/>
-                                <ui:fragment rendered="#{item.postGps != ','}">
-                                    <div id="mostrarMapa#{item.postId}">
-                                        <center><a onclick="cargarMapa(#{item.postId}, '#{item.postGps}')">MAPA</a></center>
-                                    </div>
-                                </ui:fragment>
-                            </section>
-                            <ui:repeat value="#{item.comentarioCollection}" var="comentario">
-                                <hr/>
-                                <h:form>
+                                    </h:form>
+                                </span>
+                            </header>
+                            <ui:fragment rendered="#{not empty item.headerImage}">
+                                <a class="image full">
+                                    <p:graphicImage cache="false" value="#{imagenBean.postImage}" height = "300px" width = "1200px">
+                                        <f:param name="idpost" value="#{item.postId}" />
+                                    </p:graphicImage> 
+                                </a>
+                            </ui:fragment>
+                            <ui:fragment rendered="#{empty item.headerImage}">
+                                <a class="image full">
+                                    <p:graphicImage   cache="false" value="resources/images/RockSteadyPost.jpg" height = "300px" width = "1200px">
+                                    </p:graphicImage>
+                                </a>
+                            </ui:fragment>
+                            <br/><br/>
+                            #{item.postContent}<br/><br/>
+                            <ui:fragment rendered="#{item.postGps != ','}">
+                                <div id="mostrarMapa#{item.postId}">
+                                    <center><a onclick="cargarMapa(#{item.postId}, '#{item.postGps}')">MAPA</a></center>
+                                </div>
+                            </ui:fragment>
+                        </section>
+                        <ui:repeat value="#{item.comentarioCollection}" var="comentario">
+                            <hr/>
+                            <h:form>
                                 <ui:fragment rendered="#{empty comentario.commentBy.img}">
                                     <p:graphicImage   cache="false" value="resources/images/default-user.png" alt="UserImage" width="30px" height="30px">
                                     </p:graphicImage>
@@ -112,21 +114,21 @@
                                 <h:outputText value="#{comentario.commentDate}">
                                     <f:convertDateTime pattern="MM/dd/yyyy HH:mm"/>
                                 </h:outputText> <br/>
-                                </h:form>
-                                #{comentario.commentContent}<br/>                                        
-                            </ui:repeat>
-                            <h:form enctype="multipart/form-data">
-                                <p:inputTextarea rows="3" cols="60" value="#{newComBean.contenidoComentario}" title="commentContent" /><br/>
-                                <h:commandButton value="Comentar" action="#{newComBean.createCommnt()}" >
-                                    <f:setPropertyActionListener target="#{newComBean.postComentado}" value="#{item}" />
-                                </h:commandButton>
                             </h:form>
-                            <br/>
-                            <hr/>
+                            #{comentario.commentContent}<br/>                                        
                         </ui:repeat>
-                    </div>
-                </div> 
-            </div>
+                        <h:form enctype="multipart/form-data">
+                            <h:inputTextarea rows="3" cols="60" value="#{newComBean.contenido}" title="commentContent" /><br/>
+                            <h:commandButton value="Comentar" action="#{newComBean.createCommnt()}" >
+                                <f:setPropertyActionListener target="#{newComBean.postComentado}" value="#{item}" />
+                            </h:commandButton>
+                        </h:form>
+                        <br/>
+                        <hr/>
+                    </ui:repeat>
+                </div>
+            </div> 
         </div>
-    </ui:define>
+    </div>
+</ui:define>
 </ui:composition>

@@ -45,8 +45,16 @@ public class NewComBean {
 
     @EJB
     private ComentarioFacade comentarioFacade;
+    private String contenido;
 
-    private String contenidoComentario;
+    public String getContenido() {
+        return contenido;
+    }
+
+    public void setContenido(String contenido) {
+        this.contenido = contenido;
+    }
+    
     private Post postComentado;
 
     public Post getPostComentado() {
@@ -57,18 +65,10 @@ public class NewComBean {
         this.postComentado = postComentado;
     }
 
-    public String getContenidoComentario() {
-        return contenidoComentario;
-    }
-
-    public void setContenidoComentario(String contenidoComentario) {
-        this.contenidoComentario = contenidoComentario;
-    }
-
     public String createCommnt() {
 
         Comentario newComentario = new Comentario();
-        newComentario.setCommentContent(contenidoComentario);
+        newComentario.setCommentContent(contenido);
         newComentario.setPostCommented(postComentado);
         newComentario.setCommentBy(loginBean.getUsuario());
         newComentario.setCommentDate(Calendar.getInstance().getTime());
