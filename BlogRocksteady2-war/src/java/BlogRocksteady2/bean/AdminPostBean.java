@@ -86,13 +86,13 @@ public class AdminPostBean implements Serializable{
     public String doSearchPostsByUser(){
         Usuario user;
         List resBusqueda = usuarioFacade.getUserByName(this.userFilter);
+        this.setMVP = false;
         if(resBusqueda.isEmpty()){
             this.setPostList(null);
         }else{
             user = (Usuario) resBusqueda.get(0);
             this.setPostList(postFacade.getPostsByUser(user));
         }
-        this.setMVP = false;
         this.searchPerformed = true;
         loginBean.setBusquedaRealizada("posts");
         return null;
@@ -106,12 +106,13 @@ public class AdminPostBean implements Serializable{
         return null;
     }
     
-    public void doDeletePostWithID(BigDecimal postID){
-        Post p = postFacade.find(postID);
+    public String doDeletePostWithID(BigDecimal postID){
+        Post p;
+        p= postFacade.find(postID);
         postFacade.remove(p);
-        postList = postFacade.findAll();
         this.searchPerformed = false;
         loginBean.setBusquedaRealizada(null);
+        return null;
     }
     
     public String doMakeMVP(BigDecimal postID){
