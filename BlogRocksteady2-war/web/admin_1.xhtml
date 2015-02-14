@@ -11,32 +11,54 @@
 
         <!-- Main -->
         <div id="main">
-            <div class="row">
-                <div id="content" class="12u skel-cell-important">
-                    <div class="container">
-                        <h:form>
-                            <h:panelGrid columns="3" style="height: 400px; width: 50%;">
-                                <h:panelGrid >
-                                    <h:outputLabel value="username"/>
-                                    <h:inputText id="nick" required="true" requiredMessage="Nick obligatorio" 
-                                                 value="#{loginBean.nick}"/>
-                                    <h:message for="nick"/>
-                                </h:panelGrid><br></br>
-                                <h:panelGrid>
-                                    <h:outputLabel value="password"/>
-                                    <h:inputText id="password" required="true" requiredMessage="Password obligatorio" 
-                                                 value="#{loginBean.password}" />
-                                    <h:message for="password"/>
-                                </h:panelGrid><br></br>
-                                <h:panelGrid>
-                                    <h:commandButton id="validar" action="#{loginBean.comprobar()}" value="Enter"/>
-                                    <h:message for="validar"/>
-                                </h:panelGrid>
-                            </h:panelGrid>
-                        </h:form>
-                    </div>
-                </div>
-            </div>      
+            <h:head>
+                <title> Sign Up </title>
+            </h:head>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="User Name" />
+                    <h:inputText  id="userName" value="#{signUpBean.userName}" required="true"/>
+
+                    <h:outputLabel value="First name"/>  
+                    <h:inputText id="name" value="#{signUpBean.name}"/>
+
+                    <h:outputLabel value="Last name" />
+                    <h:inputText id="lastName" value="#{signUpBean.lastName}"/>
+
+                    <h:outputLabel value="Email"/>
+                    <h:inputText id="email" required="true" requiredMessage=" email obligatorio"
+                                 value="#{signUpBean.email}"/>
+
+                    <h:outputLabel value="Password" />
+                    <h:inputSecret id="password" required="true"
+                                   value="#{signUpBean.password}"/>
+
+                    <h:outputLabel value="Confirm Password" />
+                    <h:inputSecret id ="confirmPassword" required="true"
+                                   value="#{signUpBean.confirmPassword}" />
+
+                    <h:outputLabel value="WebSite"/>
+                    <h:inputText id="website" value="#{signUpBean.website}" />
+
+                    <h:outputLabel value="Description"/>
+                    <h:inputText id="description" value="#{signUpBean.description}" />
+
+                    <h:outputLabel value="Twitter" />
+                    <h:inputText id="twitter" value="#{signUpBean.twitter}" />
+
+                    <h:outputLabel value="Facebook" />
+                    <h:inputText id="facebook" value="#{signUpBean.facebook}" />
+
+                    <h:outputLabel value="Instagram" /> 
+                    <h:inputText id="instragrama" value="#{signUpBean.instagram}" />
+
+                    <h:outputLabel value="Linkedin"/>
+                    <h:inputText id="linkedin" value="#{signUpBean.linkedin}" />
+
+                    <h:commandButton value="Sign Up" action="#{signUpBean.doRegister}"/>
+
+                </h:panelGrid>
+            </h:form>
         </div>
     </ui:define>
 </ui:composition>
