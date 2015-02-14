@@ -30,8 +30,12 @@ public class AdminCommentBean implements Serializable{
     @EJB
     private UsuarioFacade usuarioFacade;
     
-//    @ManagedProperty(value="#{loginBean}")
-//    private LoginBean loginBean;
+    @ManagedProperty(value="#{loginBean}")
+    private LoginBean loginBean;
+
+    public void setLoginBean(LoginBean loginBean) {
+        this.loginBean = loginBean;
+    }
     
     
     private boolean searchPerformed;
@@ -79,6 +83,7 @@ public class AdminCommentBean implements Serializable{
             this.setCommentList(comentarioFacade.getCommentsByUser(user));
         }
         this.searchPerformed = true;
+        loginBean.setBusquedaRealizada("comments");
         return null;
         
     }
@@ -87,6 +92,7 @@ public class AdminCommentBean implements Serializable{
         Comentario c = comentarioFacade.find(commentID);
         comentarioFacade.remove(c);
         this.searchPerformed = false;
+        loginBean.setBusquedaRealizada(null);
         return null;
     }
     

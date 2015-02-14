@@ -1,34 +1,43 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>New Post</title>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <h:outputScript library="js" name="latLongMap.js" />
-    </h:head>
-    <h:body>
-        <f:view> 
-            <h:form enctype="multipart/form-data">
-                <h1><h:outputText value="Create"/></h1>
-                Header Image:<br/>
-                <h:inputFile id="headerImage" value="#{newPostBean.headerImage}" title="HeaderImage" /><br/><br/>
-                Title:<br/>
-                <h:inputText id="title" value="#{newPostBean.title}" title="Title" /><br/><br/>
-                Content:<br/>
-                <h:inputTextarea rows="5" cols="50" id="postContent" value="#{newPostBean.content}" title="PostContent" /><br/><br/>
-                Latitude:<br/>
-                <h:inputText id="inLat" value="#{newPostBean.latitude}"/><br/><br/>
-                Longitude:<br/>
-                <h:inputText id="inLong" value="#{newPostBean.longitude}"/><br/><br/>
-                Festival position (click the map for set a position):<br/>
-                <div id="latLongMap" style="width:600px; height: 300px;"></div><br/> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/plantilla/plantilla.xhtml">
 
-                <h:commandButton value="Post" id="createPost" action="#{newPostBean.createPost()}"/><br/><br/> 
-                <h:link value="Volver" outcome="blog.xhtml" />
-            </h:form>
-        </f:view>
-    </h:body>
-</html>
+    <ui:define name="contenido">
+        <!-- Main -->
+        <div id="main">
+            <div class="row">
+                <div id="content" class="12u skel-cell-important">
+                    <div class="container">
+                        <f:view> 
+                            <h:form enctype="multipart/form-data">
+                                <header>
+                                    <h2>NEW POST</h2>
+                                </header>
+                                Header Image: <h6 style="color:red"> 2040 x 240 px</h6>
+                                <h:inputFile id="headerImage" value="#{newPostBean.headerImage}" title="HeaderImage" /><br/>
+                                Title:<br/>
+                                <h:inputText id="title" value="#{newPostBean.title}" title="Title" /><br/>
+                                Content:<br/>
+                                <h:inputTextarea rows="5" cols="50" id="postContent" value="#{newPostBean.content}" title="PostContent" /><br/>
+                                Latitude:<br/>
+                                <h:inputText id="inLat" value="#{newPostBean.latitude}"/><br/>
+                                Longitude:<br/>
+                                <h:inputText id="inLong" value="#{newPostBean.longitude}"/><br/>
+                                Festival position (click the map for set a position):<br/>
+                                <div id="latLongMap" style="width:600px; height: 300px;"></div>
+
+                                <h:commandButton value="Post" id="createPost" action="#{newPostBean.createPost()}"/><br/> 
+                                <h:link value="Volver" outcome="blog.xhtml" />
+                            </h:form>
+                        </f:view>
+                    </div>
+                </div>
+            </div>      
+        </div>
+    </ui:define>
+</ui:composition>

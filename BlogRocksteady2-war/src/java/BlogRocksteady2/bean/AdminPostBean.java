@@ -31,8 +31,8 @@ public class AdminPostBean implements Serializable{
     @EJB
     private PostFacade postFacade;
     
-//    @ManagedProperty(value="#{loginBean}")
-//    private LoginBean loginBean;
+    @ManagedProperty(value="#{loginBean}")
+    private LoginBean loginBean;
     
     private List<Post> postList;
     private String userFilter;
@@ -53,6 +53,10 @@ public class AdminPostBean implements Serializable{
 
     public void setSetMVP(boolean setMVP) {
         this.setMVP = setMVP;
+    }
+
+    public void setLoginBean(LoginBean loginBean) {
+        this.loginBean = loginBean;
     }
 
     public List<Post> getPostList() {
@@ -90,6 +94,7 @@ public class AdminPostBean implements Serializable{
         }
         this.setMVP = false;
         this.searchPerformed = true;
+        loginBean.setBusquedaRealizada("posts");
         return null;
     }
     
@@ -97,6 +102,7 @@ public class AdminPostBean implements Serializable{
         this.setPostList(this.postFacade.findAll());
         this.setMVP = true;
         this.searchPerformed = true;
+        loginBean.setBusquedaRealizada("posts");
         return null;
     }
     
@@ -105,6 +111,7 @@ public class AdminPostBean implements Serializable{
         Post p = postFacade.find(postID);
         postFacade.remove(p);
         this.searchPerformed = false;
+        loginBean.setBusquedaRealizada(null);
         return null;
     }
     
@@ -128,6 +135,7 @@ public class AdminPostBean implements Serializable{
             postFacade.edit(p);
         }
         this.searchPerformed = false;
+        loginBean.setBusquedaRealizada(null);
         return null;
     }
 }

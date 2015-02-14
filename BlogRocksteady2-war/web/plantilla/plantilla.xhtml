@@ -42,29 +42,29 @@ and open the template in the editor.
                 <nav id="nav">
                     <ul>
                         <li>
-                            <a href="IndexServlet">HOME</a>
+                            <h:link value="#{msg['home']}" outcome="login" />
                         </li>
                         <li>
-                            <a href="faces/blog.xhtml">Blog</a>
+                            <h:link value="#{msg['blog']}" outcome="blog" />
                         </li>
-                        <c:if test="true"> <!-- NO exite usuario -->
+                        <h:panelGroup rendered="#{empty loginBean.usuario}">
                             <li>
-                                <a href="signUp.jsp">SIGNUP</a>
+                                <h:link value="#{msg['signup']}" outcome="signUp" />
                             </li>
-                        </c:if>
-                        <c:if test="false"> <!-- exite usuario -->
-                            <c:if test="false"> <!-- usuario.userType == 1 -->
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{not empty loginBean.usuario}">
+                            <h:panelGroup rendered="#{loginBean.usuario.userType == 1}">
                                 <li>
-                                    <a href="faces/admin.xhtml">ADMIN AREA</a>
+                                    <h:link value="#{msg['Admin']}" outcome="admin" />
                                 </li>
-                            </c:if>
+                            </h:panelGroup>
                             <li>
-                                <a href="editProfile.jsp">EDITAR PERFIL</a>
+                                <h:link value="#{msg['editProfile']}" outcome="/secure/editProfile" />
                             </li>
                             <li>
-                                <a href="LogOutServlet">LOGOUT</a>
+                                <h:link value="#{msg['logout']}" outcome="logout" />
                             </li>
-                        </c:if>
+                        </h:panelGroup>
                     </ul>
                 </nav> 
 
