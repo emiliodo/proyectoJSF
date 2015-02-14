@@ -16,23 +16,23 @@
                         <f:view> 
                             <h:form enctype="multipart/form-data">
                                 <header>
-                                    <h2>NEW POST</h2>
+                                    <h2>#{msg['NewPost']}</h2>
                                 </header>
-                                Header Image: <h6 style="color:red"> 2040 x 240 px</h6>
+                                #{msg['HeaderImage']} <h6 style="color:red"> 2040 x 240 px</h6>
                                 <h:inputFile id="headerImage" value="#{newPostBean.headerImage}" title="HeaderImage" /><br/>
-                                Title:<br/>
+                                #{msg['Title']}<br/>
                                 <h:inputText id="title" value="#{newPostBean.title}" title="Title" /><br/>
-                                Content:<br/>
-                                <h:inputTextarea rows="5" cols="50" id="postContent" value="#{newPostBean.content}" title="PostContent" /><br/>
-                                Latitude:<br/>
-                                <h:inputText id="inLat" value="#{newPostBean.latitude}"/><br/>
-                                Longitude:<br/>
+                                #{msg['Content']}<br/>
+                                <h:inputTextarea rows="5" cols="60" id="postContent" value="#{newPostBean.content}" title="PostContent" /><br/><br/>
+                                #{msg['Latitude']}
+                                <h:inputText id="inLat" value="#{newPostBean.latitude}"/>
+                                #{msg['Longitude']}
                                 <h:inputText id="inLong" value="#{newPostBean.longitude}"/><br/>
-                                Festival position (click the map for set a position):<br/>
-                                <div id="latLongMap" style="width:600px; height: 300px;"></div>
+                                #{msg['mapDescription']}<br/>
+                                <div id="latLongMap" style="width:800px; height: 300px;"></div>
 
                                 <h:commandButton value="Post" id="createPost" action="#{newPostBean.createPost()}"/><br/> 
-                                <h:link value="Volver" outcome="blog.xhtml" />
+                                <h:link value="#{msg['Back']}" outcome="blog.xhtml" />
                             </h:form>
                         </f:view>
                     </div>

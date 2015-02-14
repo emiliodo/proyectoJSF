@@ -38,9 +38,27 @@ public class EditPostBean {
     private Part headerImage;
     private String content;
     private Post postE;
+    private String latitude;
+    private String longitude;
 
     public Post getPostE() {
         return postE;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 
     public void setPostE(Post postE) {
@@ -75,6 +93,8 @@ public class EditPostBean {
 
         postE.setTitle(title);
         postE.setPostContent(content);
+        postE.setPostGps(content);
+        postE.setPostGps(latitude + "," + longitude);
         postE.setPostDate(Calendar.getInstance().getTime());
         postFacade.edit(postE);
         return "blog.xhtml?faces-redirect=true";
@@ -84,6 +104,11 @@ public class EditPostBean {
         this.postE = p;
         this.title = postE.getTitle();
         this.content = postE.getPostContent();
+        
+        String [] latlong = postE.getPostGps().split(",");
+        this.latitude = latlong[0];
+        this.longitude = latlong[1];
+        
         return "editPost.xhtml?faces-redirect=true";
     }
 
