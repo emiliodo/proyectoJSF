@@ -106,19 +106,17 @@ public class AdminPostBean implements Serializable{
         return null;
     }
     
-    public String doDeletePostWithID(BigDecimal postID){
-        
+    public void doDeletePostWithID(BigDecimal postID){
         Post p = postFacade.find(postID);
         postFacade.remove(p);
+        postList = postFacade.findAll();
         this.searchPerformed = false;
         loginBean.setBusquedaRealizada(null);
-        return null;
     }
     
     public String doMakeMVP(BigDecimal postID){
         
-        // me traigo "todos" los MVP actuales, aunque se supone que solo hay
-        // uno como máximo en cualquier momento... pero bueno, por si acaso
+        
         Post p;
         List<Post> old_mvp;
         old_mvp = postFacade.getMVPost();

@@ -5,15 +5,22 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
-                template="../plantilla/plantilla.xhtml">
+                template="../plantilla/plantilla.xhtml"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:define name="contenido">
-        
+        <div id="main">
       
             <div>Editar Perfil</div>
             
               <h:outputText value=""></h:outputText>
-              <p:graphicImage  height="140" width="100" value="#{editPerfilBean.image}" cache="false"> </p:graphicImage>
+              
+<!--              <p:graphicImage  height="140" width="100" value="" 
+                               cache="false" 
+                               rendered=""> 
+              </p:graphicImage>-->
+              
+              
 
             <h:form enctype="multipart/form-data">
                 <h:panelGrid columns="2" columnClasses="column" cellpadding="5">
@@ -54,14 +61,8 @@
                         <p:inputText value="#{editPerfilBean.instagram}"  label="text" />
                     </p:inplace>
 
-                    <!-- ">
-                     <p:growl id="image" showDetail="true" />
-      
-                          <p:fileUpload value="{fileUploadView.file}" mode="simple" />
-      
-                          <p:commandButton value="Submit" ajax="false" actionListener="{editPerfilBean.upload()}" disabled="true" />
-                         </h:form> -->
-                     <h:outputText value="#{msg['Foto']}: "></h:outputText>
+                    
+                     <h:outputText value="#{msg['foto']}: "></h:outputText>
                      <h:inputFile value="#{editPerfilBean.foto}" ></h:inputFile>
 
                     <h:commandButton action="#{editPerfilBean.editarPerfil()}" value="Update profile"  />
@@ -69,7 +70,7 @@
 
             </h:form>
 
-
+</div>
         
     </ui:define>
 </ui:composition>

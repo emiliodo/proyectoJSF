@@ -9,7 +9,7 @@
 
     <ui:define name="contenido">
         <h:panelGroup rendered="#{not empty loginBean.usuario and loginBean.usuario.userType==1}">
-            
+
             <div id="main">
                 <div class="container">
                     <header>
@@ -93,7 +93,8 @@
                         </header>
                     </h:panelGroup>
 
-                    <h:panelGroup rendered="#{not empty adminUserBean.userList and adminUserBean.searchPerformed and loginBean.busquedaRealizada eq 'users'}">
+                    <h:panelGroup rendered="#{not empty adminUserBean.userList and adminUserBean.searchPerformed and loginBean.busquedaRealizada eq 'users'}" 
+                                  id="userResults">
                         <br/><br/>
                         <header>
                             <center>
@@ -112,7 +113,7 @@
                                 <!-- column header -->
                                 <f:facet name="header"><b>#{msg['UserType']}</b></f:facet>
                                 <!-- row record -->
-                                #{usersFound.userTypeToText()}
+                                #{msg[usersFound.userTypeToText()]}
                             </h:column>
                             <h:column>
                                 <!-- column header -->
@@ -149,20 +150,22 @@
                                 </h2>
                             </center>
                         </header>
+                        <h:form id="formID">
+                            <p:dataTable value="#{adminPostBean.postList}"
+                                         var="postsFound"
+                                         id="postList">
+                                <p:column> 
+                                    <li><b>#{postsFound.title}</b>
+                                        <br/>
+                                        #{postsFound.postDate}
+                                    </li>
+                                    <p:commandButton value="#{msg['DeletePost']}" action="#{adminPostBean.doDeletePostWithID(postsFound.postId)}"
+                                                     update=":formID:postList">
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
 
-                        <h:dataTable value="#{adminPostBean.postList}"
-                                     var="postsFound">
-                            <h:column>
-                                <li><b> #{postsFound.title}}</b>
-                                    <br/>
-                                    #{postsFound.postDate}
-                                </li>
-                                <h:form>
-                                    <h:commandButton value="#{msg['DeletePost']}" action="#{adminPostBean.doDeletePostWithID(postsFound.postId)}"/>
-                                </h:form>
-
-                            </h:column>
-                        </h:dataTable>
                     </h:panelGroup>
 
                     <h:panelGroup rendered="#{not empty adminPostBean.postList and adminPostBean.setMVP and loginBean.busquedaRealizada eq 'posts'}">
@@ -178,7 +181,7 @@
                                     #{postsFoundMVP.postDate}
                                 </li>
                                 <h:form>
-                                    <h:commandButton value="#{msg['MakeMVP']}" action="#{adminPostBean.doMakeMVP(postsFoundMVP.postId)}"/>
+                                    <h:commandButton value="#{msg['MakeMVP']}" action="#{adminPostBean.doMakeMVP(postsFoundMVP.postId)}"/>                         
                                 </h:form>
                                 <br/>
                             </h:column>
@@ -211,7 +214,7 @@
 
         </h:panelGroup>   
         <h:panelGroup rendered="#{empty loginBean.usuario or loginBean.usuario.userType!=1}">
-             <div id="main">
+            <div id="main">
                 <div class="container">
                     <header>
                         <center>
@@ -224,7 +227,7 @@
                         </center>
                     </header>
                 </div>
-             </div>
+            </div>
         </h:panelGroup>   
     </ui:define>
 </ui:composition>
