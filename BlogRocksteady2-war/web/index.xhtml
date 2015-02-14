@@ -1,27 +1,30 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/plantilla/plantilla.xhtml">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html" 
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core">
-    <h:head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </h:head>
-    <h:body>
-        <h:form>
-        <h:outputLabel value="username"/>
-        <h:inputText id="nick" required="true" requiredMessage="Nick obligatorio" 
-                     value="#{loginBean.nick}"/>
-        <h:message for="nick"/>
-        <h:outputLabel value="password"/>
-        <h:inputText id="password" required="true" requiredMessage="Nick obligatorio" 
-                     value="#{loginBean.password}" />
-        <h:message for="password"/>
-        <br></br>
-        <h:commandButton id="validar" action="#{loginBean.comprobar()}"/>
-         
-        </h:form>
-    </h:body>
-</html>
+    <ui:define name="contenido">
 
+        <!-- Main -->
+        <div id="main">
+            
+            <div class="row">
+                <div class="3u" align="right">
+                    <div class="container">
+                        <center>
+                            <div class="3u" align="right">
+                                    <h4>Welcome <font color="orange">${loginBean.usuario.name}</font></h4>
+                            </div>
+                        </center>
+                    </div>
+                </div>
+            </div>    
+            
+            
+        </div>
+    </ui:define>
+</ui:composition>
