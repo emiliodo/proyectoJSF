@@ -21,7 +21,6 @@ import org.primefaces.model.StreamedContent;
 
 @ManagedBean
 @RequestScoped
-@MultipartConfig
 public class PostBean {
 
     @EJB
@@ -75,7 +74,6 @@ public class PostBean {
     public StreamedContent getImage() {
         
         FacesContext context = FacesContext.getCurrentInstance();
-//        context.getCurrentPhaseId()== PhaseId.RENDER_RESPONSE;
         if (context.getCurrentPhaseId()== PhaseId.RENDER_RESPONSE) {
             // So, we're rendering the view. Return a stub StreamedContent so that it will generate right URL.
             return new DefaultStreamedContent();
@@ -91,14 +89,9 @@ public class PostBean {
         this.image = img;
     }
 
-//    public StreamedContent getImage() {
-//        return image;
-//    }
-
-    public String doImage() {
-        InputStream input = new ByteArrayInputStream(this.postFacade.find(3).getHeaderImage());
-        this.setImage(new DefaultStreamedContent(input));
-        return "blog.hxtml";
+    
+    public String goProfileView(){
+        return "viewProfile.xhtml";
     }
 
     public PostBean() {

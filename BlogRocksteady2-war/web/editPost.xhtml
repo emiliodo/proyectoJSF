@@ -17,20 +17,20 @@
                         <f:view>
                             <h:form enctype="multipart/form-data">
                                 <header>
-                                    <h2>EDIT POST</h2>
+                                    <h2>#{msg['EditPost']}</h2>
                                 </header>
-                                Title:<br/>
+                                #{msg['Title']}<br/>
                                 <h:inputText id="title" value="#{editPostBean.title}" title="Title" /><br/>
-                                Content:<br/>
-                                <h:inputTextarea rows="5" cols="50" id="postContent" value="#{editPostBean.content}" title="PostContent" /><br/>
-                                Latitude:<br/>
-                                <h:inputText id="inLat" value="#{newPostBean.latitude}"/><br/>
-                                Longitude:<br/>
-                                <h:inputText id="inLong" value="#{newPostBean.longitude}"/><br/>
-                                Festival position (click the map for set a position):
-                                <div id="latLongMap" style="width:800px; height: 300px;"></div><br/>
-                                    <h:commandButton value="Edit" id="createPost" action="#{editPostBean.editPost()}"/><br/>
-                                    <h:link value="Volver" outcome="blog.xhtml" /><br/>
+                                #{msg['Content']}<br/>
+                                <h:inputTextarea rows="5" cols="60" id="postContent" value="#{editPostBean.content}" title="PostContent" /><br/><br/>
+                                #{msg['Latitude']}
+                                <h:inputText id="inLat" value="#{editPostBean.latitude}"/>
+                                #{msg['Longitude']}
+                                <h:inputText id="inLong" value="#{editPostBean.longitude}"/><br/>
+                                #{msg['mapDescription']}<br/>
+                                <div id="latLongMap" style="width:800px; height: 300px;"></div>
+                                <h:commandButton value="Edit" id="createPost" action="#{editPostBean.editPost()}"/><br/>
+                                <h:link value="#{msg['Back']}" outcome="blog.xhtml" /><br/>
                             </h:form>
                         </f:view>
                     </div>
