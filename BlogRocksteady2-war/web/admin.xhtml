@@ -154,19 +154,14 @@
                             <p:dataTable value="#{adminPostBean.postList}"
                                          var="postsFound"
                                          id="postList">
-                                <p:column>
-                                    
-                                    <li><b> #{postsFound.title}</b>
+                                <p:column> 
+                                    <li><b>#{postsFound.title}</b>
                                         <br/>
                                         #{postsFound.postDate}
                                     </li>
-                                    
-                                   
-                                        <p:commandButton value="#{msg['DeletePost']}" actionListener="#{adminPostBean.doDeletePostWithID(postsFound.postId)}"
-                                                         update=":formID:postList" ajax="true">
-                                        </p:commandButton>
-                                   
-
+                                    <p:commandButton value="#{msg['DeletePost']}" action="#{adminPostBean.doDeletePostWithID(postsFound.postId)}"
+                                                     update=":formID:postList">
+                                    </p:commandButton>
                                 </p:column>
                             </p:dataTable>
                         </h:form>
