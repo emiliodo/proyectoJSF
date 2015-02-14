@@ -106,13 +106,13 @@ public class AdminPostBean implements Serializable{
         return null;
     }
     
-    public String doDeletePostWithID(BigDecimal postID){
-        
+    public void doDeletePostWithID(BigDecimal postID){
         Post p = postFacade.find(postID);
         postFacade.remove(p);
+        this.postList = postFacade.findAll();
         this.searchPerformed = false;
         loginBean.setBusquedaRealizada(null);
-        return null;
+        
     }
     
     public String doMakeMVP(BigDecimal postID){

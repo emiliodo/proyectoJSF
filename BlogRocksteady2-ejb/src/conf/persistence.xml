@@ -3,6 +3,7 @@
   <persistence-unit name="BlogRocksteady2-ejbPU" transaction-type="JTA">
     <jta-data-source>jdbc/rocksteady</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <shared-cache-mode>NONE</shared-cache-mode>
     <properties/>
   </persistence-unit>
 </persistence>
