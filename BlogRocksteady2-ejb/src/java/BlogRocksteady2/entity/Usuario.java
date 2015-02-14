@@ -275,7 +275,6 @@ public class Usuario implements Serializable {
     }
     
     public String userTypeToText(){
-        System.out.print("usertype= " + this.userType + " username= "+ this.username);
         if(this.userType == (BigInteger.valueOf(1))){
             return "Admin";
         }else if(this.userType == (BigInteger.valueOf(2))){
