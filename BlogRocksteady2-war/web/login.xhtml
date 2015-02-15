@@ -14,35 +14,32 @@
             <div class="row">
                 <div class="3u" align="right">
                     <div class="container">
-                            
-<!--                            <h:panelGrid columns="3" style="height: 400px; width: 50%;">
-                                <h:panelGrid >
-                                    <h:outputLabel value="username"/>
-                                    <h:inputText id="nick" required="true" requiredMessage="Nick obligatorio" 
-                                                 value="#{loginBean.nick}"/>
-                                    <h:message for="nick"/>
-                                </h:panelGrid><br></br>
-                                <h:panelGrid>
-                                    <h:outputLabel value="password"/>
-                                    <h:inputText id="password" required="true" requiredMessage="Password obligatorio" 
-                                                 value="#{loginBean.password}" />
-                                    <h:message for="password"/>
-                                </h:panelGrid><br></br>
-                                <h:panelGrid>
-                                    <h:commandButton id="validar" action="#{loginBean.comprobar()}" value="Enter"/>
-                                    <h:message for="validar"/>
+                        <center>
+                            <div class="3u" align="right">
+                                <h:form>
+                                    <h:panelGrid columns="2">
+                                        <h:panelGrid columns="1" style="margin-right:10px;">
+                                            <h:outputLabel value="Usuario"/>
+                                            <h:inputText id="nick" required="true" requiredMessage="Nick obligatorio" 
+                                                         value="#{loginBean.nick}"/>
+                                            <h:message for="nick" errorStyle="color:red"/>
+                                        </h:panelGrid>
+                                        <h:panelGrid columns="1" style="margin-left:10px;">
+                                            <h:outputLabel value="Password"/>
+                                            <h:inputSecret id="password" required="true" requiredMessage="Password obligatorio" 
+                                                         value="#{loginBean.password}" />
+                                            <h:message for="password" errorStyle="color:red"/>
+                                        </h:panelGrid>
+                                    <h:panelGrid>
+                                        <h:commandButton id="validar" style="width:100px" action="#{loginBean.comprobar()}" value="Enter"/>
+                                        <h:message for="validar"/>
+                                    </h:panelGrid>
                                 </h:panelGrid>
-                            </h:panelGrid>-->
-
-                            <center>
-                                <div class="3u" align="right">
-                                    <h:form>
-                                        User    <h:inputText id="nick" required="true" requiredMessage="Nick obligatorio" value="#{loginBean.nick}"/><br/>
-                                        Password <h:inputText id="password" required="true" requiredMessage="Password obligatorio" value="#{loginBean.password}" /><br/>
-                                            <h:commandButton id="validar" action="#{loginBean.comprobar()}" value="Enter"/>
                                     </h:form>
-                                </div>
-                            </center>
+                            </div>
+                        </center>
+
+
                     </div>
                 </div>
             </div>      

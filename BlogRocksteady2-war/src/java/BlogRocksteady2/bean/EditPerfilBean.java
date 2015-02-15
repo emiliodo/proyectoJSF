@@ -18,6 +18,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.servlet.http.Part;
 import org.apache.commons.io.IOUtils;
 import org.primefaces.model.DefaultStreamedContent;
@@ -29,7 +30,7 @@ import org.primefaces.model.UploadedFile;
  * @author YSF
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class EditPerfilBean implements Serializable{
     @EJB
     private UsuarioFacade usuarioFacade;
@@ -45,19 +46,6 @@ public class EditPerfilBean implements Serializable{
     private Part foto;
     private StreamedContent image;
 
-//    public UploadedFile getFile() {
-//        return file;
-//    }
-//
-//    public void setFile(UploadedFile file) {
-//        this.file = file;
-//    }
-//     public void upload() {
-//        if(file != null) {
-//            FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
-//            FacesContext.getCurrentInstance().addMessage(null, message);
-//        }
-//    }
 
     public String getLinkedin() {
         return linkedin;
@@ -157,14 +145,13 @@ public class EditPerfilBean implements Serializable{
             setDescription(usuario.getDescription());
             setLinkedin(usuario.getLinkedin());
             setInstagram(usuario.getInstagram());
-            //setFile((UploadedFile) usuario.getImg());
-            return null;
+            return "editProfile.xhtml";
         }else{
             return "index.xhtml";
         }
     }
     
-     public  String editarPerfil() throws IOException{
+    public void editarPerfil(ActionEvent event) throws IOException{
         BigDecimal user = (BigDecimal) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
         if (user.compareTo(BigDecimal.ZERO)>=1){
             usuario = usuarioFacade.findById(user);
@@ -175,18 +162,15 @@ public class EditPerfilBean implements Serializable{
             usuario.setTwitter(twitter);
             usuario.setLinkedin(linkedin);
             usuario.setInstagram(instagram);
-             InputStream inputStream = foto.getInputStream();
-             byte[] imagen = IOUtils.toByteArray(inputStream);
-            usuario.setImg(imagen);
-            
-          //  usuario.setImg((Serializable) file);
-            usuarioFacade.edit(usuario);
-            
-        
-
-            
-      
+            if (foto != null) {
+               InputStream inputStream = foto.getInputStream();
+                byte[] imagen = IOUtils.toByteArray(inputStream);
+                usuario.setImg(imagen);
+            }  
+            usuarioFacade.edit(usuario); 
+            FacesMessage message = new FacesMessage("Perfil actualizado con éxito");
+            FacesContext.getCurrentInstance().addMessage(null, message);
         }
-        return "/pruebajsf.xhtml?faces-redirect=true";
+       
      }
 }

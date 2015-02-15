@@ -5,14 +5,16 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
-                template="../plantilla/plantilla.xhtml"
+                template="plantilla/plantilla.xhtml"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:define name="contenido">
+        <center>
         <div id="main">
-      
-            <div>Editar Perfil</div>
             
+        
+            <div><h1 style="font-size: 20px;">Editar Perfil</h1><br/></div>
+           
               <h:outputText value=""></h:outputText>
               
 <!--              <p:graphicImage  height="140" width="100" value="" 
@@ -22,22 +24,23 @@
               
               
 
-            <h:form enctype="multipart/form-data">
+<h:form id="form_editPerfil" enctype="multipart/form-data">
+    <p:growl id="growl_editPerfil" life="2000" />
                 <h:panelGrid columns="2" columnClasses="column" cellpadding="5">
 
                     <h:outputLabel for="email" value="Email:" />
                     <p:inplace id="email" editor="true" emptyLabel="Introduzca email">
-                        <p:inputText value="#{editPerfilBean.email}" required="true" label="text" />
+                        <p:inputText value="#{editPerfilBean.email}" required="false" label="text" />
                     </p:inplace>
 
                     <h:outputLabel for="webSite" value="WebSite:" />
                     <p:inplace id="webSite" editor="true" emptyLabel="Introduzca website">
-                        <p:inputText value="#{editPerfilBean.website}" required="true" label="text" />
+                        <p:inputText value="#{editPerfilBean.website}" required="false" label="text" />
                     </p:inplace>
 
                     <h:outputLabel for="description" value="Description:" />
                     <p:inplace id="description" editor="true" emptyLabel="Introduzca description">
-                        <p:inputText value="#{editPerfilBean.description}" required="true" label="text" />
+                        <p:inputText value="#{editPerfilBean.description}" required="false" label="text" />
                     </p:inplace>
 
                     <h:outputLabel for="facebook" value="facebook:" />
@@ -64,13 +67,21 @@
                     
                      <h:outputText value="#{msg['foto']}: "></h:outputText>
                      <h:inputFile value="#{editPerfilBean.foto}" ></h:inputFile>
+                     <center>
+                         <h:panelGrid >
+                             <br></br>
 
-                    <h:commandButton action="#{editPerfilBean.editarPerfil()}" value="Update profile"  />
-                </h:panelGrid>
+                            <h:commandButton actionListener="#{editPerfilBean.editarPerfil}" 
+                                             value="#{msg['updateProfile']}"  >
+                                <f:ajax execute="form_editPerfil" render="form_editPerfil"/>
+                            </h:commandButton>
+                        </h:panelGrid>
+                         </center>
+                     </h:panelGrid>
 
             </h:form>
 
 </div>
-        
+        </center>      
     </ui:define>
 </ui:composition>
