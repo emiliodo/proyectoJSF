@@ -125,8 +125,10 @@ public class PostBean {
 
     }
     
-    public String filterPost(){
-        return null;
+    public String FilterPost(){
+        Date dateFrom2 = dateFrom;
+        return "index.xhtml";
     }
+    
 
 }

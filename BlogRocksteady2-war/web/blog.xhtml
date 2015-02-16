@@ -9,6 +9,7 @@
 
     <ui:define name="contenido">
 
+
         <!-- Main -->
         <div id="main">
             <div class="container">
@@ -31,11 +32,15 @@
                 </ui:fragment>
                 <div>
                     <center><h2>#{msg['filterPost']}</h2></center>
-                    <h:form>
-                        From date:<p:calendar id="popup" value="#{postBean.dateFrom}" mode="inline" /><br/>
-                        to date:<p:calendar id="popup2" value="#{postBean.dateTo}" mode="inline" /><br/>
-                        <p:commandButton value="#{msg['filter']}" action="#{postBean.filterPost()}"/><br/><br/>
-                    </h:form>
+                    <center>
+                        <h:form>
+                            From date:<br/>
+                            <input type="date" value="#{postBean.dateFrom}"/><br/>
+                            to date:<br/>
+                            <h:inputText id="inputDateTo" value="#{postBean.dateTo}"/><br/>
+                            <h:commandButton value="#{msg['filter']}" action="#{postBean.FilterPost()}"/><br/><br/>
+                        </h:form>
+                    </center>
                 </div>
                 <div class="row">
                     <div id="content" class="12u skel-cell-important">
@@ -118,10 +123,10 @@
                                 </h:form>
                                 #{comentario.commentContent}<br/>                                        
                             </ui:repeat>
-                            <h:form enctype="multipart/form-data">
-                                <h:inputTextarea rows="2" cols="60" value="#{newComBean.contenido}" title="commentContent" /><br/>
-                                <h:commandButton value="Comentar" action="#{newComBean.createCommnt()}" >
-                                    <f:setPropertyActionListener target="#{newComBean.postComentado}" value="#{item}" />
+                            <h:form>
+                                <h:inputTextarea rows="2" cols="60" value="#{newCommentBean.contenido}"/><br/>
+                                <h:commandButton value="Comentar" action="#{newCommentBean.ComentarPost()}" >
+                                    <f:setPropertyActionListener target="#{newCommentBean.postComentado}" value="#{item}" />
                                 </h:commandButton>
                             </h:form>
                             <br/>
