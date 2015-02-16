@@ -16,9 +16,36 @@
             <div class="3u" align="right">
                 <div class="container">
                     <center>
-                        <div class="3u" align="right">
-                            <h4>Welcome <font color="orange">${loginBean.usuario.name}</font></h4>
-                        </div>
+                        
+                        <ui:fragment rendered="#{empty loginBean.comprobar()}">
+                            <h:form>
+                                <h:panelGrid columns="2">
+                                    <h:panelGrid columns="1" style="margin-right:10px;">
+                                        <h:outputLabel value="#{msg['Username']}"/>
+                                        <h:inputText id="nick" required="true" requiredMessage="Nick obligatorio" 
+                                                     value="#{loginBean.nick}"/>
+                                        <h:message for="nick" errorStyle="color:red"/>
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="1" style="margin-left:10px;">
+                                        <h:outputLabel value="#{msg['password']}"/>
+                                        <h:inputSecret id="password" required="true" requiredMessage="Password obligatorio" 
+                                                       value="#{loginBean.password}" />
+                                        <h:message for="password" errorStyle="color:red"/>
+                                    </h:panelGrid>
+                                    <h:panelGrid>
+                                        <h:commandButton id="validar" style="width:100px" action="#{loginBean.comprobar()}" value="Enter"/>
+                                        <h:message for="validar"/>
+                                    </h:panelGrid>
+                                </h:panelGrid>
+                            </h:form>
+                        </ui:fragment>
+
+                        <ui:fragment rendered="#{not empty loginBean.comprobar()}">
+                            <div class="3u" align="right">
+                                <h4>#{msg['welcome']} <font color="orange">${loginBean.usuario.name}</font></h4>
+                            </div>
+                        </ui:fragment>
+
                     </center>
                 </div>
             </div>
@@ -26,44 +53,39 @@
             <div class="divider"></div>
             <div class="container">
                 <div class="row">
-                    <!-- Content -->
                     <div class="8u skel-cell-important">
-                        <section id="content">
-
-                            <h1>MVPOST</h1>
+                        <h1>MVPOST</h1>
+                        <h:form> 
                             <!-- Title -->
-                            <h:panelGroup rendered="#{not empty mvpPost}"/>
                             <header>
-                                <h2>#{mvpPost.title}</h2>
+                                <h2>#{indexBean.postMVP.title}</h2>
                             </header>
 
-                            <!-- Profile Image -->
-                            <ui:fragment rendered="#{empty item.postedBy.img}">
+                            <!--Profile Image -->
+                            <ui:fragment rendered="#{empty indexBean.postMVP.postedBy.img}">
                                 <p:graphicImage   cache="false" value="resources/images/default-user.png" alt="UserImage" width="30px" height="30px">
                                 </p:graphicImage>
                             </ui:fragment>
-                            <ui:fragment rendered="#{not empty item.postedBy.img}">
+                            <ui:fragment rendered="#{not empty indexBean.postMVP.postedBy.img}">
                                 <p:graphicImage cache="false" value="#{imagenBean.userImage}" width="30px" height="30px">
-                                    <f:param name="iduser" value="#{item.postedBy.userId}" />
+                                    <f:param name="iduser" value="#{indexBean.postMVP.postedBy.userId}" />
                                 </p:graphicImage>
                             </ui:fragment>
-                            
-                            <!-- User name -->
-                            <h:commandLink action="#{postBean.goProfileView()}" ><h:outputText value="#{item.postedBy.username}"/>
-                                <f:param name="iduser" value="#{item.postedBy.userId}" />
-                            </h:commandLink>
-                            
-                            
 
-                            <!-- Header Image MVPost -->
-                            <ui:fragment rendered="#{not empty item.headerImage}">
+                            <!--User name -->
+                            <h:commandLink action="#{postBean.goProfileView()}" ><h:outputText value="#{indexBean.postMVP.postedBy.username}"/>
+                                <f:param name="iduser" value="#{indexBean.postMVP.postedBy.userId}" />
+                            </h:commandLink>
+
+                            <!--Header Image MVPost -->
+                            <ui:fragment rendered="#{not empty indexBean.postMVP.headerImage}">
                                 <a class="image full">
-                                    <p:graphicImage cache="false" value="#{imagenBean.postImage}" height = "300px" width = "600px">
-                                        <f:param name="idpost" value="#{item.postId}" />
+                                    <p:graphicImage cache="false" value="#{imagenBean.postImage}" height = "200px" width = "600px">
+                                        <f:param name="idpost" value="#{indexBean.postMVP.postId}" />
                                     </p:graphicImage> 
                                 </a>
                             </ui:fragment>
-                            <ui:fragment rendered="#{empty item.headerImage}">
+                            <ui:fragment rendered="#{empty indexBean.postMVP.headerImage}">
                                 <a class="image full">
                                     <p:graphicImage   cache="false" value="resources/images/RockSteadyPost.jpg" height = "200px" width = "600px">
                                     </p:graphicImage>
@@ -71,21 +93,8 @@
                             </ui:fragment>
 
                             <!-- MVPost Content -->
-
-
-                        </section>
-                    </div>
-                    <!-- /Content -->
-
-                    <div id="sidebar" class="4u">
-                        <section>
-                            <ul class="default">
-                                <li><a href="/RocksteadyRep/PostServlet?postYear=2014">2014</a></li>
-                                <li><a href="/RocksteadyRep/PostServlet?postYear=2013">2013</a></li>
-                                <li><a href="/RocksteadyRep/PostServlet?postYear=2012">2012</a></li>
-                                <li><a href="/RocksteadyRep/PostServlet?postYear=2011">2011</a></li>
-                            </ul>
-                        </section>
+                            #{indexBean.postMVP.postContent}
+                        </h:form>
                     </div>
                 </div>
             </div>    
