@@ -30,19 +30,6 @@
                     </center>
                     <br/><br/>
                 </ui:fragment>
-                <div>
-                    <center><h2>#{msg['filterPost']}</h2></center>
-                    <center>
-                        <h:form>
-                            From date:<br/>
-                            <input type="date" value="#{postBean.dateFrom}"/><br/>
-                            to date:<br/>
-                            <input type="date" value="#{postBean.dateFrom}"/><br/>
-                            <h:inputText id="inputDateTo" value="#{postBean.dateTo}"/><br/>
-                            <h:commandButton value="#{msg['filter']}" action="#{postBean.filterPost()}"/><br/><br/>
-                        </h:form>
-                    </center>
-                </div>
                 <div class="row">
                     <div id="content" class="12u skel-cell-important">
                         <ui:repeat value="#{postBean.postlist}" var="item">
