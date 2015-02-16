@@ -21,10 +21,69 @@
                             </div>
                         </center>
                     </div>
+                    
+                </div>
+                <div class="divider"></div>
+            <div class="container">
+                <div class="row">
+                    <!-- Content -->
+                    <div class="8u skel-cell-important">
+                        <section id="content">
+                            <h:panelGroup rendered="#{not empty mvpPost}"/>
+                                <header>
+                                    <h2>#{mvpPost.title}</h2>
+                                   
+                                </header>
+
+                                 <h:panelGroup rendered="#{not empty mvpPost.getHeaderImage()}"/>
+                                    <p><a href="#" class="image full">
+                                            <img height = "157px" width = "783px" src="ShowImages?postId=${mvpPost.getPostId()}" alt="Imagen Post #{mvpPost.getPostId()}"/></a>
+                                    </p>
+                                
+                                 <h:panelGroup rendered="#{empty mvpPost.getHeaderImage()}"/>
+                                    <p><a href="#" class="image full">
+                                            <img height = "157px" width = "783px" src="images/RockSteadyPost.jpg" alt="Imagen Post ${mvpPost.getPostId()}"/></a>
+                                    </p>
+                                
+                              
+                              
+                             <h:panelGroup rendered="#{empty mvpPost}"/>
+                                <header>
+                                    <h2>MVPost not found</h2>
+                                    <span class="byline">  | Date </span>
+                                </header>
+                                <p>
+                                    <a href="" class="image full"><img src="images/pics02.jpg" alt=""/></a>   
+
+                                </p>
+                                <p>Ask an admin to set a mvpPost</p>
+
+                           
+                        </section>
+                    </div>
+                    <!-- /Content -->
+
+
+                    <!-- Sidebar -->
+                    <div id="sidebar" class="4u">
+                        <section>
+                            
+                               
+                            <ul class="default">
+                                <li><a href="/RocksteadyRep/PostServlet?postYear=2014">2014</a></li>
+                                <li><a href="/RocksteadyRep/PostServlet?postYear=2013">2013</a></li>
+                                <li><a href="/RocksteadyRep/PostServlet?postYear=2012">2012</a></li>
+                                <li><a href="/RocksteadyRep/PostServlet?postYear=2011">2011</a></li>
+                            </ul>
+                                
+                        </section>
+                    </div>
+                    <!-- Sidebar -->
                 </div>
             </div>    
             
             
         </div>
+         </div>   
     </ui:define>
 </ui:composition>
