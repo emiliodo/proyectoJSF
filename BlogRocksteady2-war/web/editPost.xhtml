@@ -29,7 +29,7 @@
                                 <h:inputText id="inLong" value="#{editPostBean.longitude}"/><br/>
                                 #{msg['mapDescription']}<br/>
                                 <div id="latLongMap" style="width:800px; height: 300px;"></div><br/><br/>
-                                <h:commandButton value="Edit" id="EditPost" actionListener="#{editPostBean.editPost()}">
+                                <h:commandButton value="Edit" id="EditPost" action="#{editPostBean.editPost()}">
                                 </h:commandButton>
                                 <h:commandButton  value="#{msg['Back']}" action="blog.xhtml?faces-redirect=true"/><br/><br/>
                             </h:form>
