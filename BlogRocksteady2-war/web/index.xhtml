@@ -9,14 +9,12 @@
 
     <ui:define name="contenido">
 
-
-
         <!-- Main -->
         <div id="main">
             <div class="3u" align="right">
                 <div class="container">
                     <center>
-                        
+
                         <ui:fragment rendered="#{empty loginBean.comprobar()}">
                             <h:form>
                                 <h:panelGrid columns="2">
@@ -54,47 +52,56 @@
             <div class="container">
                 <div class="row">
                     <div class="8u skel-cell-important">
-                        <h1>MVPOST</h1>
-                        <h:form> 
-                            <!-- Title -->
-                            <header>
-                                <h2>#{indexBean.postMVP.title}</h2>
-                            </header>
 
-                            <!--Profile Image -->
-                            <ui:fragment rendered="#{empty indexBean.postMVP.postedBy.img}">
-                                <p:graphicImage   cache="false" value="resources/images/default-user.png" alt="UserImage" width="30px" height="30px">
-                                </p:graphicImage>
-                            </ui:fragment>
-                            <ui:fragment rendered="#{not empty indexBean.postMVP.postedBy.img}">
-                                <p:graphicImage cache="false" value="#{imagenBean.userImage}" width="30px" height="30px">
-                                    <f:param name="iduser" value="#{indexBean.postMVP.postedBy.userId}" />
-                                </p:graphicImage>
-                            </ui:fragment>
 
-                            <!--User name -->
-                            <h:commandLink action="#{postBean.goProfileView()}" ><h:outputText value="#{indexBean.postMVP.postedBy.username}"/>
-                                <f:param name="iduser" value="#{indexBean.postMVP.postedBy.userId}" />
-                            </h:commandLink>
+                        <ui:fragment rendered="#{empty indexBean.postMVP}">
+                            <h1>#{msg['noMVPost']}</h1>
+                        </ui:fragment>
 
-                            <!--Header Image MVPost -->
-                            <ui:fragment rendered="#{not empty indexBean.postMVP.headerImage}">
-                                <a class="image full">
-                                    <p:graphicImage cache="false" value="#{imagenBean.postImage}" height = "200px" width = "600px">
-                                        <f:param name="idpost" value="#{indexBean.postMVP.postId}" />
-                                    </p:graphicImage> 
-                                </a>
-                            </ui:fragment>
-                            <ui:fragment rendered="#{empty indexBean.postMVP.headerImage}">
-                                <a class="image full">
-                                    <p:graphicImage   cache="false" value="resources/images/RockSteadyPost.jpg" height = "200px" width = "600px">
+                        <ui:fragment rendered="#{not empty indexBean.postMVP}">                     
+
+                            <h1>MVPOST</h1>
+                            <h:form> 
+                                <!-- Title -->
+                                <header>
+                                    <h2>#{indexBean.postMVP.title}</h2>
+                                </header>
+
+                                <!--Profile Image -->
+                                <ui:fragment rendered="#{empty indexBean.postMVP.postedBy.img}">
+                                    <p:graphicImage   cache="false" value="resources/images/default-user.png" alt="UserImage" width="30px" height="30px">
                                     </p:graphicImage>
-                                </a>
-                            </ui:fragment>
+                                </ui:fragment>
+                                <ui:fragment rendered="#{not empty indexBean.postMVP.postedBy.img}">
+                                    <p:graphicImage cache="false" value="#{imagenBean.userImage}" width="30px" height="30px">
+                                        <f:param name="iduser" value="#{indexBean.postMVP.postedBy.userId}" />
+                                    </p:graphicImage>
+                                </ui:fragment>
 
-                            <!-- MVPost Content -->
-                            #{indexBean.postMVP.postContent}
-                        </h:form>
+                                <!--User name -->
+                                <h:commandLink action="#{postBean.goProfileView()}" ><h:outputText value="#{indexBean.postMVP.postedBy.username}"/>
+                                    <f:param name="iduser" value="#{indexBean.postMVP.postedBy.userId}" />
+                                </h:commandLink>
+
+                                <!--Header Image MVPost -->
+                                <ui:fragment rendered="#{not empty indexBean.postMVP.headerImage}">
+                                    <a class="image full">
+                                        <p:graphicImage cache="false" value="#{imagenBean.postImage}" height = "200px" width = "600px">
+                                            <f:param name="idpost" value="#{indexBean.postMVP.postId}" />
+                                        </p:graphicImage> 
+                                    </a>
+                                </ui:fragment>
+                                <ui:fragment rendered="#{empty indexBean.postMVP.headerImage}">
+                                    <a class="image full">
+                                        <p:graphicImage   cache="false" value="resources/images/RockSteadyPost.jpg" height = "200px" width = "600px">
+                                        </p:graphicImage>
+                                    </a>
+                                </ui:fragment>
+
+                                <!-- MVPost Content -->
+                                #{indexBean.postMVP.postContent}
+                            </h:form>
+                        </ui:fragment>
                     </div>
                 </div>
             </div>    

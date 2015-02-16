@@ -114,7 +114,6 @@ public class NewPostBean {
 
     public String createPost() {
 
-        //Controlar que el usuario logueado tiene permisos para crear Post
         Post newPost = new Post();
         newPost.setMvpost(Character.MIN_VALUE);
         newPost.setPostContent(content);
@@ -129,11 +128,8 @@ public class NewPostBean {
                 Logger.getLogger(NewPostBean.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
         newPost.setTitle(title);
         newPost.setPostGps(latitude + "," + longitude);
-
-        //El usuario que tiene la sesion abierta.
         newPost.setPostedBy(loginBean.getUsuario());
         newPost.setPostDate(Calendar.getInstance().getTime());
         postFacade.create(newPost);

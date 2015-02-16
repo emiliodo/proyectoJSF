@@ -81,17 +81,6 @@ public class IndexBean {
             postMVP = mvpostlist.get(0);
         }
     }
-
-//    
-//            List<Post> mvpPost = postFacade.getMVPost();
-//        Post p = null;
-//        if (mvpPost != null && !mvpPost.isEmpty()) {
-//            p = mvpPost.get(0);
-//            request.setAttribute("mvpPost", p);
-//
-//        }
-//        RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
-//        rd.forward(request, response);
     public IndexBean() {
     }
 
