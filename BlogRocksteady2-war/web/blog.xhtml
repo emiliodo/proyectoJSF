@@ -38,7 +38,7 @@
                             <input type="date" value="#{postBean.dateFrom}"/><br/>
                             to date:<br/>
                             <h:inputText id="inputDateTo" value="#{postBean.dateTo}"/><br/>
-                            <h:commandButton value="#{msg['filter']}" action="#{postBean.FilterPost()}"/><br/><br/>
+                            <h:commandButton value="#{msg['filter']}" action="#{postBean.filterPost()}"/><br/><br/>
                         </h:form>
                     </center>
                 </div>
@@ -110,9 +110,7 @@
                                 <ui:fragment rendered="#{empty loginBean.usuario}">
                                     <h3>Debes ser un usuario registrado para acceder a los comentarios</h3>
                                 </ui:fragment>
-                                
                             </section>
-                            <!--Comments-->
                             <br/>
                             <hr/>
                         </ui:repeat>

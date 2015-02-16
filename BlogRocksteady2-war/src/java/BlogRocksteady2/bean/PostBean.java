@@ -5,7 +5,6 @@ import BlogRocksteady2.ejb.PostFacade;
 import BlogRocksteady2.entity.Comentario;
 import BlogRocksteady2.entity.Post;
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
@@ -13,14 +12,14 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class PostBean {
 
     @EJB
@@ -29,7 +28,14 @@ public class PostBean {
     private ComentarioFacade comentarioFacade;
 
     private Date dateFrom;
-
+    private Date dateTo;
+    private Post post;
+    private List<Post> postlist;
+    private Comentario comentario;
+    private Collection<Comentario> comentariolist;
+    private StreamedContent image;
+    private Post mvpost;
+    
     public Date getDateFrom() {
         return dateFrom;
     }
@@ -45,13 +51,6 @@ public class PostBean {
     public void setDateTo(Date dateTo) {
         this.dateTo = dateTo;
     }
-    private Date dateTo;
-    private Post post;
-    private List<Post> postlist;
-    private Comentario comentario;
-    private Collection<Comentario> comentariolist;
-    private StreamedContent image;
-    private Post mvpost;
 
     public Post getMvpost() {
         return mvpost;
@@ -129,7 +128,7 @@ public class PostBean {
 
     }
     
-    public String FilterPost(){
+    public String filterPost(){
         Date dateFrom2 = dateFrom;
         return "index.xhtml";
     }
