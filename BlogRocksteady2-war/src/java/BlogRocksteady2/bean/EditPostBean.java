@@ -9,19 +9,14 @@ import BlogRocksteady2.ejb.PostFacade;
 import BlogRocksteady2.ejb.UsuarioFacade;
 import BlogRocksteady2.entity.Post;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.Part;
-import org.apache.commons.io.IOUtils;
 
 /**
  *
