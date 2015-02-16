@@ -19,6 +19,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.faces.event.PhaseId;
 import javax.servlet.http.Part;
 import org.apache.commons.io.IOUtils;
 import org.primefaces.model.DefaultStreamedContent;
@@ -69,6 +70,14 @@ public class EditPerfilBean implements Serializable{
 
     public void setImage(StreamedContent image) {
         this.image = image;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public void setLinkedin(String linkedin) {
@@ -173,4 +182,19 @@ public class EditPerfilBean implements Serializable{
         }
        
      }
+    
+    public StreamedContent getUserImage() {
+        
+        FacesContext context = FacesContext.getCurrentInstance();
+        if (context.getCurrentPhaseId()== PhaseId.RENDER_RESPONSE) {
+            // So, we're rendering the view. Return a stub StreamedContent so that it will generate right URL.
+            return new DefaultStreamedContent();
+       }
+        else {
+            // So, browser is requesting the image. Get ID value from actual request param.
+            String iduser = context.getExternalContext().getRequestParameterMap().get("iduser");
+            byte [] img = this.usuarioFacade.find(new BigDecimal(iduser)).getImg();
+            return new DefaultStreamedContent(new ByteArrayInputStream(img));
+        }
+    }
 }
