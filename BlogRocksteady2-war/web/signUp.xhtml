@@ -8,59 +8,71 @@
                 template="/plantilla/plantilla.xhtml">
 
     <ui:define name="contenido">
-
-        <!-- Main -->
+    
         <div id="main">
-            <h:head>
-                <title> Sign Up </title>
-            </h:head>
+        <center>
             <div class="container">
-                <h:form>
-                    <h:panelGrid columns="2">
-                        <h:outputLabel value="User Name" />
-                        <h:inputText  id="userName" value="#{signUpBean.userName}" required="true"/>
+                <h:form id="form_SignUp" >
+              
+               <h:panelGrid columns="2" border="1" width="30%" cellpadding="5">
 
-                        <h:outputLabel value="First name"/>  
-                        <h:inputText id="name" value="#{signUpBean.name}"/>
-
-                        <h:outputLabel value="Last name" />
-                        <h:inputText id="lastName" value="#{signUpBean.lastName}"/>
-
-                        <h:outputLabel value="Email"/>
-                        <h:inputText id="email" required="true" requiredMessage=" email obligatorio"
-                                     value="#{signUpBean.email}"/>
-
-                        <h:outputLabel value="Password" />
-                        <h:inputSecret id="password" required="true"
-                                       value="#{signUpBean.password}"/>
-
-                        <h:outputLabel value="Confirm Password" />
-                        <h:inputSecret id ="confirmPassword" required="true"
-                                       value="#{signUpBean.confirmPassword}" />
-
-                        <h:outputLabel value="WebSite"/>
-                        <h:inputText id="website" value="#{signUpBean.website}" />
-
-                        <h:outputLabel value="Description"/>
-                        <h:inputText id="description" value="#{signUpBean.description}" />
-
-                        <h:outputLabel value="Twitter" />
-                        <h:inputText id="twitter" value="#{signUpBean.twitter}" />
-
-                        <h:outputLabel value="Facebook" />
-                        <h:inputText id="facebook" value="#{signUpBean.facebook}" />
-
-                        <h:outputLabel value="Instagram" /> 
-                        <h:inputText id="instragrama" value="#{signUpBean.instagram}" />
-
-                        <h:outputLabel value="Linkedin"/>
-                        <h:inputText id="linkedin" value="#{signUpBean.linkedin}" />
-
-                        <h:commandButton value="Sign Up" action="#{signUpBean.doRegister}"/>
-
-                    </h:panelGrid>
-                </h:form>
+                    <h:outputLabel value="#{msg['userName']}" />
+                    <h:inputText  id="userName" value="#{signUpBean.userName}" required="true"/>
+                
+                    <h:outputLabel value="#{msg['firstName']}"/>  
+                    <h:inputText id="name" value="#{signUpBean.name}" required="true"/>
+                
+                    <h:outputLabel value="#{msg['lastName']}"/>
+                    <h:inputText id="lastName" value="#{signUpBean.lastName}" required ="true"/>
+                
+                    <h:outputLabel value="Email"/>
+                    <h:inputText id="email" required="true" requiredMessage="Please enter your email"
+                                validatorMessage="Invalid email format" value="#{signUpBean.email}"/>
+                    
+                    <h:outputLabel value="#{msg['password']}" />
+                    <h:inputSecret id="password" required="true"
+                                   value="#{signUpBean.password}"/>
+                
+                    <h:outputLabel value="#{msg['confirmPassword']}" />
+                    <h:inputSecret id ="confirmPassword" required="true"
+                                   value="#{signUpBean.confirmPassword}" />
+                
+                    <h:outputLabel value="WebSite"/>
+                    <h:inputText id="website" value="#{signUpBean.website}" />
+                
+                    <h:outputLabel value="Description"/>
+                    <h:inputText id="description" value="#{signUpBean.description}" />
+                
+                    <h:outputLabel value="Twitter" />
+                    <h:inputText id="twitter" value="#{signUpBean.twitter}" />
+                
+                    <h:outputLabel value="Facebook" />
+                    <h:inputText id="facebook" value="#{signUpBean.facebook}" />
+                
+                    <h:outputLabel value="Instagram" /> 
+                    <h:inputText id="instragrama" value="#{signUpBean.instagram}" />
+                
+                    <h:outputLabel value="Linkedin"/>
+                    <h:inputText id="linkedin" value="#{signUpBean.linkedin}" /><br></br>
+<!--                    <h:outputText value="{msg['newImage']}: "></h:outputText>
+                    <h:inputFile  value="{signUpBean.image}" ></h:inputFile>-->
+                    
+                    <h:commandButton value="#{msg['signup']}" action="#{signUpBean.doRegister}"/>
+            
+                </h:panelGrid>
+                    <div>   
+                        <h:commandLink action="#{internacionalizacionBean.cambiarLocale('es')}">                                  
+                    <img height = "20px" width = "20px" src="resources/images/ESPAA_1.png" alt="Idioma Español"/></h:commandLink>
+                    <h:commandLink action="#{internacionalizacionBean.cambiarLocale('en')}"> 
+                    <img height = "20px" width = "20px" src="resources/images/icono ingles.png" /></h:commandLink>
+                    <h:commandLink action="#{internacionalizacionBean.cambiarLocale('fr')}"> 
+                    <img height = "20px" width = "20px" src="resources/images/French Southern and Antarctic Lands Flag.png" alt="Idioma Frances"/></h:commandLink>
+            
+                </div>
+                
+            </h:form>
             </div>
-        </div>
+        </center> 
+    </div>
     </ui:define>
 </ui:composition>
