@@ -87,7 +87,7 @@ public class EditPostBean {
         this.content = content;
     }
 
-    public String editPost(ActionEvent event) throws IOException {
+    public String editPost(){
 
         postE.setTitle(title);
         postE.setPostContent(content);
@@ -95,8 +95,6 @@ public class EditPostBean {
         postE.setPostGps(latitude + "," + longitude);
         postE.setPostDate(Calendar.getInstance().getTime());
         postFacade.edit(postE);
-        FacesMessage message = new FacesMessage("Post editado");
-        FacesContext.getCurrentInstance().addMessage(null, message);
         return "blog.xhtml?faces-redirect=true";
     }
 

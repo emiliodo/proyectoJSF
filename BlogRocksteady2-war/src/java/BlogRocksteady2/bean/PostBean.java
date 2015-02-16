@@ -34,7 +34,7 @@ public class PostBean {
     private Comentario comentario;
     private Collection<Comentario> comentariolist;
     private StreamedContent image;
-    private Post mvpost;
+
     
     public Date getDateFrom() {
         return dateFrom;
@@ -50,14 +50,6 @@ public class PostBean {
 
     public void setDateTo(Date dateTo) {
         this.dateTo = dateTo;
-    }
-
-    public Post getMvpost() {
-        return mvpost;
-    }
-
-    public void setMvpost(Post mvpost) {
-        this.mvpost = mvpost;
     }
 
     public Post getPost() {
