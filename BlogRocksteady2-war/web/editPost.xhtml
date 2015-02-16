@@ -15,7 +15,7 @@
                 <div id="content" class="12u skel-cell-important">
                     <div class="container">
                         <f:view>
-                            <h:form enctype="multipart/form-data">
+                            <h:form id="form_editPost" enctype="multipart/form-data">
                                 <header>
                                     <h2>#{msg['EditPost']}</h2>
                                 </header>
@@ -29,8 +29,9 @@
                                 <h:inputText id="inLong" value="#{editPostBean.longitude}"/><br/>
                                 #{msg['mapDescription']}<br/>
                                 <div id="latLongMap" style="width:800px; height: 300px;"></div><br/><br/>
-                                <p:commandButton value="Edit" id="createPost" action="#{editPostBean.editPost()}"/>
-                                <p:commandButton ajax="false" value="#{msg['Back']}" action="blog.xhtml"/><br/><br/>
+                                <h:commandButton value="Edit" id="createPost" actionListener="#{editPostBean.editPost(event)}">
+                                </h:commandButton>
+                                <h:commandButton  value="#{msg['Back']}" action="blog.xhtml"/><br/><br/>
                             </h:form>
                         </f:view>
                     </div>

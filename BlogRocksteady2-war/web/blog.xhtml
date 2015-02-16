@@ -34,7 +34,7 @@
                     <h:form>
                         From date:<p:calendar id="popup" value="#{postBean.dateFrom}" mode="inline" /><br/>
                         to date:<p:calendar id="popup2" value="#{postBean.dateTo}" mode="inline" /><br/>
-                        <p:commandButton value="#{msg['filter']}" action="#{postBean.filterPost()}"/>
+                        <p:commandButton value="#{msg['filter']}" action="#{postBean.filterPost()}"/><br/><br/>
                     </h:form>
                 </div>
                 <div class="row">
@@ -74,6 +74,7 @@
                                         </h:form>
                                     </span>
                                 </header>
+                                <!--Header Image-->
                                 <ui:fragment rendered="#{not empty item.headerImage}">
                                     <a class="image full">
                                         <p:graphicImage cache="false" value="#{imagenBean.postImage}" height = "300px" width = "1200px">
@@ -87,16 +88,17 @@
                                         </p:graphicImage>
                                     </a>
                                 </ui:fragment>
-                                <br/><br/>
+                                <!--Content-->
                                 #{item.postContent}<br/><br/>
+                                <!--Map-->
                                 <ui:fragment rendered="#{item.postGps != ','}">
                                     <div id="mostrarMapa#{item.postId}">
-                                        <center><a onclick="cargarMapa(#{item.postId}, '#{item.postGps}')">MAPA</a></center>
+                                        <center><a onclick="cargarMapa(#{item.postId}, '#{item.postGps}')"><img lborder="0" src="resources/images/Google-Maps-icon.png" width="50" height="50" alt="Icono mapa" /></a></center>
                                     </div>
                                 </ui:fragment>
                             </section>
+                            <!--Comments-->
                             <ui:repeat value="#{item.comentarioCollection}" var="comentario">
-                                <hr/>
                                 <h:form>
                                     <ui:fragment rendered="#{empty comentario.commentBy.img}">
                                         <p:graphicImage   cache="false" value="resources/images/default-user.png" alt="UserImage" width="30px" height="30px">
@@ -117,13 +119,12 @@
                                 #{comentario.commentContent}<br/>                                        
                             </ui:repeat>
                             <h:form enctype="multipart/form-data">
-                                <h:inputTextarea rows="3" cols="60" value="#{newComBean.contenido}" title="commentContent" /><br/>
+                                <h:inputTextarea rows="2" cols="60" value="#{newComBean.contenido}" title="commentContent" /><br/>
                                 <h:commandButton value="Comentar" action="#{newComBean.createCommnt()}" >
                                     <f:setPropertyActionListener target="#{newComBean.postComentado}" value="#{item}" />
                                 </h:commandButton>
                             </h:form>
                             <br/>
-                            <hr/>
                         </ui:repeat>
                     </div>
                 </div> 

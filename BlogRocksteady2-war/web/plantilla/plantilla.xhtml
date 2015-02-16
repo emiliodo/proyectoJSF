@@ -31,50 +31,50 @@ and open the template in the editor.
     <h:body>
 
         <h:form id="formulario_nav" >
-            
-        
-        <div id="header">
-            <div class="container">
-                <div id="logo">
-                    <h1><a>Rocksteady</a></h1>
-                    <span>BLOG</span>
-                </div>
-                  
-                <!-- Nav -->
-                <nav id="nav">
-                    <ul>
-                        <li>
-                            <h:link value="#{msg['home']}" outcome="login" />
-                        </li>
-                        <li>
-                            <h:link value="#{msg['blog']}" outcome="blog" />
-                        </li>
-                        <h:panelGroup rendered="#{empty loginBean.usuario}">
+
+
+            <div id="header">
+                <div class="container">
+                    <div id="logo">
+                        <h1><a>Rocksteady</a></h1>
+                        <span>BLOG</span>
+                    </div>
+
+                    <!-- Nav -->
+                    <nav id="nav">
+                        <ul>
                             <li>
-                                <h:link value="#{msg['signup']}" outcome="signUp" />
+                                <h:link value="#{msg['home']}" outcome="login" />
                             </li>
-                        </h:panelGroup>
-                        <h:panelGroup rendered="#{not empty loginBean.usuario}">
-                            <h:panelGroup rendered="#{loginBean.usuario.userType == 1}">
+                            <li>
+                                <h:link value="#{msg['blog']}" outcome="blog" />
+                            </li>
+                            <h:panelGroup rendered="#{empty loginBean.usuario}">
                                 <li>
-                                    <h:link value="#{msg['Admin']}" outcome="admin" />
+                                    <h:link value="#{msg['signup']}" outcome="signUp" />
                                 </li>
                             </h:panelGroup>
-                            <li>
-                                <!--<h:link value="#{msg['editProfile']}" outcome="editProfile" />-->
-                                <h:commandLink id="commandLink_editProfil" value="#{msg['editProfile']}" action="#{editPerfilBean.cargarPerfil}" />
-                            </li>
-                            <li>
-                                <!-- <h:link value="#{msg['logout']}" outcome="logout"  />-->
-                                <h:commandLink id="commandLink_logout" value="#{msg['logout']}" action="#{loginBean.logout}" />
-                            </li>
-                        </h:panelGroup>
-                    </ul>
-                </nav> 
+                            <h:panelGroup rendered="#{not empty loginBean.usuario}">
+                                <h:panelGroup rendered="#{loginBean.usuario.userType == 1}">
+                                    <li>
+                                        <h:link value="#{msg['Admin']}" outcome="admin" />
+                                    </li>
+                                </h:panelGroup>
+                                <li>
+                                    <!--<h:link value="#{msg['editProfile']}" outcome="editProfile" />-->
+                                    <h:commandLink id="commandLink_editProfil" value="#{msg['editProfile']}" action="#{editPerfilBean.cargarPerfil}" />
+                                </li>
+                                <li>
+                                    <!-- <h:link value="#{msg['logout']}" outcome="logout"  />-->
+                                    <h:commandLink id="commandLink_logout" value="#{msg['logout']}" action="#{loginBean.logout}" />
+                                </li>
+                            </h:panelGroup>
+                        </ul>
+                    </nav> 
+
+                </div>
 
             </div>
-
-        </div>
         </h:form>
 
 
@@ -85,7 +85,14 @@ and open the template in the editor.
 
         <!-- Copyright -->
         <div id="copyright">
-            Trabajo Java EE - Máster INFTEL
+            Trabajo Java EE - Máster INFTEL <br/>
+            <a href="LocaleServlet?lang=es">                                    
+                <img height = "20px" width = "20px" src="resources/images/ESPAA_1.png" alt="Idioma Español"/></a>
+            <a href="LocaleServlet?lang=en_US">
+                <img height = "20px" width = "20px" src="resources/images/icono ingles.png" alt="Idioma Ingles"/></a>
+            <a href="LocaleServlet?lang=fr_FR">
+                <img height = "20px" width = "20px" src="resources/images/French Southern and Antarctic Lands Flag.png" alt="Idioma Frances"/>
+            </a>
         </div>
 
 

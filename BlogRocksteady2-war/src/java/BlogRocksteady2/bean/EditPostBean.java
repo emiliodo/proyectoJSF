@@ -14,9 +14,12 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.servlet.http.Part;
 import org.apache.commons.io.IOUtils;
 
@@ -89,7 +92,7 @@ public class EditPostBean {
         this.content = content;
     }
 
-    public String editPost() {
+    public String editPost(ActionEvent event) throws IOException {
 
         postE.setTitle(title);
         postE.setPostContent(content);
@@ -97,6 +100,8 @@ public class EditPostBean {
         postE.setPostGps(latitude + "," + longitude);
         postE.setPostDate(Calendar.getInstance().getTime());
         postFacade.edit(postE);
+        FacesMessage message = new FacesMessage("Post editado");
+        FacesContext.getCurrentInstance().addMessage(null, message);
         return "blog.xhtml?faces-redirect=true";
     }
 
@@ -104,11 +109,10 @@ public class EditPostBean {
         this.postE = p;
         this.title = postE.getTitle();
         this.content = postE.getPostContent();
-        
-        String [] latlong = postE.getPostGps().split(",");
+
+        String[] latlong = postE.getPostGps().split(",");
         this.latitude = latlong[0];
         this.longitude = latlong[1];
-        
         return "editPost.xhtml?faces-redirect=true";
     }
 

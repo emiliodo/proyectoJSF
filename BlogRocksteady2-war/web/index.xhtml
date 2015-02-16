@@ -9,81 +9,89 @@
 
     <ui:define name="contenido">
 
+
+
         <!-- Main -->
         <div id="main">
-            
-            <div class="row">
-                <div class="3u" align="right">
-                    <div class="container">
-                        <center>
-                            <div class="3u" align="right">
-                                    <h4>Welcome <font color="orange">${loginBean.usuario.name}</font></h4>
-                            </div>
-                        </center>
-                    </div>
-                    
+            <div class="3u" align="right">
+                <div class="container">
+                    <center>
+                        <div class="3u" align="right">
+                            <h4>Welcome <font color="orange">${loginBean.usuario.name}</font></h4>
+                        </div>
+                    </center>
                 </div>
-                <div class="divider"></div>
+            </div>
+
+            <div class="divider"></div>
             <div class="container">
                 <div class="row">
                     <!-- Content -->
                     <div class="8u skel-cell-important">
                         <section id="content">
+
+                            <h1>MVPOST</h1>
+                            <!-- Title -->
                             <h:panelGroup rendered="#{not empty mvpPost}"/>
-                                <header>
-                                    <h2>#{mvpPost.title}</h2>
-                                   
-                                </header>
+                            <header>
+                                <h2>#{mvpPost.title}</h2>
+                            </header>
 
-                                 <h:panelGroup rendered="#{not empty mvpPost.getHeaderImage()}"/>
-                                    <p><a href="#" class="image full">
-                                            <img height = "157px" width = "783px" src="ShowImages?postId=${mvpPost.getPostId()}" alt="Imagen Post #{mvpPost.getPostId()}"/></a>
-                                    </p>
-                                
-                                 <h:panelGroup rendered="#{empty mvpPost.getHeaderImage()}"/>
-                                    <p><a href="#" class="image full">
-                                            <img height = "157px" width = "783px" src="images/RockSteadyPost.jpg" alt="Imagen Post ${mvpPost.getPostId()}"/></a>
-                                    </p>
-                                
-                              
-                              
-                             <h:panelGroup rendered="#{empty mvpPost}"/>
-                                <header>
-                                    <h2>MVPost not found</h2>
-                                    <span class="byline">  | Date </span>
-                                </header>
-                                <p>
-                                    <a href="" class="image full"><img src="images/pics02.jpg" alt=""/></a>   
+                            <!-- Profile Image -->
+                            <ui:fragment rendered="#{empty item.postedBy.img}">
+                                <p:graphicImage   cache="false" value="resources/images/default-user.png" alt="UserImage" width="30px" height="30px">
+                                </p:graphicImage>
+                            </ui:fragment>
+                            <ui:fragment rendered="#{not empty item.postedBy.img}">
+                                <p:graphicImage cache="false" value="#{imagenBean.userImage}" width="30px" height="30px">
+                                    <f:param name="iduser" value="#{item.postedBy.userId}" />
+                                </p:graphicImage>
+                            </ui:fragment>
+                            
+                            <!-- User name -->
+                            <h:commandLink action="#{postBean.goProfileView()}" ><h:outputText value="#{item.postedBy.username}"/>
+                                <f:param name="iduser" value="#{item.postedBy.userId}" />
+                            </h:commandLink>
+                            
+                            
 
-                                </p>
-                                <p>Ask an admin to set a mvpPost</p>
+                            <!-- Header Image MVPost -->
+                            <ui:fragment rendered="#{not empty item.headerImage}">
+                                <a class="image full">
+                                    <p:graphicImage cache="false" value="#{imagenBean.postImage}" height = "300px" width = "600px">
+                                        <f:param name="idpost" value="#{item.postId}" />
+                                    </p:graphicImage> 
+                                </a>
+                            </ui:fragment>
+                            <ui:fragment rendered="#{empty item.headerImage}">
+                                <a class="image full">
+                                    <p:graphicImage   cache="false" value="resources/images/RockSteadyPost.jpg" height = "200px" width = "600px">
+                                    </p:graphicImage>
+                                </a>
+                            </ui:fragment>
 
-                           
+                            <!-- MVPost Content -->
+
+
                         </section>
                     </div>
                     <!-- /Content -->
 
-
-                    <!-- Sidebar -->
                     <div id="sidebar" class="4u">
                         <section>
-                            
-                               
                             <ul class="default">
                                 <li><a href="/RocksteadyRep/PostServlet?postYear=2014">2014</a></li>
                                 <li><a href="/RocksteadyRep/PostServlet?postYear=2013">2013</a></li>
                                 <li><a href="/RocksteadyRep/PostServlet?postYear=2012">2012</a></li>
                                 <li><a href="/RocksteadyRep/PostServlet?postYear=2011">2011</a></li>
                             </ul>
-                                
                         </section>
                     </div>
-                    <!-- Sidebar -->
                 </div>
             </div>    
-            
-            
-        </div>
-         </div>   
+        </div>   
     </ui:define>
 </ui:composition>
+
+
+

@@ -26,7 +26,7 @@
         </script>
     </head>
     <body>
-        <div id="map${param.idPost}" style="height:150px;width:600px;"></div>
+        <div id="map${param.idPost}" style="height:300px;width:1200px;"></div>
     </body>
 </html>
 

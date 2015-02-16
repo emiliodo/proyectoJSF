@@ -51,6 +51,15 @@ public class PostBean {
     private Comentario comentario;
     private Collection<Comentario> comentariolist;
     private StreamedContent image;
+    private Post mvpost;
+
+    public Post getMvpost() {
+        return mvpost;
+    }
+
+    public void setMvpost(Post mvpost) {
+        this.mvpost = mvpost;
+    }
 
     public Post getPost() {
         return post;
