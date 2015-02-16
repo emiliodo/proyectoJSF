@@ -72,7 +72,7 @@
                                                 <h:commandLink action="#{editPostBean.cargarEditar(item)}"> 
                                                     <h:graphicImage value="resources/images/edit_icon.png" alt="#{msg['editPost']}" />
                                                 </h:commandLink>
-                                                <h:commandLink action="#{adminPostBean.doDeletePostWithID(item.postId)}"> 
+                                                <h:commandLink action="#{postBean.EliminarPost(item.postId)}"> 
                                                     <h:graphicImage value="resources/images/delete_icon.png" alt="#{msg['deletePost']}" />
                                                 </h:commandLink>
                                             </ui:fragment>
@@ -98,38 +98,23 @@
                                 <!--Map-->
                                 <ui:fragment rendered="#{item.postGps != ','}">
                                     <div id="mostrarMapa#{item.postId}">
-                                        <center><a onclick="cargarMapa(#{item.postId}, '#{item.postGps}')"><img lborder="0" src="resources/images/Google-Maps-icon.png" width="50" height="50" alt="Icono mapa" /></a></center>
+                                        <center><a onclick="cargarMapa(#{item.postId}, '#{item.postGps}')"><img lborder="0" src="resources/images/Google-Maps-icon.png" width="50" height="50" alt="Icono mapa" />#{msg['Showmap']} </a></center>
                                     </div>
                                 </ui:fragment>
+                                <ui:fragment rendered="#{not empty loginBean.usuario}">
+                                    <h:form>
+                                        <h:commandLink action="#{viewPostBean.cargarPost(item)}" ><h:outputText value="#{msg['readMore']}"/>
+                                    </h:commandLink>
+                                    </h:form>
+                                </ui:fragment>
+                                <ui:fragment rendered="#{empty loginBean.usuario}">
+                                    <h3>Debes ser un usuario registrado para acceder a los comentarios</h3>
+                                </ui:fragment>
+                                
                             </section>
                             <!--Comments-->
-                            <ui:repeat value="#{item.comentarioCollection}" var="comentario">
-                                <h:form>
-                                    <ui:fragment rendered="#{empty comentario.commentBy.img}">
-                                        <p:graphicImage   cache="false" value="resources/images/default-user.png" alt="UserImage" width="30px" height="30px">
-                                        </p:graphicImage>
-                                    </ui:fragment>
-                                    <ui:fragment rendered="#{not empty comentario.commentBy.img}">
-                                        <p:graphicImage cache="false" value="#{imagenBean.userImage}" width="20px" height="20px">
-                                            <f:param name="iduser" value="#{comentario.commentBy.userId}" />
-                                        </p:graphicImage>
-                                    </ui:fragment>
-                                    <h:commandLink action="#{postBean.goProfileView()}" ><h:outputText value="#{comentario.commentBy.username}"/>
-                                        <f:param name="iduser" value="#{comentario.commentBy.userId}" />
-                                    </h:commandLink> | 
-                                    <h:outputText value="#{comentario.commentDate}">
-                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm"/>
-                                    </h:outputText> <br/>
-                                </h:form>
-                                #{comentario.commentContent}<br/>                                        
-                            </ui:repeat>
-                            <h:form>
-                                <h:inputTextarea rows="2" cols="60" value="#{newCommentBean.contenido}"/><br/>
-                                <h:commandButton value="Comentar" action="#{newCommentBean.ComentarPost()}" >
-                                    <f:setPropertyActionListener target="#{newCommentBean.postComentado}" value="#{item}" />
-                                </h:commandButton>
-                            </h:form>
                             <br/>
+                            <hr/>
                         </ui:repeat>
                     </div>
                 </div> 

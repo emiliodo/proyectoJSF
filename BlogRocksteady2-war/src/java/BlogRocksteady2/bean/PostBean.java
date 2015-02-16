@@ -120,6 +120,10 @@ public class PostBean {
     public String goProfileView(){
         return "viewProfile.xhtml";
     }
+    
+    public String GoPostView(){
+        return "viewPost.xhtml";
+    }
 
     public PostBean() {
 
@@ -130,5 +134,11 @@ public class PostBean {
         return "index.xhtml";
     }
     
+    public String EliminarPost(BigDecimal postID){
+        Post p;
+        p= postFacade.find(postID);
+        postFacade.remove(p);
+        return "blog.xhtml?faces-redirect=true";
+    }
 
 }

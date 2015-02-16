@@ -26,6 +26,9 @@ public class NewCommentBean {
     
     @ManagedProperty(value = "#{loginBean}")
     private LoginBean loginBean;
+    
+    private Post postComentado;
+    private String contenidoComentario;
 
     public LoginBean getLoginBean() {
         return loginBean;
@@ -35,8 +38,6 @@ public class NewCommentBean {
         this.loginBean = loginBean;
     }
 
-    private Post postComentado;
-
     public Post getPostComentado() {
         return postComentado;
     }
@@ -45,14 +46,14 @@ public class NewCommentBean {
         this.postComentado = postComentado;
     }
 
-    public String getContenido() {
-        return contenido;
+    public String getContenidoComentario() {
+        return contenidoComentario;
     }
 
-    public void setContenido(String contenido) {
-        this.contenido = contenido;
+    public void setContenidoComentario(String contenido) {
+        this.contenidoComentario = contenido;
     }
-    private String contenido;
+    
     
     /**
      * Creates a new instance of NewCommentBean
@@ -64,12 +65,12 @@ public class NewCommentBean {
         
         Comentario nuevoComentario = new Comentario();
         nuevoComentario.setCommentBy(loginBean.getUsuario());
-        nuevoComentario.setCommentContent(contenido);
+        nuevoComentario.setCommentContent(contenidoComentario);
         nuevoComentario.setCommentDate(Calendar.getInstance().getTime());
         nuevoComentario.setPostCommented(postComentado);
         comentarioFacade.create(nuevoComentario);
         
-        return "blog.xhtml?faces-redirect=true";
+        return "viewPost.xhtml?faces-redirect=true";
         
     }
     
