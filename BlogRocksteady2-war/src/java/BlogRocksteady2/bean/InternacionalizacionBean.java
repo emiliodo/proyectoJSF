@@ -46,11 +46,11 @@ public class InternacionalizacionBean implements Serializable{
    
     }
 
-    public String cambiarLocale(String idioma) {
+    public void cambiarLocale(String idioma) {
 
         locale = new Locale(idioma);
         FacesContext.getCurrentInstance()
                 .getViewRoot().setLocale(locale);
-        return "/index";
+        //return "/index";
     }
 }

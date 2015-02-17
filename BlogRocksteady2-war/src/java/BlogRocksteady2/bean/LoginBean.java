@@ -89,7 +89,7 @@ public class LoginBean implements Serializable{
     
           FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
           
-          return "login.xhtml";
+          return "index.xhtml";
     }
     
 }
