@@ -59,9 +59,9 @@
                             <p>#{viewPostBean.post.postContent}</p>
                         </h:form>
                         <ui:fragment rendered="#{viewPostBean.post.postGps != ','}">
-                                    <div id="mostrarMapa#{viewPostBean.post.postId}">
-                                        <center><a onclick="cargarMapa(#{viewPostBean.post.postId}, '#{viewPostBean.post.postGps}')"><img lborder="0" src="resources/images/Google-Maps-icon.png" width="50" height="50" alt="Icono mapa" /> #{msg['Showmap']}</a></center>
-                                    </div>
+                            <div id="mostrarMapa#{viewPostBean.post.postId}">
+                                <center><a onclick="cargarMapa(#{viewPostBean.post.postId}, '#{viewPostBean.post.postGps}')"><img lborder="0" src="resources/images/Google-Maps-icon.png" width="50" height="50" alt="Icono mapa" /> #{msg['Showmap']}</a></center>
+                            </div>
                         </ui:fragment>
                         <ui:repeat value="#{viewPostBean.post.comentarioCollection}" var="comentario">
                             <h:form>
@@ -91,7 +91,9 @@
                         <hr/>
                         <h:form>
                             <h:outputText value="#{msg['newComment']}"/><br/>
-                            <h:inputTextarea rows="2" cols="60" value="#{viewPostBean.contenidoComentario}"/><br/>
+                            <h:inputTextarea rows="2" cols="60" value="#{viewPostBean.contenidoComentario}">
+                                <f:validateLength maximum="1024" />
+                            </h:inputTextarea><br/>
                             <h:commandButton value="Comentar" action="#{viewPostBean.ComentarPost()}" >
                             </h:commandButton>
                         </h:form>

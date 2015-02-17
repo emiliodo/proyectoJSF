@@ -20,9 +20,11 @@
                                     <h2>#{msg['EditPost']}</h2>
                                 </header>
                                 #{msg['Title']}<br/>
-                                <h:inputText id="title" value="#{editPostBean.title}" title="Title" /><br/>
+                                <h:inputText id="title" value="#{editPostBean.title}" maxlength="255" title="Title" /><br/>
                                 #{msg['Content']}<br/>
-                                <h:inputTextarea rows="5" cols="60" id="postContent" value="#{editPostBean.content}" title="PostContent" /><br/><br/>
+                                <h:inputTextarea rows="5" cols="60" id="postContent"  value="#{editPostBean.content}" title="PostContent" >
+                                    <f:validateLength maximum="1024" />
+                                </h:inputTextarea><br/><br/>
                                 #{msg['Latitude']}
                                 <h:inputText id="inLat" value="#{editPostBean.latitude}"/>
                                 #{msg['Longitude']}
