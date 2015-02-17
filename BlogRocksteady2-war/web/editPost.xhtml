@@ -20,18 +20,20 @@
                                     <h2>#{msg['EditPost']}</h2>
                                 </header>
                                 #{msg['Title']}<br/>
-                                <h:inputText id="title" value="#{editPostBean.title}" title="Title" /><br/>
+                                <h:inputText id="title" value="#{editPostBean.title}" maxlength="255" title="Title" /><br/>
                                 #{msg['Content']}<br/>
-                                <h:inputTextarea rows="5" cols="60" id="postContent" value="#{editPostBean.content}" title="PostContent" /><br/><br/>
+                                <h:inputTextarea rows="5" cols="60" id="postContent"  value="#{editPostBean.content}" title="PostContent" >
+                                    <f:validateLength maximum="1024" />
+                                </h:inputTextarea><br/><br/>
                                 #{msg['Latitude']}
                                 <h:inputText id="inLat" value="#{editPostBean.latitude}"/>
                                 #{msg['Longitude']}
                                 <h:inputText id="inLong" value="#{editPostBean.longitude}"/><br/>
                                 #{msg['mapDescription']}<br/>
                                 <div id="latLongMap" style="width:800px; height: 300px;"></div><br/><br/>
-                                <h:commandButton value="Edit" id="createPost" actionListener="#{editPostBean.editPost(event)}">
+                                <h:commandButton value="Edit" id="EditPost" action="#{editPostBean.editPost()}">
                                 </h:commandButton>
-                                <h:commandButton  value="#{msg['Back']}" action="blog.xhtml"/><br/><br/>
+                                <h:commandButton  value="#{msg['Back']}" action="blog.xhtml?faces-redirect=true"/><br/><br/>
                             </h:form>
                         </f:view>
                     </div>

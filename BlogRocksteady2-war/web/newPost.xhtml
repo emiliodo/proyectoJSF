@@ -22,9 +22,11 @@
                                     #{msg['HeaderImage']} <h6 style="color:red"> 2040 x 240 px</h6>
                                     <h:inputFile id="headerImage" value="#{newPostBean.headerImage}" title="HeaderImage" /><br/>
                                     #{msg['Title']}<br/>
-                                    <h:inputText id="title" value="#{newPostBean.title}" title="Title" /><br/>
+                                    <h:inputText id="title" maxlength="255" value="#{newPostBean.title}" title="Title" /><br/>
                                     #{msg['Content']}<br/>
-                                    <h:inputTextarea rows="5" cols="60" id="postContent" value="#{newPostBean.content}" title="PostContent" /><br/><br/>
+                                    <h:inputTextarea rows="5" cols="60" id="postContent" value="#{newPostBean.content}" title="PostContent" >
+                                        <f:validateLength maximum="1024" />
+                                    </h:inputTextarea><br/><br/>
                                     #{msg['Latitude']}
                                     <h:inputText id="inLat" value="#{newPostBean.latitude}"/>
                                     #{msg['Longitude']}
