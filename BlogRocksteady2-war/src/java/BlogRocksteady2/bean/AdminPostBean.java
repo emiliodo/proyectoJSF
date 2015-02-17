@@ -138,6 +138,8 @@ public class AdminPostBean implements Serializable{
         loginBean.setBusquedaRealizada(null);
         return null;
     }
+       
         
+
 }
 

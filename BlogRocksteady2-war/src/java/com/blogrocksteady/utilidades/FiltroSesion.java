@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author YSF
  */
-@WebFilter("/faces/secure/*")
+@WebFilter(urlPatterns = {"/faces/editProfile.xhtml", "/faces/admin.xhtml"} )
 public class FiltroSesion implements Filter{
 
     @Override
