@@ -13,17 +13,9 @@
             <div id="main">
 
 
-                <div><h1 style="font-size: 20px;">Editar Perfil</h1><br/></div>
+                <div><h1 style="font-size: 20px;">#{msg['editProfile']}</h1><br/></div>
 
                 <h:outputText value=""></h:outputText>
-
-                <!--              <p:graphicImage  height="140" width="100" value="" 
-                                               cache="false" 
-                                               rendered=""> 
-                              </p:graphicImage>-->
-
-
-
                 <h:form id="form_editPerfil" enctype="multipart/form-data">
                     <p:growl id="growl_editPerfil" life="2000" />
                     
@@ -76,7 +68,7 @@
                         </p:inplace>
 
 
-                        <h:outputText value="#{msg['foto']}: "></h:outputText>
+                        <h:outputLabel value="#{msg['foto']}"/>
                         <h:inputFile  value="#{editPerfilBean.foto}" ></h:inputFile>
                         <center>
                             <h:panelGrid >

@@ -33,6 +33,14 @@ public class InternacionalizacionBean implements Serializable{
     public void setLocaleCode(String localeCode) {
         this.localeCode = localeCode;
     }
+    
+    public Locale getLocale() {
+        return locale;
+    }
+
+    public void setLocale(Locale locale) {
+        this.locale = locale;
+    }
 
     public InternacionalizacionBean() {
    
@@ -43,6 +51,6 @@ public class InternacionalizacionBean implements Serializable{
         locale = new Locale(idioma);
         FacesContext.getCurrentInstance()
                 .getViewRoot().setLocale(locale);
-        return null;
+        return "/index";
     }
 }

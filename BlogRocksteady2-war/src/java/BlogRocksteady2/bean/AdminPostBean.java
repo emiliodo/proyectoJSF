@@ -12,7 +12,7 @@ import BlogRocksteady2.entity.Usuario;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
-import static java.util.Objects.isNull;
+//import static java.util.Objects.isNull;
 //import static java.util.Objects.isNull;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -138,4 +138,6 @@ public class AdminPostBean implements Serializable{
         loginBean.setBusquedaRealizada(null);
         return null;
     }
+        
 }
+

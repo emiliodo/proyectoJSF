@@ -8,10 +8,21 @@
                 template="/plantilla/plantilla.xhtml">
 
     <ui:define name="contenido">
-
+        <center>
+            <h:form id="form_internacionalizacion">
+                <h:commandLink action="#{internacionalizacionBean.cambiarLocale('es')}">                                  
+                    <img height = "20px" width = "20px" src="resources/images/ESPAA_1.png" alt="Idioma Español"/></h:commandLink>
+                <h:commandLink action="#{internacionalizacionBean.cambiarLocale('en')}"> 
+                    <img height = "20px" width = "20px" src="resources/images/icono ingles.png" /></h:commandLink>
+                <h:commandLink action="#{internacionalizacionBean.cambiarLocale('fr')}"> 
+                    <img height = "20px" width = "20px" src="resources/images/French Southern and Antarctic Lands Flag.png" alt="Idioma Frances"/>
+                </h:commandLink>
+            </h:form>
+        </center>
         <!-- Main -->
         <div id="main">
             <div class="3u" align="right">
+                
                 <div class="container">
                     <center>
 

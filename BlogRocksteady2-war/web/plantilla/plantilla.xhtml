@@ -29,9 +29,9 @@ and open the template in the editor.
 
     </h:head>
     <h:body>
-
+        <f:view locale="#{internacionalizacionBean.locale}">
         <h:form id="formulario_nav" >
-
+            
 
             <div id="header">
                 <div class="container">
@@ -86,15 +86,9 @@ and open the template in the editor.
         <!-- Copyright -->
         <div id="copyright">
             Trabajo Java EE - Máster INFTEL <br/>
-            <a href="LocaleServlet?lang=es">                                    
-                <img height = "20px" width = "20px" src="resources/images/ESPAA_1.png" alt="Idioma Español"/></a>
-            <a href="LocaleServlet?lang=en_US">
-                <img height = "20px" width = "20px" src="resources/images/icono ingles.png" alt="Idioma Ingles"/></a>
-            <a href="LocaleServlet?lang=fr_FR">
-                <img height = "20px" width = "20px" src="resources/images/French Southern and Antarctic Lands Flag.png" alt="Idioma Frances"/>
-            </a>
+            
         </div>
-
+        </f:view>
 
 
     </h:body>
